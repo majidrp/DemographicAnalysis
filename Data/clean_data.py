@@ -206,7 +206,8 @@ def Save_CSV(filename, data, rest_keys):
         else:
             outfile.write(str(labels[i]) + '\n')
     for geo in geo_keys:
-        row = [geo]
+        gkey = '\"' + str(geo) + '\"'
+        row = [gkey]
         for gender in genders:
             for age in ages:
                 if age == 65:
