@@ -1335,7 +1335,7 @@
         "Black": "0.2657", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0113", 
-        "Total_Population": "4833722.0000", 
+        "Total_Population": "4833722", 
         "Two or More": "0.0169", 
         "White": "0.6890"
     }, 
@@ -2675,7 +2675,7 @@
         "Black": "0.0341", 
         "Native Hawaiian and Other Paciffic Islander": "0.0120", 
         "Other": "0.0129", 
-        "Total_Population": "735132.0000", 
+        "Total_Population": "735132", 
         "Two or More": "0.0774", 
         "White": "0.6635"
     }, 
@@ -4015,7 +4015,7 @@
         "Black": "0.0419", 
         "Native Hawaiian and Other Paciffic Islander": "0.0019", 
         "Other": "0.0620", 
-        "Total_Population": "6626624.0000", 
+        "Total_Population": "6626624", 
         "Two or More": "0.0320", 
         "White": "0.7898"
     }, 
@@ -5355,7 +5355,7 @@
         "Black": "0.1568", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0226", 
-        "Total_Population": "2959373.0000", 
+        "Total_Population": "2959373", 
         "Two or More": "0.0220", 
         "White": "0.7791"
     }, 
@@ -6695,7 +6695,7 @@
         "Black": "0.0592", 
         "Native Hawaiian and Other Paciffic Islander": "0.0037", 
         "Other": "0.1294", 
-        "Total_Population": "38332521.0000", 
+        "Total_Population": "38332521", 
         "Two or More": "0.0451", 
         "White": "0.6193"
     }, 
@@ -8035,7 +8035,7 @@
         "Black": "0.0398", 
         "Native Hawaiian and Other Paciffic Islander": "0.0016", 
         "Other": "0.0477", 
-        "Total_Population": "5268367.0000", 
+        "Total_Population": "5268367", 
         "Two or More": "0.0359", 
         "White": "0.8382"
     }, 
@@ -9375,7 +9375,7 @@
         "Black": "0.1032", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0515", 
-        "Total_Population": "3596080.0000", 
+        "Total_Population": "3596080", 
         "Two or More": "0.0292", 
         "White": "0.7727"
     }, 
@@ -10715,7 +10715,7 @@
         "Black": "0.2163", 
         "Native Hawaiian and Other Paciffic Islander": "0.0009", 
         "Other": "0.0249", 
-        "Total_Population": "925749.0000", 
+        "Total_Population": "925749", 
         "Two or More": "0.0285", 
         "White": "0.6887"
     }, 
@@ -12055,7 +12055,7 @@
         "Black": "0.4881", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0335", 
-        "Total_Population": "646449.0000", 
+        "Total_Population": "646449", 
         "Two or More": "0.0322", 
         "White": "0.4085"
     }, 
@@ -13395,7 +13395,7 @@
         "Black": "0.1607", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0249", 
-        "Total_Population": "19552860.0000", 
+        "Total_Population": "19552860", 
         "Two or More": "0.0235", 
         "White": "0.7619"
     }, 
@@ -14735,7 +14735,7 @@
         "Black": "0.3098", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0269", 
-        "Total_Population": "9992167.0000", 
+        "Total_Population": "9992167", 
         "Two or More": "0.0211", 
         "White": "0.6040"
     }, 
@@ -16075,7 +16075,7 @@
         "Black": "0.0216", 
         "Native Hawaiian and Other Paciffic Islander": "0.0978", 
         "Other": "0.0100", 
-        "Total_Population": "1404054.0000", 
+        "Total_Population": "1404054", 
         "Two or More": "0.2350", 
         "White": "0.2557"
     }, 
@@ -17415,7 +17415,7 @@
         "Black": "0.0056", 
         "Native Hawaiian and Other Paciffic Islander": "0.0011", 
         "Other": "0.0262", 
-        "Total_Population": "1612136.0000", 
+        "Total_Population": "1612136", 
         "Two or More": "0.0240", 
         "White": "0.9153"
     }, 
@@ -18755,7 +18755,7 @@
         "Black": "0.1423", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0568", 
-        "Total_Population": "12882135.0000", 
+        "Total_Population": "12882135", 
         "Two or More": "0.0225", 
         "White": "0.7268"
     }, 
@@ -20095,7 +20095,7 @@
         "Black": "0.0918", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0245", 
-        "Total_Population": "6570902.0000", 
+        "Total_Population": "6570902", 
         "Two or More": "0.0217", 
         "White": "0.8415"
     }, 
@@ -21435,7 +21435,7 @@
         "Black": "0.0331", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0125", 
-        "Total_Population": "3090416.0000", 
+        "Total_Population": "3090416", 
         "Two or More": "0.0171", 
         "White": "0.9138"
     }, 
@@ -22775,7 +22775,7 @@
         "Black": "0.0581", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0191", 
-        "Total_Population": "2893957.0000", 
+        "Total_Population": "2893957", 
         "Two or More": "0.0330", 
         "White": "0.8556"
     }, 
@@ -24115,7 +24115,7 @@
         "Black": "0.0797", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0091", 
-        "Total_Population": "4395295.0000", 
+        "Total_Population": "4395295", 
         "Two or More": "0.0200", 
         "White": "0.8770"
     }, 
@@ -25455,7 +25455,7 @@
         "Black": "0.3228", 
         "Native Hawaiian and Other Paciffic Islander": "0.0001", 
         "Other": "0.0097", 
-        "Total_Population": "4625470.0000", 
+        "Total_Population": "4625470", 
         "Two or More": "0.0168", 
         "White": "0.6285"
     }, 
@@ -26795,7 +26795,7 @@
         "Black": "0.0103", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0029", 
-        "Total_Population": "1328302.0000", 
+        "Total_Population": "1328302", 
         "Two or More": "0.0210", 
         "White": "0.9489"
     }, 
@@ -28135,7 +28135,7 @@
         "Black": "0.2960", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0360", 
-        "Total_Population": "5928814.0000", 
+        "Total_Population": "5928814", 
         "Two or More": "0.0286", 
         "White": "0.5762"
     }, 
@@ -29475,7 +29475,7 @@
         "Black": "0.0709", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0427", 
-        "Total_Population": "6692824.0000", 
+        "Total_Population": "6692824", 
         "Two or More": "0.0297", 
         "White": "0.7964"
     }, 
@@ -30815,7 +30815,7 @@
         "Black": "0.1393", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0101", 
-        "Total_Population": "9895622.0000", 
+        "Total_Population": "9895622", 
         "Two or More": "0.0269", 
         "White": "0.7912"
     }, 
@@ -32155,7 +32155,7 @@
         "Black": "0.0543", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0162", 
-        "Total_Population": "5420380.0000", 
+        "Total_Population": "5420380", 
         "Two or More": "0.0271", 
         "White": "0.8479"
     }, 
@@ -33495,7 +33495,7 @@
         "Black": "0.3772", 
         "Native Hawaiian and Other Paciffic Islander": "0.0001", 
         "Other": "0.0081", 
-        "Total_Population": "2991207.0000", 
+        "Total_Population": "2991207", 
         "Two or More": "0.0108", 
         "White": "0.5899"
     }, 
@@ -34835,7 +34835,7 @@
         "Black": "0.1145", 
         "Native Hawaiian and Other Paciffic Islander": "0.0009", 
         "Other": "0.0108", 
-        "Total_Population": "6044171.0000", 
+        "Total_Population": "6044171", 
         "Two or More": "0.0251", 
         "White": "0.8279"
     }, 
@@ -36175,7 +36175,7 @@
         "Black": "0.0032", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0050", 
-        "Total_Population": "1015165.0000", 
+        "Total_Population": "1015165", 
         "Two or More": "0.0255", 
         "White": "0.8912"
     }, 
@@ -37515,7 +37515,7 @@
         "Black": "0.0460", 
         "Native Hawaiian and Other Paciffic Islander": "0.0009", 
         "Other": "0.0192", 
-        "Total_Population": "1868516.0000", 
+        "Total_Population": "1868516", 
         "Two or More": "0.0229", 
         "White": "0.8832"
     }, 
@@ -38855,7 +38855,7 @@
         "Black": "0.0839", 
         "Native Hawaiian and Other Paciffic Islander": "0.0066", 
         "Other": "0.0961", 
-        "Total_Population": "2790136.0000", 
+        "Total_Population": "2790136", 
         "Two or More": "0.0421", 
         "White": "0.6834"
     }, 
@@ -40195,7 +40195,7 @@
         "Black": "0.0122", 
         "Native Hawaiian and Other Paciffic Islander": "0.0001", 
         "Other": "0.0082", 
-        "Total_Population": "1323459.0000", 
+        "Total_Population": "1323459", 
         "Two or More": "0.0192", 
         "White": "0.9345"
     }, 
@@ -41535,7 +41535,7 @@
         "Black": "0.1366", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0649", 
-        "Total_Population": "8899339.0000", 
+        "Total_Population": "8899339", 
         "Two or More": "0.0244", 
         "White": "0.6819"
     }, 
@@ -42875,7 +42875,7 @@
         "Black": "0.0200", 
         "Native Hawaiian and Other Paciffic Islander": "0.0008", 
         "Other": "0.0889", 
-        "Total_Population": "2085287.0000", 
+        "Total_Population": "2085287", 
         "Two or More": "0.0333", 
         "White": "0.7527"
     }, 
@@ -44215,7 +44215,7 @@
         "Black": "0.1567", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0852", 
-        "Total_Population": "19651127.0000", 
+        "Total_Population": "19651127", 
         "Two or More": "0.0287", 
         "White": "0.6460"
     }, 
@@ -45555,7 +45555,7 @@
         "Black": "0.2154", 
         "Native Hawaiian and Other Paciffic Islander": "0.0007", 
         "Other": "0.0326", 
-        "Total_Population": "9848060.0000", 
+        "Total_Population": "9848060", 
         "Two or More": "0.0240", 
         "White": "0.6917"
     }, 
@@ -46895,7 +46895,7 @@
         "Black": "0.0150", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0064", 
-        "Total_Population": "723393.0000", 
+        "Total_Population": "723393", 
         "Two or More": "0.0204", 
         "White": "0.8895"
     }, 
@@ -48235,7 +48235,7 @@
         "Black": "0.1214", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0082", 
-        "Total_Population": "11570808.0000", 
+        "Total_Population": "11570808", 
         "Two or More": "0.0256", 
         "White": "0.8246"
     }, 
@@ -49575,7 +49575,7 @@
         "Black": "0.0719", 
         "Native Hawaiian and Other Paciffic Islander": "0.0014", 
         "Other": "0.0269", 
-        "Total_Population": "3850568.0000", 
+        "Total_Population": "3850568", 
         "Two or More": "0.0747", 
         "White": "0.7312"
     }, 
@@ -50915,7 +50915,7 @@
         "Black": "0.0185", 
         "Native Hawaiian and Other Paciffic Islander": "0.0036", 
         "Other": "0.0284", 
-        "Total_Population": "3930065.0000", 
+        "Total_Population": "3930065", 
         "Two or More": "0.0422", 
         "White": "0.8576"
     }, 
@@ -52255,7 +52255,7 @@
         "Black": "0.1103", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0207", 
-        "Total_Population": "12773801.0000", 
+        "Total_Population": "12773801", 
         "Two or More": "0.0206", 
         "White": "0.8163"
     }, 
@@ -53595,7 +53595,7 @@
         "Black": "0.0642", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0695", 
-        "Total_Population": "1051511.0000", 
+        "Total_Population": "1051511", 
         "Two or More": "0.0256", 
         "White": "0.8047"
     }, 
@@ -54935,7 +54935,7 @@
         "Black": "0.2765", 
         "Native Hawaiian and Other Paciffic Islander": "0.0007", 
         "Other": "0.0150", 
-        "Total_Population": "4774839.0000", 
+        "Total_Population": "4774839", 
         "Two or More": "0.0190", 
         "White": "0.6723"
     }, 
@@ -56275,7 +56275,7 @@
         "Black": "0.0154", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0080", 
-        "Total_Population": "844877.0000", 
+        "Total_Population": "844877", 
         "Two or More": "0.0290", 
         "White": "0.8511"
     }, 
@@ -57615,7 +57615,7 @@
         "Black": "0.1697", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0142", 
-        "Total_Population": "6495978.0000", 
+        "Total_Population": "6495978", 
         "Two or More": "0.0190", 
         "White": "0.7790"
     }, 
@@ -58955,7 +58955,7 @@
         "Black": "0.1188", 
         "Native Hawaiian and Other Paciffic Islander": "0.0008", 
         "Other": "0.0601", 
-        "Total_Population": "26448193.0000", 
+        "Total_Population": "26448193", 
         "Two or More": "0.0245", 
         "White": "0.7502"
     }, 
@@ -60295,7 +60295,7 @@
         "Black": "0.0113", 
         "Native Hawaiian and Other Paciffic Islander": "0.0095", 
         "Other": "0.0481", 
-        "Total_Population": "2900872.0000", 
+        "Total_Population": "2900872", 
         "Two or More": "0.0243", 
         "White": "0.8737"
     }, 
@@ -61635,7 +61635,7 @@
         "Black": "0.0115", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0026", 
-        "Total_Population": "626630.0000", 
+        "Total_Population": "626630", 
         "Two or More": "0.0211", 
         "White": "0.9498"
     }, 
@@ -62975,7 +62975,7 @@
         "Black": "0.1928", 
         "Native Hawaiian and Other Paciffic Islander": "0.0007", 
         "Other": "0.0197", 
-        "Total_Population": "8260405.0000", 
+        "Total_Population": "8260405", 
         "Two or More": "0.0325", 
         "White": "0.6933"
     }, 
@@ -64315,7 +64315,7 @@
         "Black": "0.0372", 
         "Native Hawaiian and Other Paciffic Islander": "0.0061", 
         "Other": "0.0367", 
-        "Total_Population": "6971406.0000", 
+        "Total_Population": "6971406", 
         "Two or More": "0.0492", 
         "White": "0.7803"
     }, 
@@ -65655,7 +65655,7 @@
         "Black": "0.0339", 
         "Native Hawaiian and Other Paciffic Islander": "0.0008", 
         "Other": "0.0033", 
-        "Total_Population": "1854304.0000", 
+        "Total_Population": "1854304", 
         "Two or More": "0.0183", 
         "White": "0.9371"
     }, 
@@ -66995,7 +66995,7 @@
         "Black": "0.0623", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0169", 
-        "Total_Population": "5742713.0000", 
+        "Total_Population": "5742713", 
         "Two or More": "0.0211", 
         "White": "0.8660"
     }, 
@@ -68335,7 +68335,7 @@
         "Black": "0.0128", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0195", 
-        "Total_Population": "582658.0000", 
+        "Total_Population": "582658", 
         "Two or More": "0.0274", 
         "White": "0.9067"
     }

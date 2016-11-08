@@ -170,7 +170,7 @@ def Read_Races(data, filename, indices, labels):
             if geo == "Puerto Rico":
                 break
             total = float(item[indices[0]])
-            total_str = '%.4f' % total
+            total_str = str(int(total))
             data[geo]["Total_Population"] = total_str
             for i in range(1, len(indices)):
                 per_pop = float(item[indices[i]])/total
