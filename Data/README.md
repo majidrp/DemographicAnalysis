@@ -3,9 +3,9 @@ Survey (ACS) which was downloaded from http://factfinder.census.gov/
 
 The python script `clean_data.py` pulls from the `Raw_Data` folder
 (which contains the data directly from the census) and parses just the
-necessary rows and columns and returns it in JSON format. It is not
-completely finished yet, as there seems to be some bugs in different years
-when testing educational status (ie "S1501") for the years 2010-2015.
+necessary rows and columns and returns it in JSON format. There is a problem
+when parsing the `Counties`, which is being worked on, but it works fine for
+parsing the `States`.
 
 It then outputs the data into the appropriate folder, named such as
 `[YEAR]_ACS.json`, where `[YEAR]` is the year that the data is from. The format
