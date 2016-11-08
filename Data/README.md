@@ -14,8 +14,9 @@ of the json data is
 ```
 geo
  |- Race -> {"White","Black","American Indian or Alaskan Native","Asian","Native Hawaiian and Other Paciffic Islander","Other","Two or More"}
+ |- Total_Population
  |- Age -> {"18","19","20",...,"63","64","65+"}
-     |- Gender ["M","F"]
+     |- Gender -> {"M","F"}
           |- Population
           |- Education -> 18-24:{"No HS","HS/GED","Some College", "Bachelors"} or 25+:{"No HS","HS/GED","Some College","Bachelors","Graduate/Professional"}
           |- Marital Status -> {"Married","Widowed","Divorced","Separated","Never Married"}
