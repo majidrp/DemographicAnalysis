@@ -144,10 +144,16 @@ def Read_MaritalStatus(data, filename, m_list, m_add, f_list, f_add, labels):
                             continue
                         for gender in genders:
                             if gender == "M":
-                                m_per = float(item[m_list[index_offset]])/100.0
+                                m_per = item[m_list[index_offset]]
+                                if m_per == "N":
+                                    m_per = "0.0"
+                                m_per = float(m_per)/100.0
                                 m_per = '%.4f' % m_per
                             else:
-                                m_per = float(item[f_list[index_offset]])/100.0
+                                m_per = item[f_list[index_offset]]
+                                if m_per == "N":
+                                    m_per = "0.0"
+                                m_per = float(m_per)/100.0
                                 m_per = '%.4f' % m_per
                             data[geo][age][gender][m_status] = m_per
                     index_offset = index_offset + 1
@@ -173,65 +179,67 @@ def Read_Races(data, filename, indices, labels):
     return
 
 
+type_list = ["Counties"]#["State","Counties"]
 year_list = ["10", "11", "12", "13", "14", "15"]
-SAVE_DIR = os.getcwd() + "/States/"
 SAVE_EXT = "_ACS.json"
 end = "_with_ann.csv"
 FT = ""
 
-for year in year_list:
-    BASE_DIR = os.getcwd() + "/Raw_Data/States/20" + year + "_ACS/"
+for type_ in type_list:
+    SAVE_DIR = os.getcwd() + "/" + type_ + "/"
+    for year in year_list:
+        BASE_DIR = os.getcwd() + "/Raw_Data/" + type_ + "/20" + year + "_ACS/"
 
-    if year == "05" or year == "06":
-        FT = "_EST_"
-    else:
-        FT = "_1YR_"
+        if year == "05" or year == "06":
+            FT = "_EST_"
+        else:
+            FT = "_1YR_"
 
-    output_file = SAVE_DIR + "20" + year + SAVE_EXT
-    # Age
-    tag = "B01001"
-    currFile = BASE_DIR + "ACS_" + year + FT + tag + end
-    m_list = [15,17,19,21,23,25,27,29,31,33,35,37,39,41]
-    m_add = [41,43,45,47,49,51]
-    f_list = [63,65,67,69,71,73,75,77,79,81,83,85,87,89]
-    f_add = [89,91,93,95,97,99]
-    labels = ["18-19","20","21","22-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-61","62-64","65+"]
+        output_file = SAVE_DIR + "20" + year + SAVE_EXT
+        # Age
+        tag = "B01001"
+        currFile = BASE_DIR + "ACS_" + year + FT + tag + end
+        m_list = [15,17,19,21,23,25,27,29,31,33,35,37,39,41]
+        m_add = [41,43,45,47,49,51]
+        f_list = [63,65,67,69,71,73,75,77,79,81,83,85,87,89]
+        f_add = [89,91,93,95,97,99]
+        labels = ["18-19","20","21","22-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-61","62-64","65+"]
 
-    data = Read_AgeSex(currFile, m_list, m_add, f_list, f_add, labels)
+        data = Read_AgeSex(currFile, m_list, m_add, f_list, f_add, labels)
 
-    # Education
-    tag = "S1501"
-    currFile = BASE_DIR + "ACS_" + year + FT + tag + end
-    if year == "15":
-        m_list = [21,33,45,57,81,105,117,141,153]
-        m_add = [[81,93],[117,129]]
-        f_list = [25,37,49,61,85,109,121,145,157]
-        f_add = [[85,97],[121,133]]
-    else:
-        m_list = [11,17,23,29,41,53,59,71,77]
-        m_add = [[41,47],[59,65]]
-        f_list = [13,19,25,31,43,55,61,73,79]
-        f_add = [[43,49],[61,67]]
-    labels = [["18-24",["No HS","HS/GED","Some College", "Bachelors"]],["25+",["No HS","HS/GED","Some College","Bachelors","Graduate/Professional"]]]
+        # Education
+        tag = "S1501"
+        currFile = BASE_DIR + "ACS_" + year + FT + tag + end
+        if year == "15":
+            m_list = [21,33,45,57,81,105,117,141,153]
+            m_add = [[81,93],[117,129]]
+            f_list = [25,37,49,61,85,109,121,145,157]
+            f_add = [[85,97],[121,133]]
+        else:
+            m_list = [11,17,23,29,41,53,59,71,77]
+            m_add = [[41,47],[59,65]]
+            f_list = [13,19,25,31,43,55,61,73,79]
+            f_add = [[43,49],[61,67]]
+        labels = [["18-24",["No HS","HS/GED","Some College", "Bachelors"]],["25+",["No HS","HS/GED","Some College","Bachelors","Graduate/Professional"]]]
 
-    Read_Education(data, currFile, m_list, m_add, f_list, f_add, labels)
+        Read_Education(data, currFile, m_list, m_add, f_list, f_add, labels)
 
-    # Martial Stauts
-    tag = "S1201"
-    currFile = BASE_DIR + "ACS_" + year + FT + tag + end
-    m_list = [29,31,33,35,37,41,43,45,47,49,53,55,57,59,61,65,67,69,71,73,77,79,81,83,85,89,91,93,95,97]
-    f_list = [113,115,117,119,121,125,127,129,131,133,137,139,141,143,145,149,151,153,155,157,161,143,165,167,169,173,175,177,179,181]
-    labels = [["15-19",["Married","Widowed","Divorced","Separated","Never Married"]],["20-34",["Married","Widowed","Divorced","Separated","Never Married"]],["35-44",["Married","Widowed","Divorced","Separated","Never Married"]],["45-54",["Married","Widowed","Divorced","Separated","Never Married"]],["55-64",["Married","Widowed","Divorced","Separated","Never Married"]],["65+",["Married","Widowed","Divorced","Separated","Never Married"]]]
+        # Martial Stauts
+        tag = "S1201"
+        currFile = BASE_DIR + "ACS_" + year + FT + tag + end
+        m_list = [29,31,33,35,37,41,43,45,47,49,53,55,57,59,61,65,67,69,71,73,77,79,81,83,85,89,91,93,95,97]
+        f_list = [113,115,117,119,121,125,127,129,131,133,137,139,141,143,145,149,151,153,155,157,161,143,165,167,169,173,175,177,179,181]
+        labels = [["15-19",["Married","Widowed","Divorced","Separated","Never Married"]],["20-34",["Married","Widowed","Divorced","Separated","Never Married"]],["35-44",["Married","Widowed","Divorced","Separated","Never Married"]],["45-54",["Married","Widowed","Divorced","Separated","Never Married"]],["55-64",["Married","Widowed","Divorced","Separated","Never Married"]],["65+",["Married","Widowed","Divorced","Separated","Never Married"]]]
 
-    Read_MaritalStatus(data, currFile, m_list, m_add, f_list, f_add, labels)
+        Read_MaritalStatus(data, currFile, m_list, m_add, f_list, f_add, labels)
 
-    # Race
-    tag = "B02001"
-    currFile = BASE_DIR + "ACS_" + year + FT + tag + end
-    ind_list = [3,5,7,9,11,13,15,17]
-    labels = ["Total","White","Black","American Indian or Alaskan Native","Asian","Native Hawaiian and Other Paciffic Islander","Other","Two or More"]
-    Read_Races(data, currFile, ind_list, labels)
+        # Race
+        tag = "B02001"
+        currFile = BASE_DIR + "ACS_" + year + FT + tag + end
+        ind_list = [3,5,7,9,11,13,15,17]
+        labels = ["Total","White","Black","American Indian or Alaskan Native","Asian","Native Hawaiian and Other Paciffic Islander","Other","Two or More"]
+        Read_Races(data, currFile, ind_list, labels)
 
-    print("Writing to: \"" + output_file + "\"")
-    with open(output_file, 'w') as outfile:
-        json.dump(data, outfile)
+        print("Writing to: \"" + output_file + "\"")
+        with open(output_file, 'w') as outfile:
+            json.dump(data, outfile)
