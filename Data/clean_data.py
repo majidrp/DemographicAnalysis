@@ -179,7 +179,7 @@ def Read_Races(data, filename, indices, labels):
     return
 
 
-type_list = ["Counties"]#["State","Counties"]
+type_list = ["States","Counties"]
 year_list = ["10", "11", "12", "13", "14", "15"]
 SAVE_EXT = "_ACS.json"
 end = "_with_ann.csv"
@@ -242,4 +242,4 @@ for type_ in type_list:
 
         print("Writing to: \"" + output_file + "\"")
         with open(output_file, 'w') as outfile:
-            json.dump(data, outfile)
+            json.dump(data, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
