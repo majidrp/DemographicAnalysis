@@ -178,10 +178,66 @@ def Read_Races(data, filename, indices, labels):
                 data[geo][labels[i]] = per_pop
     return
 
+def Save_CSV(filename, data, rest_keys):
+    outfile = open(filename, 'w')
+    genders = ["M", "F"]
+    geo_keys = []
+    agef_keys = []
+    ages = range(18, 66)
+    labels = ["Geo"]
+    first_key = data.keys()
+    geo_keys = first_key
+    first_key.sort()
+    first_key = first_key[0]
+    age_keys = data[first_key]["30"]["M"].keys()
+    age_keys.sort()
+    agef_keys = age_keys
+    for gender in genders:
+        for age in ages:
+            if age == 65:
+                age = "65+"
+            for sKeys in age_keys:
+                temp = str(age) + "_" + gender + "_" + sKeys
+                labels.append(temp)
+    labels.extend(rest_keys)
+    for i in range(len(labels)):
+        if i < len(labels)-1:
+            outfile.write(str(labels[i]) + ',')
+        else:
+            outfile.write(str(labels[i]) + '\n')
+    for geo in geo_keys:
+        row = [geo]
+        for gender in genders:
+            for age in ages:
+                if age == 65:
+                    age = "65+"
+                for sKeys in age_keys:
+                    if age < 25 and sKeys == "Graduate/Professional":
+                        row.append(0.0)
+                    else:
+                        row.append(data[geo][str(age)][gender][sKeys])
+        for i in range(0, len(rest_keys)):
+            if i == 0:
+                val = "Total_Population"
+            else:
+                val = rest_keys[i]
+            try:
+                row.append(data[geo][val])
+            except KeyError:
+                row.append(0.0)
+        for i in range(0, len(row)):
+            if i < len(row)-1:
+                outfile.write(str(row[i]) + ',')
+            else:
+                outfile.write(str(row[i]) + '\n')
+    outfile.close()
+    return
+
 
 type_list = ["States","Counties"]
 year_list = ["10", "11", "12", "13", "14", "15"]
 SAVE_EXT = "_ACS.json"
+CSV_EXT = "_ACS.csv"
 end = "_with_ann.csv"
 FT = ""
 
@@ -196,6 +252,7 @@ for type_ in type_list:
             FT = "_1YR_"
 
         output_file = SAVE_DIR + "20" + year + SAVE_EXT
+        output_file_csv = SAVE_DIR + "20" + year + CSV_EXT
         # Age
         tag = "B01001"
         currFile = BASE_DIR + "ACS_" + year + FT + tag + end
@@ -243,3 +300,6 @@ for type_ in type_list:
         print("Writing to: \"" + output_file + "\"")
         with open(output_file, 'w') as outfile:
             json.dump(data, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
+
+        print("Writing to: \"" + output_file_csv + "\"")
+        Save_CSV(output_file_csv, data, labels)
