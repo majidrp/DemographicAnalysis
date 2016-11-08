@@ -4,6 +4,7 @@ Survey (ACS) which was downloaded from http://factfinder.census.gov/
 The python script `clean_data.py` pulls from the `Raw_Data` folder
 (which contains the data directly from the census) and parses just the
 necessary rows and columns and returns it in JSON format. Parses both `States`
+and `Counties` into JSON and CSV data formats to be read in (CSV is smaller).
 
 It then outputs the data into the appropriate folder, named such as
 `[YEAR]_ACS.json`, where `[YEAR]` is the year that the data is from. The format
@@ -11,8 +12,8 @@ of the json data is
 
 ```
 geo
- |- Race -> {"White","Black","American Indian or Alaskan Native","Asian","Native Hawaiian and Other Paciffic Islander","Other","Two or More"}
  |- Total_Population
+ |- Race -> {"White","Black","American Indian or Alaskan Native","Asian","Native Hawaiian and Other Paciffic Islander","Other","Two or More"}
  |- Age -> {"18","19","20",...,"63","64","65+"}
      |- Gender -> {"M","F"}
           |- Population
