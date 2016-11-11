@@ -101,3 +101,7 @@ function zoomed() {
 function stopped() {
   if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
+
+function chooseData(){
+  // will write this later
+}
