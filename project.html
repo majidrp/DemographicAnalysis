@@ -17,31 +17,28 @@
 
 <body>
 
+<h1>Demographic Analysis 2010 to 2015</h1>
+<p class="info">Ashkan Bashardoust - Majid Rasouli - Christopher Mertin</p>
+
 <script src="//d3js.org/d3.v4.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script type="application/javascript" src="script.js"></script>
 
-<div id="bar-chart" class="view">
-    <h2 class="">Category Selection</h2>
-    <div id="plot-selector">
-        <label>Plot:</label>
-        <select id="dataset" onchange="chooseData()">
-            <option selected value="attendance">Gender</option>
-            <option value="teams">Age</option>
-            <option value="matches">Education</option>
-            <option value="goals">Race</option>
+<div id="selection" class="view">
+    <h2 id="edition">Attribute Selection</h2>
+
+    <h3>Year</h3>
+    <span id="year"></span>
+    <div id="year-selector">
+        <select id="year-fir" onchange="chooseData()">
+            <option selected value="1">2010</option>
+            <option value="2">2011</option>
+            <option value="3">2012</option>
+            <option value="4">2013</option>
+            <option value="3">2014</option>
+            <option value="4">2015</option>
         </select>
     </div>
-
-    <svg width="500" height="400" id="barChart">
-        <g id="xAxis"></g>
-        <g id="yAxis"></g>
-        <g id="bars"></g>
-    </svg>
-</div>
-
-<div id="details" class="view">
-    <h2 id="edition">Attribute Selection</h2>
 
     <h3>Gender</h3>
     <span id="gender"></span>
@@ -52,17 +49,18 @@
 
     <h3>Age</h3>
     <span id="age"></span>
+    
 
     <h3>Education</h3>
     <span id="education"></span>
     <form action="#" method="post">
 	<input type="checkbox" name="gender" value="1">Less than high school</input><br>
-	<input type="checkbox" name="gender" value="2">Some college, no degree</input><br>
-	<input type="checkbox" name="gender" value="3">Postsecondary non-degree award</input><br>
+	<input type="checkbox" name="gender" value="2">Some college courses</input><br>
+	<input type="checkbox" name="gender" value="3">College degree</input><br>
 	<input type="checkbox" name="gender" value="4">Associate’s degree</input><br>
 	<input type="checkbox" name="gender" value="5">Bachelor’s degree</input><br>
 	<input type="checkbox" name="gender" value="6">Master’s degree</input><br>
-	<input type="checkbox" name="gender" value="6">Doctoral or professional degree</input>
+	<input type="checkbox" name="gender" value="6">Doctoral degree</input>
 	</form>
 
     <h3>Race</h3>
@@ -79,18 +77,8 @@
     <input type="submit" name="submit" value="Submit"/>
 </div>
 
-<div id="map-view" class="view">
-    <h2>World Map</h2>
-    <svg width="400" height="30">
-        <rect class="host legend-element" x="0" y="5"></rect>
-        <text x="18" y="18">Host</text>
-        <rect class="team legend-element" x="60" y="5"></rect>
-        <text x="78" y="18">Participant</text>
-        <circle class="gold" cx="176" cy="12" r="8"></circle>
-        <text x="188" y="18">Winner</text>
-        <circle class="silver" cx="258" cy="12" r="8"></circle>
-        <text x="270" y="18">Runner-Up</text>
-    </svg>
+<div id="plots" class="view">
+    <h2>Plots</h2>
 
     <svg width="900" height="600">
         <g id="map"></g>
@@ -98,5 +86,36 @@
     </svg>
 </div>
 
+<div id="category" class="view">
+    <h2 class="">Category Selection</h2>
+
+    <h3>Category</h3>
+    <div id="category-selector">
+        <select id="dataset" onchange="chooseData()">
+            <option selected value="1">Gender</option>
+            <option value="2">Age</option>
+            <option value="3">Education</option>
+            <option value="4">Race</option>
+        </select>
+    </div>
+
+    <h3>Year</h3>
+    <div id="year-chooser">
+        <select id="year-sec" onchange="chooseData()">
+            <option selected value="1">2010</option>
+            <option value="2">2011</option>
+            <option value="3">2012</option>
+            <option value="4">2013</option>
+            <option value="3">2014</option>
+            <option value="4">2015</option>
+        </select>
+    </div>
+
+    <svg width="500" height="400" id="barChart">
+        <g id="xAxis"></g>
+        <g id="yAxis"></g>
+        <g id="bars"></g>
+    </svg>
+</div>
 
 </body>

@@ -1,3 +1,11 @@
+h1 {
+    font-family: "Arvo";
+    font-size:35px;
+    color: #464646;
+    margin: 0px;
+    padding: 0px;
+}
+
 .background {
   fill: none;
   pointer-events: all;
