@@ -32,6 +32,10 @@ h1 {
 
 }
 
+.zoom {
+  fill: white
+}
+
 #mainDiv{
 	width: 500px;
   height: 700px;
