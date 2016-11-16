@@ -24,60 +24,70 @@
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script type="application/javascript" src="script.js"></script>
 
-<div id="selection" class="view">
-    <h2 id="edition">Attribute Selection</h2>
+<div id="mainDiv">
+  <div id="selection">
+      <h2 id="edition">Attribute Selection</h2>
 
-    <h3>Year</h3>
-    <span id="year"></span>
-    <div id="year-selector">
-        <select id="year-fir" onchange="chooseData()">
-            <option selected value="1">2010</option>
-            <option value="2">2011</option>
-            <option value="3">2012</option>
-            <option value="4">2013</option>
-            <option value="3">2014</option>
-            <option value="4">2015</option>
-        </select>
-    </div>
+      <h3>Year</h3>
+      <span id="year"></span>
+      <div id="year-selector">
+          <select id="year-fir" onchange="chooseData()">
+              <option selected value="1">2010</option>
+              <option value="2">2011</option>
+              <option value="3">2012</option>
+              <option value="4">2013</option>
+              <option value="3">2014</option>
+              <option value="4">2015</option>
+          </select>
+      </div>
 
-    <h3>Gender</h3>
-    <span id="gender"></span>
-    <form action="#" method="post">
-	<input type="checkbox" name="gender" value="Male">Male</input>
-	<input type="checkbox" name="gender" value="Female">Female</input>
-	</form>
+      <h3>Gender</h3>
+      <span id="gender"></span>
+      <form action="#" method="post">
+  	<input type="checkbox" name="gender" value="Male">Male</input>
+  	<input type="checkbox" name="gender" value="Female">Female</input>
+  	</form>
 
-    <h3>Age</h3>
-    <span id="age"></span>
-    
+      <h3>Age</h3>
+      <span id="age"></span>
 
-    <h3>Education</h3>
-    <span id="education"></span>
-    <form action="#" method="post">
-	<input type="checkbox" name="gender" value="1">Less than high school</input><br>
-	<input type="checkbox" name="gender" value="2">Some college courses</input><br>
-	<input type="checkbox" name="gender" value="3">College degree</input><br>
-	<input type="checkbox" name="gender" value="4">Associate’s degree</input><br>
-	<input type="checkbox" name="gender" value="5">Bachelor’s degree</input><br>
-	<input type="checkbox" name="gender" value="6">Master’s degree</input><br>
-	<input type="checkbox" name="gender" value="6">Doctoral degree</input>
-	</form>
 
-    <h3>Race</h3>
-    <span id="race"></span>
-    <form action="#" method="post">
-	<input type="checkbox" name="gender" value="White">White</input><br>
-	<input type="checkbox" name="gender" value="Black">Black</input><br>
-	<input type="checkbox" name="gender" value="Asian">Asian</input><br>
-	<input type="checkbox" name="gender" value="Red">American Idian or Alaska Native</input><br>
-	<input type="checkbox" name="gender" value="Hawaii">Native Hawaiians and Other Pacific Islanders</input><br>
-	<input type="checkbox" name="gender" value="Multipe">Two or more races</input><br>
-	<input type="checkbox" name="gender" value="Other">Some other race</input>
-	</form><br>
-    <input type="submit" name="submit" value="Submit"/>
+      <h3>Education</h3>
+      <span id="education"></span>
+      <form action="#" method="post">
+  	<input type="checkbox" name="gender" value="1">Less than high school</input><br>
+  	<input type="checkbox" name="gender" value="2">Some college courses</input><br>
+  	<input type="checkbox" name="gender" value="3">College degree</input><br>
+  	<input type="checkbox" name="gender" value="4">Associate’s degree</input><br>
+  	<input type="checkbox" name="gender" value="5">Bachelor’s degree</input><br>
+  	<input type="checkbox" name="gender" value="6">Master’s degree</input><br>
+  	<input type="checkbox" name="gender" value="6">Doctoral degree</input>
+  	</form>
+
+      <h3>Race</h3>
+      <span id="race"></span>
+      <form action="#" method="post">
+  	<input type="checkbox" name="gender" value="White">White</input><br>
+  	<input type="checkbox" name="gender" value="Black">Black</input><br>
+  	<input type="checkbox" name="gender" value="Asian">Asian</input><br>
+  	<input type="checkbox" name="gender" value="Red">American Idian or Alaska Native</input><br>
+  	<input type="checkbox" name="gender" value="Hawaii">Native Hawaiians and Other Pacific Islanders</input><br>
+  	<input type="checkbox" name="gender" value="Multipe">Two or more races</input><br>
+  	<input type="checkbox" name="gender" value="Other">Some other race</input>
+  	</form><br>
+      <input type="submit" name="submit" value="Submit"/>
+
+  </div>
+
+  <!-- <div class="map" id="map">
+    <h2>US Map</h2>
+    <svg id="mapSVG">
+        <g id="mapg"></g>
+    </svg>
+  </div> -->
 </div>
 
-<div id="plots" class="view">
+<div id="plots">
     <h2>Plots</h2>
 
     <svg width="900" height="600">
@@ -86,8 +96,8 @@
     </svg>
 </div>
 
-<div id="category" class="view">
-    <h2 class="">Category Selection</h2>
+<div id="category">
+    <h2>Category Selection</h2>
 
     <h3>Category</h3>
     <div id="category-selector">

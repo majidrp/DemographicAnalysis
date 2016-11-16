@@ -1,18 +1,21 @@
-var width = 960,
-    height = 500,
+var width = 1200,
+    height = 700,
     active = d3.select(null);
 
 var projection = d3.geoAlbersUsa()
-    .scale(1000)
+    .scale(1400)
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
     .projection(projection);
 
 var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .on("click", stopped, true);
+	.attr("width", width)
+	.attr("height", height);
+    //.on("click", stopped, true);
+
+// var svg = d3.select("#mapSVG");
+//     .on("click", stopped, true);
 
 // svg.call(d3.zoom()
 //     .scaleExtent([1, 8])
@@ -22,9 +25,9 @@ var zoom = d3.zoom()
     .scaleExtent([1, 8])
     .on("zoom", zoomed);
 
-svg
-    .call(zoom); // delete this line to disable free zooming
-    //.call(zoom.event);
+// svg
+//     .call(zoom); // delete this line to disable free zooming
+//     //.call(zoom.event);
 
 svg.append("rect")
     .attr("class", "background")
@@ -33,6 +36,7 @@ svg.append("rect")
     .on("click", reset);
 
 var g = svg.append("g");
+//var g = d3.select("#mapg");
 
 d3.json("/Data/us.json", function(error, us) {
   if (error) throw error;
