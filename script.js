@@ -14,38 +14,20 @@ var svg = d3.select("body").append("svg")
 	.attr("height", height);
     //.on("click", stopped, true);
 
-// var svg = d3.select("#mapSVG");
-//     .on("click", stopped, true);
-
-// svg.call(d3.zoom()
-//     .scaleExtent([1, 8])
-//     .on("zoom", zoomed));
-
 var zoom = d3.zoom()
     .scaleExtent([1, 8])
     .on("zoom", zoomed);
 
-// svg
-//     .call(zoom); // delete this line to disable free zooming
-//     //.call(zoom.event);
-
 svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
-    .attr("height", height)
-    .call(d3.zoom()
-        .on("zoom", zoomed));
+    .attr("height", height);
+    // .call(d3.zoom()
+    //     .on("zoom", zoomed));
     //.on("click", reset);
 
-// svg.append('rect')
-//     .attr('class', 'zoom')
-//     .attr('width', width)
-//     .attr('height', height)
-//     .call(d3.zoom()
-//         .on("zoom", zoomed));
 
 var g = svg.append("g");
-//var g = d3.select("#mapg");
 
 d3.json("/Data/us.json", function(error, us) {
   if (error) throw error;
@@ -55,10 +37,7 @@ d3.json("/Data/us.json", function(error, us) {
     .enter().append("path")
       .attr("d", path)
       .attr("class", "feature")
-      .call(d3.zoom()
-          .on("zoom", zoomed));
-      //.attr('class', 'zoom')
-      //.on("click", clicked);
+      .on("click", clicked);
 
   g.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -67,7 +46,6 @@ d3.json("/Data/us.json", function(error, us) {
 });
 
 function clicked(d) {
-  //console.log("clicked()");
   if (active.node() === this) return reset();
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
@@ -80,37 +58,25 @@ function clicked(d) {
       scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
       translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-//console.log(x);
-  svg.transition()
-      .duration(750)
-      .call(zoom.transform, transform);
-
-  function transform() {
-    //console.log("transform()");
-    return d3.zoomIdentity
-        .translate(translate)
-        .scale(scale);
-  }
+  g.style("stroke-width", 1.5 / d3.event.scale + "px");
+  g.transition().duration(750)
+      .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
+  d3.select('body').select('svg').select('rect').call(zoom);
 }
 
 function reset() {
-  //console.log("reset()");
   active.classed("active", false);
   active = d3.select(null);
 
-  // svg.transition()
-  //     .duration(750)
-  //     .call(zoom.translate([0, 0]).scale(1).event);
+  translate = (0,0);
+  scale = 1;
+  g.transition().duration(750)
+      .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
 }
 
 function zoomed() {
-  //console.log("zoomed()");
   g.attr("transform", d3.event.transform);
-  //g.style("stroke-width", 1.5 / d3.event.scale + "px");
-  //g.attr("transform", d3.event.scale);
-  //g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-  //g.attr("transform", "translate(" + d3.event.translate + ")");
-  //g.attr("scale(" + d3.event.scale + ")");
+  g.style("stroke-width", 1.5 / d3.event.scale + "px");
 }
 
 // If the drag behavior prevents the default click,
