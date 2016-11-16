@@ -17,7 +17,7 @@ h1 {
 }
 
 .feature.active {
-  fill: orange;
+  fill: blue;
 }
 
 .mesh {
@@ -25,4 +25,45 @@ h1 {
   stroke: #fff;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.view {
+    padding: 0.5em;
+
+}
+
+#mainDiv{
+	width: 500px;
+  height: 700px;
+	margin:auto;
+	background: transparent;
+  float: left;
+}
+
+#selection{
+	width:400px;
+  height: 700px;
+	/*margin:auto;*/
+	background: transparent;
+  margin-bottom:20px;
+  margin-left: 20px;
+  float: left;
+}
+
+#map{
+  width:1300px;
+  height: 800px;
+  float: left;
+}
+
+#plots{
+  width: 1600px;
+  height: 500px;
+  float: left;
+}
+
+#category{
+  width: 1600px;
+  height: 500px;
+  float: left;
 }
