@@ -5,13 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Visualization - Project</title>
-    <link rel="stylesheet" href="styles.css"/>
-    <!-- <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script> -->
 
-   	<!-- for version 3
-    <script src="//d3js.org/topojson.v1.min.js"></script>
-    <script src="//d3js.org/d3.v3.min.js"></script> -->
+    <link rel="stylesheet" href="styles.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:100,300' rel='stylesheet' type='text/css'>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="jquery.range.css">
+    <script src="jquery.range.js"></script>
 
 </head>
 
@@ -20,9 +19,11 @@
 <h1><center>Demographic Analysis 2010 to 2015</center></h1>
 <p class="info"><center>Ashkan Bashardoust - Majid Rasouli - Christopher Mertin</center></p>
 
-<script src="//d3js.org/d3.v4.min.js"></script>
-<script src="//d3js.org/topojson.v1.min.js"></script>
+
+<script src="http://d3js.org/d3.v4.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
 <script type="application/javascript" src="script.js"></script>
+
 
 <div id="mainDiv">
   <div id="selection">
@@ -49,7 +50,22 @@
   	</form>
 
       <h3>Age</h3>
-      <span id="age"></span>
+      <br>
+      <div id="age"><input type="hidden" class="range-slider" value="30,50" />
+        <script src="jquery.range.js"></script>
+        <script>
+        $('.range-slider').jRange({
+          from: 18,
+          to: 65,
+          step: 1,
+          scale: [18,30,50,65],
+          format: '%s',
+          width: 150,
+          showLabels: true,
+          isRange : true
+        });</script>
+        <br>
+      </div>
 
 
       <h3>Education</h3>
@@ -82,8 +98,9 @@
   <input type="checkbox" name="marital_status" value="Separated">Separated</input><br>
   <input type="checkbox" name="marital_status" value="Widowed">Widowed</input><br>
   <input type="checkbox" name="marital_status" value="Divorced">Divorced</input><br>
-  </form><br>
-      <input type="submit" name="submit" value="Submit"/>
+</form><br>
+
+  <input type="submit" name="submit" value="Submit"/>
 
   </div>
 </div>
