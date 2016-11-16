@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf-8">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Visualization - Project</title>
 
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
     <link href='http://fonts.googleapis.com/css?family=Raleway:100,300' rel='stylesheet' type='text/css'>
-  	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="jquery.range.css">
-    <script src="jquery.range.js"></script>
-
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery.range.css">
+    <script src="/scripts/jquery.range.js"></script>
 </head>
 
 <body>
@@ -19,10 +17,10 @@
 <h1><center>Demographic Analysis 2010 to 2015</center></h1>
 <p class="info"><center>Ashkan Bashardoust - Majid Rasouli - Christopher Mertin</center></p>
 
+<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+<script type="application/javascript" src="/scripts/script.js"></script>
 
-<script src="http://d3js.org/d3.v4.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<script type="application/javascript" src="script.js"></script>
 
 
 <div id="mainDiv">
@@ -45,8 +43,8 @@
       <h3>Gender</h3>
       <span id="gender"></span>
       <form action="#" method="post">
-  	<input type="checkbox" name="gender" value="Male">Male</input>
-  	<input type="checkbox" name="gender" value="Female">Female</input>
+  	<input type="checkbox" name="gender" value="M">Male</input>
+  	<input type="checkbox" name="gender" value="F">Female</input>
   	</form>
 
       <h3>Age</h3>
@@ -60,7 +58,7 @@
           step: 1,
           scale: [18,34,49,"65+"],
           format: '%s',
-          width: 200,
+          width: 180,
           showLabels: true,
           isRange : true
         });</script>
@@ -71,11 +69,11 @@
       <h3>Education</h3>
       <span id="education"></span>
       <form action="#" method="post">
-  	<input type="checkbox" name="education" value="1">No High School</input><br>
-    <input type="checkbox" name="education" value="2">High School</input><br>
-  	<input type="checkbox" name="education" value="2">Some College</input><br>
-  	<input type="checkbox" name="education" value="5">Bachelor’s</input><br>
-  	<input type="checkbox" name="education" value="6">Graduate/Professional</input><br>
+  	<input type="checkbox" name="education" value="No HS">No High School</input><br>
+    <input type="checkbox" name="education" value="HS/GED">High School</input><br>
+  	<input type="checkbox" name="education" value="Some College">Some College</input><br>
+  	<input type="checkbox" name="education" value="Bachelors">Bachelor’s</input><br>
+  	<input type="checkbox" name="education" value="Graduate/Professional">Graduate/Professional</input><br>
   	</form>
 
       <h3>Race</h3>
@@ -84,20 +82,20 @@
   	<input type="checkbox" name="race" value="White">White</input><br>
   	<input type="checkbox" name="race" value="Black">Black</input><br>
   	<input type="checkbox" name="race" value="Asian">Asian</input><br>
-  	<input type="checkbox" name="race" value="Red">American Indian/Alaskan Native</input><br>
-  	<input type="checkbox" name="race" value="Hawaii">Native Hawaiians/Pacific Islanders</input><br>
+  	<input type="checkbox" name="race" value="American Indian or Alaskan Native">American Indian/Alaskan Native</input><br>
+  	<input type="checkbox" name="race" value="Native Hawaiian and Other Paciffic Islander">Native Hawaiians/Pacific Islanders</input><br>
     <input type="checkbox" name="race" value="Other">Other Race</input><br>
-  	<input type="checkbox" name="race" value="Multipe">Two or More</input>
+  	<input type="checkbox" name="race" value="Two or More">Two or More</input>
   	</form>
 
     <h3>Marital Status</h3>
     <span id="marital"></span>
     <form action="#" method="post">
-  <input type="checkbox" name="marital_status" value="Never_Married">Never Married</input><br>
-  <input type="checkbox" name="marital_status" value="Now_Married">Now Married</input><br>
+  <input type="checkbox" name="marital_status" value="Married">Married</input><br>
   <input type="checkbox" name="marital_status" value="Separated">Separated</input><br>
   <input type="checkbox" name="marital_status" value="Widowed">Widowed</input><br>
   <input type="checkbox" name="marital_status" value="Divorced">Divorced</input><br>
+  <input type="checkbox" name="marital_status" value="Never Married">Never Married</input><br>
 </form><br>
 
   <input type="submit" name="submit" value="Submit"/>
