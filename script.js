@@ -15,8 +15,8 @@ var svg = d3.select("body").append("svg")
     //.on("click", stopped, true);
 
 var zoom = d3.zoom()
-    .scaleExtent([1, 8])
-    .on("zoom", zoomed);
+    .scaleExtent([1, 8]);
+    //.on("zoom", zoomed);
 
 svg.append("rect")
     .attr("class", "background")
@@ -74,10 +74,10 @@ function reset() {
       .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
 }
 
-function zoomed() {
-  g.attr("transform", d3.event.transform);
-  g.style("stroke-width", 1.5 / d3.event.scale + "px");
-}
+// function zoomed() {
+//   g.attr("transform", d3.event.transform);
+//   g.style("stroke-width", 1.5 / d3.event.scale + "px");
+// }
 
 // If the drag behavior prevents the default click,
 // also stop propagation so we don’t click-to-zoom.
