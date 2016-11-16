@@ -17,8 +17,8 @@
 
 <body>
 
-<h1>Demographic Analysis 2010 to 2015</h1>
-<p class="info">Ashkan Bashardoust - Majid Rasouli - Christopher Mertin</p>
+<h1><center>Demographic Analysis 2010 to 2015</center></h1>
+<p class="info"><center>Ashkan Bashardoust - Majid Rasouli - Christopher Mertin</center></p>
 
 <script src="//d3js.org/d3.v4.min.js"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
@@ -32,12 +32,12 @@
       <span id="year"></span>
       <div id="year-selector">
           <select id="year-fir" onchange="chooseData()">
-              <option selected value="1">2010</option>
-              <option value="2">2011</option>
-              <option value="3">2012</option>
-              <option value="4">2013</option>
-              <option value="3">2014</option>
-              <option value="4">2015</option>
+              <option selected value="0">2010</option>
+              <option value="1">2011</option>
+              <option value="2">2012</option>
+              <option value="3">2013</option>
+              <option value="4">2014</option>
+              <option value="5">2015</option>
           </select>
       </div>
 
@@ -55,42 +55,43 @@
       <h3>Education</h3>
       <span id="education"></span>
       <form action="#" method="post">
-  	<input type="checkbox" name="gender" value="1">Less than high school</input><br>
-  	<input type="checkbox" name="gender" value="2">Some college courses</input><br>
-  	<input type="checkbox" name="gender" value="3">College degree</input><br>
-  	<input type="checkbox" name="gender" value="4">Associate’s degree</input><br>
-  	<input type="checkbox" name="gender" value="5">Bachelor’s degree</input><br>
-  	<input type="checkbox" name="gender" value="6">Master’s degree</input><br>
-  	<input type="checkbox" name="gender" value="6">Doctoral degree</input>
+  	<input type="checkbox" name="education" value="1">No High School</input><br>
+    <input type="checkbox" name="education" value="2">High School</input><br>
+  	<input type="checkbox" name="education" value="2">Some College</input><br>
+  	<input type="checkbox" name="education" value="5">Bachelor’s</input><br>
+  	<input type="checkbox" name="education" value="6">Graduate/Professional</input><br>
   	</form>
 
       <h3>Race</h3>
       <span id="race"></span>
       <form action="#" method="post">
-  	<input type="checkbox" name="gender" value="White">White</input><br>
-  	<input type="checkbox" name="gender" value="Black">Black</input><br>
-  	<input type="checkbox" name="gender" value="Asian">Asian</input><br>
-  	<input type="checkbox" name="gender" value="Red">American Idian or Alaska Native</input><br>
-  	<input type="checkbox" name="gender" value="Hawaii">Native Hawaiians and Other Pacific Islanders</input><br>
-  	<input type="checkbox" name="gender" value="Multipe">Two or more races</input><br>
-  	<input type="checkbox" name="gender" value="Other">Some other race</input>
-  	</form><br>
+  	<input type="checkbox" name="race" value="White">White</input><br>
+  	<input type="checkbox" name="race" value="Black">Black</input><br>
+  	<input type="checkbox" name="race" value="Asian">Asian</input><br>
+  	<input type="checkbox" name="race" value="Red">American Indian/Alaskan Native</input><br>
+  	<input type="checkbox" name="race" value="Hawaii">Native Hawaiians/Pacific Islanders</input><br>
+    <input type="checkbox" name="race" value="Other">Other Race</input><br>
+  	<input type="checkbox" name="race" value="Multipe">Two or More</input>
+  	</form>
+
+    <h3>Marital Status</h3>
+    <span id="marital"></span>
+    <form action="#" method="post">
+  <input type="checkbox" name="marital_status" value="Never_Married">Never Married</input><br>
+  <input type="checkbox" name="marital_status" value="Now_Married">Now Married</input><br>
+  <input type="checkbox" name="marital_status" value="Separated">Separated</input><br>
+  <input type="checkbox" name="marital_status" value="Widowed">Widowed</input><br>
+  <input type="checkbox" name="marital_status" value="Divorced">Divorced</input><br>
+  </form><br>
       <input type="submit" name="submit" value="Submit"/>
 
   </div>
-
-  <!-- <div class="map" id="map">
-    <h2>US Map</h2>
-    <svg id="mapSVG">
-        <g id="mapg"></g>
-    </svg>
-  </div> -->
 </div>
 
 <div id="plots">
     <h2>Plots</h2>
 
-    <svg width="900" height="600">
+    <svg width="30%" height="10%">
         <g id="map"></g>
         <g id="points"></g>
     </svg>
@@ -112,12 +113,12 @@
     <h3>Year</h3>
     <div id="year-chooser">
         <select id="year-sec" onchange="chooseData()">
-            <option selected value="1">2010</option>
-            <option value="2">2011</option>
-            <option value="3">2012</option>
-            <option value="4">2013</option>
-            <option value="3">2014</option>
-            <option value="4">2015</option>
+            <option selected value="0">2010</option>
+            <option value="1">2011</option>
+            <option value="2">2012</option>
+            <option value="3">2013</option>
+            <option value="4">2014</option>
+            <option value="5">2015</option>
         </select>
     </div>
 

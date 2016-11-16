@@ -1,9 +1,19 @@
-var width = 1200,
-    height = 700,
+var percent_width = 0.75;
+var percent_height = 0.80;
+
+var mapSVG = document.getElementById("#map");
+
+console.log(window.innerWidth);
+console.log(window.innerHeight);
+var window_width = window.innerWidth;
+var window_height = window.innerHeight;
+
+var width = window_width * percent_width,// * percent_width,
+    height = window_height * percent_height,// * percent_height,
     active = d3.select(null);
 
 var projection = d3.geoAlbersUsa()
-    .scale(1400)
+    .scale(window_width * .9)
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
