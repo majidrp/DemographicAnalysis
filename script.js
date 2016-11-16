@@ -33,7 +33,16 @@ svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
     .attr("height", height)
-    .on("click", reset);
+    .call(d3.zoom()
+        .on("zoom", zoomed));
+    //.on("click", reset);
+
+// svg.append('rect')
+//     .attr('class', 'zoom')
+//     .attr('width', width)
+//     .attr('height', height)
+//     .call(d3.zoom()
+//         .on("zoom", zoomed));
 
 var g = svg.append("g");
 //var g = d3.select("#mapg");
@@ -46,7 +55,10 @@ d3.json("/Data/us.json", function(error, us) {
     .enter().append("path")
       .attr("d", path)
       .attr("class", "feature")
-      .on("click", clicked);
+      .call(d3.zoom()
+          .on("zoom", zoomed));
+      //.attr('class', 'zoom')
+      //.on("click", clicked);
 
   g.append("path")
       .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -68,6 +80,7 @@ function clicked(d) {
       scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
       translate = [width / 2 - scale * x, height / 2 - scale * y];
 
+//console.log(x);
   svg.transition()
       .duration(750)
       .call(zoom.transform, transform);
@@ -92,8 +105,8 @@ function reset() {
 
 function zoomed() {
   //console.log("zoomed()");
-  g.style("stroke-width", 1.5 / d3.event.scale + "px");
-  //g.attr("transform", d3.event.transform);
+  g.attr("transform", d3.event.transform);
+  //g.style("stroke-width", 1.5 / d3.event.scale + "px");
   //g.attr("transform", d3.event.scale);
   //g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   //g.attr("transform", "translate(" + d3.event.translate + ")");
