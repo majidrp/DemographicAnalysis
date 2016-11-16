@@ -272,7 +272,8 @@
 				var type = this.isSingle() ? undefined : (pointer.hasClass('low') ? 'low' : 'high');
 				text = this.options.format(value, type);
 			} else {
-				text = this.options.format.replace('%s', value);
+				text = parseInt(this.options.format.replace('%s', value));
+				if (text == 65){text = "65+"}
 			}
 
 			var width = label.html(text).width(),

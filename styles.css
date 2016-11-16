@@ -11,6 +11,10 @@ h3{
   margin-top: 10px;
 }
 
+#age{
+  margin-left: 5px;
+}
+
 .background {
   fill: none;
   pointer-events: all;
