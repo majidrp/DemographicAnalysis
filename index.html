@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Visualization - Project</title>
 
-
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,300' rel='stylesheet' type='text/css'>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -25,7 +25,6 @@
 <body>
 
 <h1><center>Demographic Analysis 2010 to 2015</center></h1>
-<p class="info"><center>Ashkan Bashardoust - Majid Rasouli - Christopher Mertin</center></p>
 
 <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
 <script src="https://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
@@ -115,19 +114,30 @@
 
   </div>
 </div>
-
+<br>
 <div id="plots">
     <h2>Plots</h2>
 
-    <svg width="30%" height="10%">
-        <g id="map"></g>
+    <svg width="100" height="10%">
         <g id="points"></g>
     </svg>
 </div>
 
+<br/>
 <div id="category">
     <h2>Category Selection</h2>
 
+      <h3>Year</h3>
+      <div id="year-chooser">
+          <select id="year-sec" onchange="chooseData()">
+              <option selected value="0">2010</option>
+              <option value="1">2011</option>
+              <option value="2">2012</option>
+              <option value="3">2013</option>
+              <option value="4">2014</option>
+              <option value="5">2015</option>
+          </select>
+      </div>
     <h3>Category</h3>
     <div id="category-selector">
         <select id="dataset" onchange="chooseData()">
@@ -135,26 +145,21 @@
             <option value="2">Age</option>
             <option value="3">Education</option>
             <option value="4">Race</option>
+            <option value="5">Marital Status</option>
         </select>
     </div>
 
-    <h3>Year</h3>
-    <div id="year-chooser">
-        <select id="year-sec" onchange="chooseData()">
-            <option selected value="0">2010</option>
-            <option value="1">2011</option>
-            <option value="2">2012</option>
-            <option value="3">2013</option>
-            <option value="4">2014</option>
-            <option value="5">2015</option>
-        </select>
-    </div>
 
-    <svg width="500" height="400" id="barChart">
+
+    <svg id="barChart">
         <g id="xAxis"></g>
         <g id="yAxis"></g>
         <g id="bars"></g>
     </svg>
 </div>
+
+<br><br>
+<footer>	&copy; Ashkan Bashardoust, Majid Rasouli, Christopher Mertin</footer>
+
 
 </body>
