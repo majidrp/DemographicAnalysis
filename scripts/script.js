@@ -125,10 +125,10 @@ function ReadData()
   var BASE_DIR = DATA_BASE_DIR + geo_[0] + "/";
   var FILE_EXT = "_ACS.csv";
 
-  //ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
+  ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
 
   BASE_DIR = DATA_BASE_DIR + geo_[1] + "/";
-  //ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
+  ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
 }
 
 function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels)
