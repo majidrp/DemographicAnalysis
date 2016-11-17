@@ -55,8 +55,6 @@ d3.json(us_json_file, function(error, us)
         .attr("d", path);
   });
 
-ReadData();
-
 function clicked(d)
 {
   if (active.node() === this) return reset();
@@ -100,7 +98,7 @@ function chooseData()
 
 }
 
-function ReadData()
+function LoadData()
 {
   var base_labels = ["Bachelors", "Divorced", "Graduate/Professional", "HS/GED", "Married", "Never Married", "No HS", "Population", "Separated", "Some College", "Widowed"];
   var other_labels = ["Geo", "State", "Asian", "Black", "Native Hawaiian and Other Paciffic Islander", "Other", "Total", "Two or More", "White"];

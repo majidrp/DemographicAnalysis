@@ -1,5 +1,7 @@
 body{
   font-family: "Lato";
+  background-image: url("../background.png");
+  background-repeat: repeat;
 }
 
 h1 {
@@ -53,19 +55,18 @@ h3{
 }
 
 #mainDiv{
-	width: 20%;
-  height: 80%;
-	margin:auto;
-	background: transparent;
+  margin-left: 0px;
+  left: 0;
+  background-color: rgba(192, 192, 192, 0.3);;
   float: left;
 }
 
 #selection{
-	width:400px;
-  height: 700px;
+	width: 300px;
+  height: 100%;
 	/*margin:auto;*/
 	background: transparent;
-  margin-bottom:20px;
+  margin-bottom: 20px;
   margin-left: 20px;
   float: left;
 }
