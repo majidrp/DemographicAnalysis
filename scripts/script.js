@@ -3,8 +3,8 @@ var percent_height = 0.80;
 var states_data = [];
 var counties_data = [];
 
-var DATA_BASE_DIR = "/DemographicAnalysis/Data/";
-// var DATA_BASE_DIR = "/Data/"
+//var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
+var DATA_BASE_DIR = "/Data/" // For "local" hosting
 
 
 var mapSVG = document.getElementById("#map");
@@ -12,8 +12,8 @@ var mapSVG = document.getElementById("#map");
 var window_width = window.innerWidth;
 var window_height = window.innerHeight;
 
-var width = window_width * percent_width,// * percent_width,
-    height = window_height * percent_height,// * percent_height,
+var width = window_width * percent_width,
+    height = window_height * percent_height,
     active = d3.select(null);
 
 var projection = d3.geoAlbersUsa()
@@ -26,20 +26,14 @@ var path = d3.geoPath()
 var svg = d3.select("body").append("svg")
 	.attr("width", width)
 	.attr("height", height);
-    //.on("click", stopped, true);
 
 var zoom = d3.zoom()
     .scaleExtent([1, 8]);
-    //.on("zoom", zoomed);
 
 svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
     .attr("height", height);
-    // .call(d3.zoom()
-    //     .on("zoom", zoomed));
-    //.on("click", reset);
-
 
 var g = svg.append("g");
 
