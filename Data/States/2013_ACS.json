@@ -1,5 +1,5 @@
 {
-    "Alabama": {
+    "1000": {
         "18": {
             "F": {
                 "Bachelors": "0.0930", 
@@ -1333,13 +1333,15 @@
         "American Indian or Alaskan Native": "0.0046", 
         "Asian": "0.0121", 
         "Black": "0.2657", 
+        "Geo": "Alabama", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0113", 
+        "State": "Alabama", 
         "Total_Population": "4833722", 
         "Two or More": "0.0169", 
         "White": "0.6890"
     }, 
-    "Alaska": {
+    "2000": {
         "18": {
             "F": {
                 "Bachelors": "0.0780", 
@@ -2673,13 +2675,15 @@
         "American Indian or Alaskan Native": "0.1433", 
         "Asian": "0.0568", 
         "Black": "0.0341", 
+        "Geo": "Alaska", 
         "Native Hawaiian and Other Paciffic Islander": "0.0120", 
         "Other": "0.0129", 
+        "State": "Alaska", 
         "Total_Population": "735132", 
         "Two or More": "0.0774", 
         "White": "0.6635"
     }, 
-    "Arizona": {
+    "4000": {
         "18": {
             "F": {
                 "Bachelors": "0.0980", 
@@ -4013,13 +4017,15 @@
         "American Indian or Alaskan Native": "0.0435", 
         "Asian": "0.0289", 
         "Black": "0.0419", 
+        "Geo": "Arizona", 
         "Native Hawaiian and Other Paciffic Islander": "0.0019", 
         "Other": "0.0620", 
+        "State": "Arizona", 
         "Total_Population": "6626624", 
         "Two or More": "0.0320", 
         "White": "0.7898"
     }, 
-    "Arkansas": {
+    "5000": {
         "18": {
             "F": {
                 "Bachelors": "0.0800", 
@@ -5353,13 +5359,15 @@
         "American Indian or Alaskan Native": "0.0060", 
         "Asian": "0.0132", 
         "Black": "0.1568", 
+        "Geo": "Arkansas", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0226", 
+        "State": "Arkansas", 
         "Total_Population": "2959373", 
         "Two or More": "0.0220", 
         "White": "0.7791"
     }, 
-    "California": {
+    "6000": {
         "18": {
             "F": {
                 "Bachelors": "0.1110", 
@@ -6693,13 +6701,15 @@
         "American Indian or Alaskan Native": "0.0073", 
         "Asian": "0.1359", 
         "Black": "0.0592", 
+        "Geo": "California", 
         "Native Hawaiian and Other Paciffic Islander": "0.0037", 
         "Other": "0.1294", 
+        "State": "California", 
         "Total_Population": "38332521", 
         "Two or More": "0.0451", 
         "White": "0.6193"
     }, 
-    "Colorado": {
+    "8000": {
         "18": {
             "F": {
                 "Bachelors": "0.1310", 
@@ -8033,13 +8043,15 @@
         "American Indian or Alaskan Native": "0.0083", 
         "Asian": "0.0286", 
         "Black": "0.0398", 
+        "Geo": "Colorado", 
         "Native Hawaiian and Other Paciffic Islander": "0.0016", 
         "Other": "0.0477", 
+        "State": "Colorado", 
         "Total_Population": "5268367", 
         "Two or More": "0.0359", 
         "White": "0.8382"
     }, 
-    "Connecticut": {
+    "9000": {
         "18": {
             "F": {
                 "Bachelors": "0.1450", 
@@ -9373,13 +9385,15 @@
         "American Indian or Alaskan Native": "0.0022", 
         "Asian": "0.0410", 
         "Black": "0.1032", 
+        "Geo": "Connecticut", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0515", 
+        "State": "Connecticut", 
         "Total_Population": "3596080", 
         "Two or More": "0.0292", 
         "White": "0.7727"
     }, 
-    "Delaware": {
+    "10000": {
         "18": {
             "F": {
                 "Bachelors": "0.1430", 
@@ -10713,13 +10727,15 @@
         "American Indian or Alaskan Native": "0.0043", 
         "Asian": "0.0363", 
         "Black": "0.2163", 
+        "Geo": "Delaware", 
         "Native Hawaiian and Other Paciffic Islander": "0.0009", 
         "Other": "0.0249", 
+        "State": "Delaware", 
         "Total_Population": "925749", 
         "Two or More": "0.0285", 
         "White": "0.6887"
     }, 
-    "District of Columbia": {
+    "11000": {
         "18": {
             "F": {
                 "Bachelors": "0.2820", 
@@ -12053,13 +12069,15 @@
         "American Indian or Alaskan Native": "0.0020", 
         "Asian": "0.0355", 
         "Black": "0.4881", 
+        "Geo": "District of Columbia", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0335", 
+        "State": "District of Columbia", 
         "Total_Population": "646449", 
         "Two or More": "0.0322", 
         "White": "0.4085"
     }, 
-    "Florida": {
+    "12000": {
         "18": {
             "F": {
                 "Bachelors": "0.0970", 
@@ -13393,13 +13411,15 @@
         "American Indian or Alaskan Native": "0.0026", 
         "Asian": "0.0261", 
         "Black": "0.1607", 
+        "Geo": "Florida", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0249", 
+        "State": "Florida", 
         "Total_Population": "19552860", 
         "Two or More": "0.0235", 
         "White": "0.7619"
     }, 
-    "Georgia": {
+    "13000": {
         "18": {
             "F": {
                 "Bachelors": "0.0970", 
@@ -14733,13 +14753,15 @@
         "American Indian or Alaskan Native": "0.0022", 
         "Asian": "0.0356", 
         "Black": "0.3098", 
+        "Geo": "Georgia", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0269", 
+        "State": "Georgia", 
         "Total_Population": "9992167", 
         "Two or More": "0.0211", 
         "White": "0.6040"
     }, 
-    "Hawaii": {
+    "15000": {
         "18": {
             "F": {
                 "Bachelors": "0.1220", 
@@ -16073,13 +16095,15 @@
         "American Indian or Alaskan Native": "0.0016", 
         "Asian": "0.3783", 
         "Black": "0.0216", 
+        "Geo": "Hawaii", 
         "Native Hawaiian and Other Paciffic Islander": "0.0978", 
         "Other": "0.0100", 
+        "State": "Hawaii", 
         "Total_Population": "1404054", 
         "Two or More": "0.2350", 
         "White": "0.2557"
     }, 
-    "Idaho": {
+    "16000": {
         "18": {
             "F": {
                 "Bachelors": "0.1040", 
@@ -17413,13 +17437,15 @@
         "American Indian or Alaskan Native": "0.0123", 
         "Asian": "0.0154", 
         "Black": "0.0056", 
+        "Geo": "Idaho", 
         "Native Hawaiian and Other Paciffic Islander": "0.0011", 
         "Other": "0.0262", 
+        "State": "Idaho", 
         "Total_Population": "1612136", 
         "Two or More": "0.0240", 
         "White": "0.9153"
     }, 
-    "Illinois": {
+    "17000": {
         "18": {
             "F": {
                 "Bachelors": "0.1440", 
@@ -18753,13 +18779,15 @@
         "American Indian or Alaskan Native": "0.0020", 
         "Asian": "0.0493", 
         "Black": "0.1423", 
+        "Geo": "Illinois", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0568", 
+        "State": "Illinois", 
         "Total_Population": "12882135", 
         "Two or More": "0.0225", 
         "White": "0.7268"
     }, 
-    "Indiana": {
+    "18000": {
         "18": {
             "F": {
                 "Bachelors": "0.1070", 
@@ -20093,13 +20121,15 @@
         "American Indian or Alaskan Native": "0.0022", 
         "Asian": "0.0178", 
         "Black": "0.0918", 
+        "Geo": "Indiana", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0245", 
+        "State": "Indiana", 
         "Total_Population": "6570902", 
         "Two or More": "0.0217", 
         "White": "0.8415"
     }, 
-    "Iowa": {
+    "19000": {
         "18": {
             "F": {
                 "Bachelors": "0.1280", 
@@ -21433,13 +21463,15 @@
         "American Indian or Alaskan Native": "0.0025", 
         "Asian": "0.0205", 
         "Black": "0.0331", 
+        "Geo": "Iowa", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0125", 
+        "State": "Iowa", 
         "Total_Population": "3090416", 
         "Two or More": "0.0171", 
         "White": "0.9138"
     }, 
-    "Kansas": {
+    "20000": {
         "18": {
             "F": {
                 "Bachelors": "0.1180", 
@@ -22773,13 +22805,15 @@
         "American Indian or Alaskan Native": "0.0084", 
         "Asian": "0.0253", 
         "Black": "0.0581", 
+        "Geo": "Kansas", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0191", 
+        "State": "Kansas", 
         "Total_Population": "2893957", 
         "Two or More": "0.0330", 
         "White": "0.8556"
     }, 
-    "Kentucky": {
+    "21000": {
         "18": {
             "F": {
                 "Bachelors": "0.0960", 
@@ -24113,13 +24147,15 @@
         "American Indian or Alaskan Native": "0.0017", 
         "Asian": "0.0121", 
         "Black": "0.0797", 
+        "Geo": "Kentucky", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0091", 
+        "State": "Kentucky", 
         "Total_Population": "4395295", 
         "Two or More": "0.0200", 
         "White": "0.8770"
     }, 
-    "Louisiana": {
+    "22000": {
         "18": {
             "F": {
                 "Bachelors": "0.0820", 
@@ -25453,13 +25489,15 @@
         "American Indian or Alaskan Native": "0.0059", 
         "Asian": "0.0160", 
         "Black": "0.3228", 
+        "Geo": "Louisiana", 
         "Native Hawaiian and Other Paciffic Islander": "0.0001", 
         "Other": "0.0097", 
+        "State": "Louisiana", 
         "Total_Population": "4625470", 
         "Two or More": "0.0168", 
         "White": "0.6285"
     }, 
-    "Maine": {
+    "23000": {
         "18": {
             "F": {
                 "Bachelors": "0.0940", 
@@ -26793,13 +26831,15 @@
         "American Indian or Alaskan Native": "0.0062", 
         "Asian": "0.0106", 
         "Black": "0.0103", 
+        "Geo": "Maine", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0029", 
+        "State": "Maine", 
         "Total_Population": "1328302", 
         "Two or More": "0.0210", 
         "White": "0.9489"
     }, 
-    "Maryland": {
+    "24000": {
         "18": {
             "F": {
                 "Bachelors": "0.1490", 
@@ -28133,13 +28173,15 @@
         "American Indian or Alaskan Native": "0.0029", 
         "Asian": "0.0598", 
         "Black": "0.2960", 
+        "Geo": "Maryland", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0360", 
+        "State": "Maryland", 
         "Total_Population": "5928814", 
         "Two or More": "0.0286", 
         "White": "0.5762"
     }, 
-    "Massachusetts": {
+    "25000": {
         "18": {
             "F": {
                 "Bachelors": "0.1830", 
@@ -29473,13 +29515,15 @@
         "American Indian or Alaskan Native": "0.0021", 
         "Asian": "0.0580", 
         "Black": "0.0709", 
+        "Geo": "Massachusetts", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0427", 
+        "State": "Massachusetts", 
         "Total_Population": "6692824", 
         "Two or More": "0.0297", 
         "White": "0.7964"
     }, 
-    "Michigan": {
+    "26000": {
         "18": {
             "F": {
                 "Bachelors": "0.1060", 
@@ -30813,13 +30857,15 @@
         "American Indian or Alaskan Native": "0.0054", 
         "Asian": "0.0269", 
         "Black": "0.1393", 
+        "Geo": "Michigan", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0101", 
+        "State": "Michigan", 
         "Total_Population": "9895622", 
         "Two or More": "0.0269", 
         "White": "0.7912"
     }, 
-    "Minnesota": {
+    "27000": {
         "18": {
             "F": {
                 "Bachelors": "0.1420", 
@@ -32153,13 +32199,15 @@
         "American Indian or Alaskan Native": "0.0109", 
         "Asian": "0.0432", 
         "Black": "0.0543", 
+        "Geo": "Minnesota", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0162", 
+        "State": "Minnesota", 
         "Total_Population": "5420380", 
         "Two or More": "0.0271", 
         "White": "0.8479"
     }, 
-    "Mississippi": {
+    "28000": {
         "18": {
             "F": {
                 "Bachelors": "0.0620", 
@@ -33493,13 +33541,15 @@
         "American Indian or Alaskan Native": "0.0045", 
         "Asian": "0.0094", 
         "Black": "0.3772", 
+        "Geo": "Mississippi", 
         "Native Hawaiian and Other Paciffic Islander": "0.0001", 
         "Other": "0.0081", 
+        "State": "Mississippi", 
         "Total_Population": "2991207", 
         "Two or More": "0.0108", 
         "White": "0.5899"
     }, 
-    "Missouri": {
+    "29000": {
         "18": {
             "F": {
                 "Bachelors": "0.1260", 
@@ -34833,13 +34883,15 @@
         "American Indian or Alaskan Native": "0.0038", 
         "Asian": "0.0170", 
         "Black": "0.1145", 
+        "Geo": "Missouri", 
         "Native Hawaiian and Other Paciffic Islander": "0.0009", 
         "Other": "0.0108", 
+        "State": "Missouri", 
         "Total_Population": "6044171", 
         "Two or More": "0.0251", 
         "White": "0.8279"
     }, 
-    "Montana": {
+    "30000": {
         "18": {
             "F": {
                 "Bachelors": "0.0790", 
@@ -36173,13 +36225,15 @@
         "American Indian or Alaskan Native": "0.0682", 
         "Asian": "0.0065", 
         "Black": "0.0032", 
+        "Geo": "Montana", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0050", 
+        "State": "Montana", 
         "Total_Population": "1015165", 
         "Two or More": "0.0255", 
         "White": "0.8912"
     }, 
-    "Nebraska": {
+    "31000": {
         "18": {
             "F": {
                 "Bachelors": "0.1100", 
@@ -37513,13 +37567,15 @@
         "American Indian or Alaskan Native": "0.0077", 
         "Asian": "0.0200", 
         "Black": "0.0460", 
+        "Geo": "Nebraska", 
         "Native Hawaiian and Other Paciffic Islander": "0.0009", 
         "Other": "0.0192", 
+        "State": "Nebraska", 
         "Total_Population": "1868516", 
         "Two or More": "0.0229", 
         "White": "0.8832"
     }, 
-    "Nevada": {
+    "32000": {
         "18": {
             "F": {
                 "Bachelors": "0.0620", 
@@ -38853,13 +38909,15 @@
         "American Indian or Alaskan Native": "0.0108", 
         "Asian": "0.0771", 
         "Black": "0.0839", 
+        "Geo": "Nevada", 
         "Native Hawaiian and Other Paciffic Islander": "0.0066", 
         "Other": "0.0961", 
+        "State": "Nevada", 
         "Total_Population": "2790136", 
         "Two or More": "0.0421", 
         "White": "0.6834"
     }, 
-    "New Hampshire": {
+    "33000": {
         "18": {
             "F": {
                 "Bachelors": "0.1550", 
@@ -40193,13 +40251,15 @@
         "American Indian or Alaskan Native": "0.0023", 
         "Asian": "0.0235", 
         "Black": "0.0122", 
+        "Geo": "New Hampshire", 
         "Native Hawaiian and Other Paciffic Islander": "0.0001", 
         "Other": "0.0082", 
+        "State": "New Hampshire", 
         "Total_Population": "1323459", 
         "Two or More": "0.0192", 
         "White": "0.9345"
     }, 
-    "New Jersey": {
+    "34000": {
         "18": {
             "F": {
                 "Bachelors": "0.1550", 
@@ -41533,13 +41593,15 @@
         "American Indian or Alaskan Native": "0.0018", 
         "Asian": "0.0901", 
         "Black": "0.1366", 
+        "Geo": "New Jersey", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0649", 
+        "State": "New Jersey", 
         "Total_Population": "8899339", 
         "Two or More": "0.0244", 
         "White": "0.6819"
     }, 
-    "New Mexico": {
+    "35000": {
         "18": {
             "F": {
                 "Bachelors": "0.0610", 
@@ -42873,13 +42935,15 @@
         "American Indian or Alaskan Native": "0.0908", 
         "Asian": "0.0136", 
         "Black": "0.0200", 
+        "Geo": "New Mexico", 
         "Native Hawaiian and Other Paciffic Islander": "0.0008", 
         "Other": "0.0889", 
+        "State": "New Mexico", 
         "Total_Population": "2085287", 
         "Two or More": "0.0333", 
         "White": "0.7527"
     }, 
-    "New York": {
+    "36000": {
         "18": {
             "F": {
                 "Bachelors": "0.1680", 
@@ -44213,13 +44277,15 @@
         "American Indian or Alaskan Native": "0.0037", 
         "Asian": "0.0791", 
         "Black": "0.1567", 
+        "Geo": "New York", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0852", 
+        "State": "New York", 
         "Total_Population": "19651127", 
         "Two or More": "0.0287", 
         "White": "0.6460"
     }, 
-    "North Carolina": {
+    "37000": {
         "18": {
             "F": {
                 "Bachelors": "0.1190", 
@@ -45553,13 +45619,15 @@
         "American Indian or Alaskan Native": "0.0114", 
         "Asian": "0.0242", 
         "Black": "0.2154", 
+        "Geo": "North Carolina", 
         "Native Hawaiian and Other Paciffic Islander": "0.0007", 
         "Other": "0.0326", 
+        "State": "North Carolina", 
         "Total_Population": "9848060", 
         "Two or More": "0.0240", 
         "White": "0.6917"
     }, 
-    "North Dakota": {
+    "38000": {
         "18": {
             "F": {
                 "Bachelors": "0.1430", 
@@ -46893,13 +46961,15 @@
         "American Indian or Alaskan Native": "0.0556", 
         "Asian": "0.0126", 
         "Black": "0.0150", 
+        "Geo": "North Dakota", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0064", 
+        "State": "North Dakota", 
         "Total_Population": "723393", 
         "Two or More": "0.0204", 
         "White": "0.8895"
     }, 
-    "Ohio": {
+    "39000": {
         "18": {
             "F": {
                 "Bachelors": "0.1160", 
@@ -48233,13 +48303,15 @@
         "American Indian or Alaskan Native": "0.0016", 
         "Asian": "0.0184", 
         "Black": "0.1214", 
+        "Geo": "Ohio", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0082", 
+        "State": "Ohio", 
         "Total_Population": "11570808", 
         "Two or More": "0.0256", 
         "White": "0.8246"
     }, 
-    "Oklahoma": {
+    "40000": {
         "18": {
             "F": {
                 "Bachelors": "0.0860", 
@@ -49573,13 +49645,15 @@
         "American Indian or Alaskan Native": "0.0753", 
         "Asian": "0.0186", 
         "Black": "0.0719", 
+        "Geo": "Oklahoma", 
         "Native Hawaiian and Other Paciffic Islander": "0.0014", 
         "Other": "0.0269", 
+        "State": "Oklahoma", 
         "Total_Population": "3850568", 
         "Two or More": "0.0747", 
         "White": "0.7312"
     }, 
-    "Oregon": {
+    "41000": {
         "18": {
             "F": {
                 "Bachelors": "0.0940", 
@@ -50913,13 +50987,15 @@
         "American Indian or Alaskan Native": "0.0110", 
         "Asian": "0.0387", 
         "Black": "0.0185", 
+        "Geo": "Oregon", 
         "Native Hawaiian and Other Paciffic Islander": "0.0036", 
         "Other": "0.0284", 
+        "State": "Oregon", 
         "Total_Population": "3930065", 
         "Two or More": "0.0422", 
         "White": "0.8576"
     }, 
-    "Pennsylvania": {
+    "42000": {
         "18": {
             "F": {
                 "Bachelors": "0.1290", 
@@ -52253,13 +52329,15 @@
         "American Indian or Alaskan Native": "0.0018", 
         "Asian": "0.0301", 
         "Black": "0.1103", 
+        "Geo": "Pennsylvania", 
         "Native Hawaiian and Other Paciffic Islander": "0.0002", 
         "Other": "0.0207", 
+        "State": "Pennsylvania", 
         "Total_Population": "12773801", 
         "Two or More": "0.0206", 
         "White": "0.8163"
     }, 
-    "Rhode Island": {
+    "44000": {
         "18": {
             "F": {
                 "Bachelors": "0.1450", 
@@ -53593,13 +53671,15 @@
         "American Indian or Alaskan Native": "0.0039", 
         "Asian": "0.0316", 
         "Black": "0.0642", 
+        "Geo": "Rhode Island", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0695", 
+        "State": "Rhode Island", 
         "Total_Population": "1051511", 
         "Two or More": "0.0256", 
         "White": "0.8047"
     }, 
-    "South Carolina": {
+    "45000": {
         "18": {
             "F": {
                 "Bachelors": "0.0970", 
@@ -54933,13 +55013,15 @@
         "American Indian or Alaskan Native": "0.0030", 
         "Asian": "0.0136", 
         "Black": "0.2765", 
+        "Geo": "South Carolina", 
         "Native Hawaiian and Other Paciffic Islander": "0.0007", 
         "Other": "0.0150", 
+        "State": "South Carolina", 
         "Total_Population": "4774839", 
         "Two or More": "0.0190", 
         "White": "0.6723"
     }, 
-    "South Dakota": {
+    "46000": {
         "18": {
             "F": {
                 "Bachelors": "0.0930", 
@@ -56273,13 +56355,15 @@
         "American Indian or Alaskan Native": "0.0852", 
         "Asian": "0.0108", 
         "Black": "0.0154", 
+        "Geo": "South Dakota", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0080", 
+        "State": "South Dakota", 
         "Total_Population": "844877", 
         "Two or More": "0.0290", 
         "White": "0.8511"
     }, 
-    "Tennessee": {
+    "47000": {
         "18": {
             "F": {
                 "Bachelors": "0.1070", 
@@ -57613,13 +57697,15 @@
         "American Indian or Alaskan Native": "0.0025", 
         "Asian": "0.0152", 
         "Black": "0.1697", 
+        "Geo": "Tennessee", 
         "Native Hawaiian and Other Paciffic Islander": "0.0005", 
         "Other": "0.0142", 
+        "State": "Tennessee", 
         "Total_Population": "6495978", 
         "Two or More": "0.0190", 
         "White": "0.7790"
     }, 
-    "Texas": {
+    "48000": {
         "18": {
             "F": {
                 "Bachelors": "0.0980", 
@@ -58953,13 +59039,15 @@
         "American Indian or Alaskan Native": "0.0045", 
         "Asian": "0.0412", 
         "Black": "0.1188", 
+        "Geo": "Texas", 
         "Native Hawaiian and Other Paciffic Islander": "0.0008", 
         "Other": "0.0601", 
+        "State": "Texas", 
         "Total_Population": "26448193", 
         "Two or More": "0.0245", 
         "White": "0.7502"
     }, 
-    "Utah": {
+    "49000": {
         "18": {
             "F": {
                 "Bachelors": "0.0830", 
@@ -60293,13 +60381,15 @@
         "American Indian or Alaskan Native": "0.0115", 
         "Asian": "0.0216", 
         "Black": "0.0113", 
+        "Geo": "Utah", 
         "Native Hawaiian and Other Paciffic Islander": "0.0095", 
         "Other": "0.0481", 
+        "State": "Utah", 
         "Total_Population": "2900872", 
         "Two or More": "0.0243", 
         "White": "0.8737"
     }, 
-    "Vermont": {
+    "50000": {
         "18": {
             "F": {
                 "Bachelors": "0.1350", 
@@ -61633,13 +61723,15 @@
         "American Indian or Alaskan Native": "0.0025", 
         "Asian": "0.0122", 
         "Black": "0.0115", 
+        "Geo": "Vermont", 
         "Native Hawaiian and Other Paciffic Islander": "0.0004", 
         "Other": "0.0026", 
+        "State": "Vermont", 
         "Total_Population": "626630", 
         "Two or More": "0.0211", 
         "White": "0.9498"
     }, 
-    "Virginia": {
+    "51000": {
         "18": {
             "F": {
                 "Bachelors": "0.1450", 
@@ -62973,13 +63065,15 @@
         "American Indian or Alaskan Native": "0.0024", 
         "Asian": "0.0587", 
         "Black": "0.1928", 
+        "Geo": "Virginia", 
         "Native Hawaiian and Other Paciffic Islander": "0.0007", 
         "Other": "0.0197", 
+        "State": "Virginia", 
         "Total_Population": "8260405", 
         "Two or More": "0.0325", 
         "White": "0.6933"
     }, 
-    "Washington": {
+    "53000": {
         "18": {
             "F": {
                 "Bachelors": "0.1260", 
@@ -64313,13 +64407,15 @@
         "American Indian or Alaskan Native": "0.0137", 
         "Asian": "0.0769", 
         "Black": "0.0372", 
+        "Geo": "Washington", 
         "Native Hawaiian and Other Paciffic Islander": "0.0061", 
         "Other": "0.0367", 
+        "State": "Washington", 
         "Total_Population": "6971406", 
         "Two or More": "0.0492", 
         "White": "0.7803"
     }, 
-    "West Virginia": {
+    "54000": {
         "18": {
             "F": {
                 "Bachelors": "0.1080", 
@@ -65653,13 +65749,15 @@
         "American Indian or Alaskan Native": "0.0010", 
         "Asian": "0.0056", 
         "Black": "0.0339", 
+        "Geo": "West Virginia", 
         "Native Hawaiian and Other Paciffic Islander": "0.0008", 
         "Other": "0.0033", 
+        "State": "West Virginia", 
         "Total_Population": "1854304", 
         "Two or More": "0.0183", 
         "White": "0.9371"
     }, 
-    "Wisconsin": {
+    "55000": {
         "18": {
             "F": {
                 "Bachelors": "0.1180", 
@@ -66993,13 +67091,15 @@
         "American Indian or Alaskan Native": "0.0086", 
         "Asian": "0.0248", 
         "Black": "0.0623", 
+        "Geo": "Wisconsin", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0169", 
+        "State": "Wisconsin", 
         "Total_Population": "5742713", 
         "Two or More": "0.0211", 
         "White": "0.8660"
     }, 
-    "Wyoming": {
+    "56000": {
         "18": {
             "F": {
                 "Bachelors": "0.0920", 
@@ -68333,8 +68433,10 @@
         "American Indian or Alaskan Native": "0.0235", 
         "Asian": "0.0098", 
         "Black": "0.0128", 
+        "Geo": "Wyoming", 
         "Native Hawaiian and Other Paciffic Islander": "0.0003", 
         "Other": "0.0195", 
+        "State": "Wyoming", 
         "Total_Population": "582658", 
         "Two or More": "0.0274", 
         "White": "0.9067"

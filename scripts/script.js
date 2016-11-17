@@ -103,7 +103,7 @@ function chooseData()
 function ReadData()
 {
   var base_labels = ["Bachelors", "Divorced", "Graduate/Professional", "HS/GED", "Married", "Never Married", "No HS", "Population", "Separated", "Some College", "Widowed"];
-  var other_labels = ["Asian", "Black", "Native Hawaiian and Other Paciffic Islander", "Other", "Total", "Two or More", "White"];
+  var other_labels = ["Geo", "State", "Asian", "Black", "Native Hawaiian and Other Paciffic Islander", "Other", "Total", "Two or More", "White"];
   var ages = [];
   var years = ["2010", "2011", "2012", "2013", "2014", "2015"];
   var geo_ = ["States", "Counties"];
@@ -143,7 +143,8 @@ function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels,
       var geo_data = [];
       for(var ind = 0; ind < d.length; ind++)
       {
-        var local_geo = d[ind].Geo;
+
+        var local_geo = parseInt(d[ind].id);
         var gen_data = [];
         for(var gen = 0; gen < genders.length; gen++)
         {
@@ -165,7 +166,14 @@ function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels,
         // Other labels for region done here
         for(var i = 0; i < other_labels.length; i++)
         {
-          geo_data[local_geo][other_labels[i]] = +d[ind][other_labels[i]];
+          if(i == 0 || i == 1)
+          {
+            geo_data[local_geo][other_labels[i]] = d[ind][other_labels[i]];
+          }
+          else
+          {
+            geo_data[local_geo][other_labels[i]] = +d[ind][other_labels[i]];
+          }
         }
       }
       year_data[years[temp]] = geo_data;
@@ -187,7 +195,7 @@ function ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_label
       var geo_data = [];
       for(var ind = 0; ind < d.length; ind++)
       {
-        var local_geo = d[ind].Geo;
+        var local_geo = parseInt(d[ind].id);
         var gen_data = [];
         for(var gen = 0; gen < genders.length; gen++)
         {
@@ -209,7 +217,14 @@ function ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_label
         // Other labels for region done here
         for(var i = 0; i < other_labels.length; i++)
         {
-          geo_data[local_geo][other_labels[i]] = +d[ind][other_labels[i]];
+          if(i == 0 || i == 1)
+          {
+            geo_data[local_geo][other_labels[i]] = d[ind][other_labels[i]];
+          }
+          else
+          {
+            geo_data[local_geo][other_labels[i]] = +d[ind][other_labels[i]];
+          }
         }
       }
       year_data[years[temp]] = geo_data;
