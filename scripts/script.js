@@ -3,6 +3,9 @@ var percent_height = 0.80;
 var states_data = [];
 var counties_data = [];
 
+var DATA_BASE_DIR = "/DemographicAnalysis/Data/";
+// var DATA_BASE_DIR = "/Data/"
+
 
 var mapSVG = document.getElementById("#map");
 
@@ -40,7 +43,8 @@ svg.append("rect")
 
 var g = svg.append("g");
 
-d3.json("/Data/us.json", function(error, us)
+us_json_file = DATA_BASE_DIR + "us.json";
+d3.json(us_json_file, function(error, us)
   {
     if (error) throw error;
 
@@ -124,12 +128,12 @@ function ReadData()
     }
   }
 
-  var BASE_DIR = "/Data/" + geo_[0] + "/";
+  var BASE_DIR = DATA_BASE_DIR + geo_[0] + "/";
   var FILE_EXT = "_ACS.csv";
 
   ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
 
-  BASE_DIR = "/Data/" + geo_[1] + "/";
+  BASE_DIR = DATA_BASE_DIR + geo_[1] + "/";
   ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
 }
 
