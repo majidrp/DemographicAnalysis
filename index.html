@@ -127,29 +127,33 @@
 <div id="category">
     <h2>Category Selection</h2>
 
-      <h3>Year</h3>
-      <div id="year-chooser">
-          <select id="year-sec" onchange="chooseData()">
-              <option selected value="0">2010</option>
-              <option value="1">2011</option>
-              <option value="2">2012</option>
-              <option value="3">2013</option>
-              <option value="4">2014</option>
-              <option value="5">2015</option>
-          </select>
-      </div>
-    <h3>Category</h3>
-    <div id="category-selector">
-        <select id="dataset" onchange="chooseData()">
-            <option selected value="1">Gender</option>
-            <option value="2">Age</option>
-            <option value="3">Education</option>
-            <option value="4">Race</option>
-            <option value="5">Marital Status</option>
-        </select>
-    </div>
-
-
+    <table style="width:50px">
+  <tr>
+    <td><h3>Year</h3></td>
+    <td><h3>Category</h3></td>
+  </tr>
+  <tr>
+    <td>      <div id="year-chooser">
+              <select id="year-sec" onchange="chooseData()">
+                  <option selected value="0">2010</option>
+                  <option value="1">2011</option>
+                  <option value="2">2012</option>
+                  <option value="3">2013</option>
+                  <option value="4">2014</option>
+                  <option value="5">2015</option>
+              </select>
+          </div></td>
+    <td>    <div id="category-selector">
+            <select id="dataset" onchange="chooseData()">
+                <option selected value="1">Gender</option>
+                <option value="2">Age</option>
+                <option value="3">Education</option>
+                <option value="4">Race</option>
+                <option value="5">Marital Status</option>
+            </select>
+        </div></td>
+  </tr>
+</table>
 
     <svg id="barChart">
         <g id="xAxis"></g>
