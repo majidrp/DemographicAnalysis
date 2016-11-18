@@ -26,16 +26,7 @@ h3{
 
 .background {
   fill: none;
-  pointer-events: all;
-}
-
-.feature {
-  fill: #ccc;
-  cursor: pointer;
-}
-
-.feature.active {
-  fill: blue;
+  pointer-events: fill;
 }
 
 .mesh {
@@ -55,10 +46,11 @@ h3{
 }
 
 #mainDiv{
+  height: 100%;
   float: left;
   overflow: hidden;
-  border-left: 0px;
-  margin-left: 0px;
+  /*border-left: 0px;
+  margin-left: 0px;*/
   left: 0px;
   background-color: rgba(192, 192, 192, 0.3);
 }
@@ -100,4 +92,32 @@ footer{
   height: 25px;
   width: 100%;
   overflow: hidden;
+}
+
+#states {
+  fill: #aaa;
+}
+
+#states .active {
+  fill: #1E90FF;
+  display:none;
+}
+
+#state-borders {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.county-boundary {
+  fill: #808080;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.county-boundary:hover, .state:hover {
+  fill: orange;
 }
