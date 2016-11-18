@@ -36,9 +36,23 @@
   <div id="selection">
       <h2 id="edition">Attribute Selection</h2>
 
-      <h3>Year</h3>
-      <span id="year"></span>
-      <div id="year-selector">
+      <h3>Year</h3><br>
+      <div id="year">
+        <input type="hidden" class="single-slider" value="2015" />
+          <script src="/scripts/jquery.range.js"></script>
+          <script>
+            $('.single-slider').jRange({
+            from: 2010,
+            to: 2015,
+            step: 1,
+            scale: [2010, 2011, 2012, 2013, 2014, 2015],
+            format: '%s',
+            width: 180,
+            showLabels: true,
+            snap: true
+            });
+        </script><br>
+<!--
           <select id="year-fir" onchange="chooseData()">
               <option selected value="0">2010</option>
               <option value="1">2011</option>
@@ -47,6 +61,7 @@
               <option value="4">2014</option>
               <option value="5">2015</option>
           </select>
+        -->
       </div>
 
       <h3>Gender</h3>
