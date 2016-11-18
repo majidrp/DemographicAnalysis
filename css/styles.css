@@ -96,6 +96,8 @@ footer{
 
 #states {
   fill: #aaa;
+  stroke: #000;
+  stroke-width: 1px;
 }
 
 #states .active {
@@ -120,7 +122,7 @@ footer{
 
 .state:hover
 {
-  opacity: 0;
+  fill: transparent;
 }
 
 .county-boundary:hover
