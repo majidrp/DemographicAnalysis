@@ -5,67 +5,70 @@ var counties_data = [];
 
 //var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
 var DATA_BASE_DIR = "/Data/" // For "local" hosting
+var us_json_file = DATA_BASE_DIR + "us.json";
+
+DrawMap(us_json_file);
+
+function DrawMap(us_json_file)
+{
+  var mapSVG = document.getElementById("#map");
+
+  var window_width = window.innerWidth;
+  var window_height = window.innerHeight;
+
+  var width = window_width * percent_width,
+      height = window_height * percent_height,
+      active = d3.select(null);
+
+  var projection = d3.geoAlbersUsa()
+      .scale(window_width * .7)
+      .translate([width / 2, height / 2]);
+
+  var path = d3.geoPath()
+      .projection(projection);
+
+  var svg = d3.select("body").append("svg")
+  	.attr("width", width)
+  	.attr("height", height);
+
+  var zoom = d3.zoom()
+      .scaleExtent([1, 8]);
+
+  svg.append("rect")
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height)
+      .on("click", reset);
+
+  var g = svg.append("g");
 
 
-var mapSVG = document.getElementById("#map");
-
-var window_width = window.innerWidth;
-var window_height = window.innerHeight;
-
-var width = window_width * percent_width,
-    height = window_height * percent_height,
-    active = d3.select(null);
-
-var projection = d3.geoAlbersUsa()
-    .scale(window_width * .7)
-    .translate([width / 2, height / 2]);
-
-var path = d3.geoPath()
-    .projection(projection);
-
-var svg = d3.select("body").append("svg")
-	.attr("width", width)
-	.attr("height", height);
-
-var zoom = d3.zoom()
-    .scaleExtent([1, 8]);
-
-svg.append("rect")
-    .attr("class", "background")
-    .attr("width", width)
-    .attr("height", height)
-    .on("click", reset);
-
-var g = svg.append("g");
-
-us_json_file = DATA_BASE_DIR + "us.json";
-
-d3.json(us_json_file, function(error, us) {
-
-   g.append("g")
-        .attr("id", "counties")
+  d3.json(us_json_file, function(error, us)
+  {
+     g.append("g")
+      .attr("id", "counties")
       .selectAll("path")
-        .data(topojson.feature(us, us.objects.counties).features)
+      .data(topojson.feature(us, us.objects.counties).features)
       .enter().append("path")
-    .attr("d", path)
-    .attr("class", "county-boundary")
-    .on("click", reset);
-        //.on("click", countyclicked);
+      .attr("d", path)
+      .attr("class", "county-boundary")
+      .on("click", reset);
 
-    g.append("g")
-        .attr("id", "states")
+     g.append("g")
+      .attr("id", "states")
       .selectAll("path")
-        .data(topojson.feature(us, us.objects.states).features)
+      .data(topojson.feature(us, us.objects.states).features)
       .enter().append("path")
-    .attr("d", path)
-    .attr("class", "state")
-        .on("click", clicked);
+      .attr("d", path)
+      .attr("class", "state")
+      .on("click", clicked);
 
-    g.append("path")
-        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-        .attr("id", "state-borders")
-        .attr("d", path);
+     g.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("id", "state-borders")
+      .attr("d", path);
   });
+}
 
 
 function clicked(d)
