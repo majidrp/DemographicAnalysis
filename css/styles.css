@@ -123,9 +123,11 @@ footer{
 .state:hover
 {
   fill: transparent;
+  stroke: #000;
+  stroke-width: 3px;
 }
 
 .county-boundary:hover
 {
-  opacity: 0.7;
+  opacity: .7;
 }
