@@ -5,7 +5,7 @@ var counties_data = [];
 
 //var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
 var DATA_BASE_DIR = "/Data/" // For "local" hosting
-
+var us_json_file = DATA_BASE_DIR + "us.json";
 
 var mapSVG = document.getElementById("#map");
 
@@ -38,39 +38,37 @@ svg.append("rect")
 
 var g = svg.append("g");
 
-us_json_file = DATA_BASE_DIR + "us.json";
 
-d3.json(us_json_file, function(error, us) {
-
+d3.json(us_json_file, function(error, us)
+{
    g.append("g")
-        .attr("id", "counties")
-      .selectAll("path")
-        .data(topojson.feature(us, us.objects.counties).features)
-      .enter().append("path")
+    .attr("id", "counties")
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.counties).features)
+    .enter().append("path")
     .attr("d", path)
     .attr("class", "county-boundary")
     .on("click", reset);
-        //.on("click", countyclicked);
 
-    g.append("g")
-        .attr("id", "states")
-      .selectAll("path")
-        .data(topojson.feature(us, us.objects.states).features)
-      .enter().append("path")
+   g.append("g")
+    .attr("id", "states")
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
     .attr("d", path)
     .attr("class", "state")
-        .on("click", clicked);
+    .on("click", clicked);
 
-    g.append("path")
-        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-        .attr("id", "state-borders")
-        .attr("d", path);
-  });
-
+   g.append("path")
+    .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+    .attr("id", "state-borders")
+    .attr("d", path);
+});
 
 function clicked(d)
 {
-  if (active.node() === this) return reset();
+  if(active.node() === this)
+    {return reset();}
 
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
@@ -85,7 +83,7 @@ function clicked(d)
 
   g.style("stroke-width", 1.5 / d3.event.scale + "px");
   g.transition().duration(1300)
-      .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
+                .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
   d3.select('body').select('svg').select('rect').call(zoom);
 }
 
@@ -97,7 +95,7 @@ function reset()
   translate = (0,0);
   scale = 1;
   g.transition().duration(1300)
-      .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
+                .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
 }
 
 // If the drag behavior prevents the default click,
