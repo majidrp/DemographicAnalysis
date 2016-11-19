@@ -67,7 +67,7 @@ d3.json(us_json_file, function(error, us)
 
 function clicked(d)
 {
-  if(active.node() === this) 
+  if(active.node() === this)
     {return reset();}
 
   active.classed("active", false);
