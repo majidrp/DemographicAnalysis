@@ -28,6 +28,26 @@ h3{
   margin-left: 15px;
 }
 
+.button{
+background-color: #999;
+border: white;
+color: white;
+margin-right: 15px;
+width: 275px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+-webkit-transition-duration: 0.2s; /* Safari */
+transition-duration: 0.2s;
+}
+
+.button:hover {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
 .background {
   fill: none;
   pointer-events: fill;
