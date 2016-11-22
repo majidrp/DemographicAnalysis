@@ -1,5 +1,5 @@
-var percent_width = 0.8;
-var percent_height = 0.8;
+var percent_width = 0.7;
+var percent_height = 0.9;
 var states_data = [];
 var counties_data = [];
 
@@ -17,7 +17,7 @@ var width = window_width * percent_width,
     active = d3.select(null);
 
 var projection = d3.geoAlbersUsa()
-    .scale(window_width * .7)
+    .scale(window_width * .8)
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
