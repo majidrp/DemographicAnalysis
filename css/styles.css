@@ -35,6 +35,10 @@ h3{
   background: transparent; /* Gecko Browsers */
 }
 
+select:focus, button:focus{
+    outline: none;
+}
+
 .button{
 background-color: #999;
 border: none;
