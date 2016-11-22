@@ -30,6 +30,17 @@
   white-space: nowrap;
   line-height: 1;
 }
+
+#year .slider-container .back-bar .pointer-label {
+  position: absolute;
+  top: -17px;
+  font-size: 9px;
+  color: transparent;
+  background: transparent;
+  white-space: nowrap;
+  line-height: 1;
+}
+
 .slider-container .back-bar .focused {
   z-index: 10;
 }
@@ -59,6 +70,7 @@
   color: #999;
   line-height: 1;
 }
+
 .slider-container.slider-readonly .clickable-dummy,
 .slider-container.slider-readonly .pointer {
   cursor: pointer;
