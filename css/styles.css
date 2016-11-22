@@ -28,9 +28,16 @@ h3{
   margin-left: 15px;
 }
 
+::selection {
+  background: transparent; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: transparent; /* Gecko Browsers */
+}
+
 .button{
 background-color: #999;
-border: white;
+border: none;
 color: white;
 margin-right: 15px;
 width: 275px;
