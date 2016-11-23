@@ -1,5 +1,6 @@
 body{
-  background-color: #999;
+  background-image: url("../background.png");
+  background-repeat: repeat;
   font-family: "Lato";
 }
 
