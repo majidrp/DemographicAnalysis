@@ -105,9 +105,9 @@ function stopped()
   if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
 
-function chooseData()
+function UpdateData()
 {
-
+  BubbleChart();
 }
 
 function LoadData()
