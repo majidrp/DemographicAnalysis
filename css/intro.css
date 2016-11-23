@@ -22,6 +22,10 @@ h2{
   margin-bottom: 20px;
 }
 
+a #fa-github{
+  color: transparent;
+}
+
 .quote{
   background-color: #e6e6e6;
   text-align: center;
@@ -33,7 +37,41 @@ h2{
   font-family: "Arizona";
 }
 
-#quote_acs{
+#quote-source{
+  color: #808080;
+  font-size: 14px;
+  font-style: normal;
+  float:right;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  font-size: 20px;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 0.5em 10px;
+  padding-bottom: 20px;
+  quotes: "\201C""\201D""\2018""\2019";
+  font-family: "Arizona";
+  font-style: italic;
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+
+#quote-acs{
   font-size: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -41,6 +79,20 @@ h2{
   margin-right: 10px;
 }
 
-#yt_video{
+#yt-video{
+  margin-bottom: 20px;
+}
+
+.fa-github-square {
+  color: black;
+  opacity: .7;
+  transition: opacity .3s linear;
+}
+
+.fa-github-square:hover{
+  opacity: 1;
+}
+
+#fa-github{
   margin-bottom: 20px;
 }
