@@ -2,6 +2,10 @@ var percent_width = 0.7;
 var states_data = [];
 var counties_data = [];
 
+Array.prototype.insert = function (index, item) {
+  this.splice(index, 0, item);
+};
+
 //var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
 var DATA_BASE_DIR = "/Data/" // For "local" hosting
 var us_json_file = DATA_BASE_DIR + "us.json";
@@ -105,7 +109,61 @@ function stopped()
 
 function UpdateData()
 {
-  BubbleChart();
+  var year = parseInt(d3.select("#year-slider").property("value"));
+  var genValues = d3.selectAll('input[class="gen_checkbox"]:checked').nodes();
+  var eduValues = d3.selectAll('input[class="edu_checkbox"]:checked').nodes();
+  var raceValues = d3.selectAll('input[class="race_checkbox"]:checked').nodes();
+  var marValues = d3.selectAll('input[class="mar_checkbox"]:checked').nodes();
+  var ages = d3.select("#age-slider").property("value").split(",");
+
+  // Gets the range of ages from the slider
+  if(ages[0] == ages[1])
+  {
+    ages.pop();
+  }
+  else
+  {
+    if(ages[1] != "65+")
+    {
+      ages[0] = '' + parseInt(ages[0]);
+      ages[1] = '' + parseInt(ages[1]);
+      var diff = parseInt(ages[1]) - parseInt(ages[0]);
+    }
+    else
+    {
+      ages[0] = '' + parseInt(ages[0]);
+      var diff = 65 - parseInt(ages[0]);
+    }
+    for(var i = 1; i < diff; i++)
+    {
+      var val = parseInt(ages[0]) + i
+      ages.insert(i, '' + val);
+    }
+  }
+
+  // Gets an array of the values in the checkboxes
+  for(var i = 0; i < genValues.length; i++)
+  {
+    genValues[i] = genValues[i].value;
+  }
+
+  for(var i = 0; i < eduValues.length; i++)
+  {
+    eduValues[i] = eduValues[i].value;
+  }
+
+  for(var i = 0; i < raceValues.length; i++)
+  {
+    raceValues[i] = raceValues[i].value;
+  }
+
+  for(var i = 0; i < marValues.length; i++)
+  {
+    marValues[i] = marValues[i].value;
+  }
+
+  // Calls the appropriate functions for the check boxes
+  BubbleChart(year, ages, genValues, eduValues, raceValues, marValues);
 }
 
 function LoadData()

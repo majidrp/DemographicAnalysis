@@ -56,7 +56,7 @@ $(document).ready(function () {
       <h2 id="edition">Attribute Selection</h2>
       <h3>Year</h3>
       <div id="year">
-        <input type="hidden" class="single-slider" value="2015" />
+        <input id="year-slider" type="hidden" class="single-slider" value="2015" />
           <script src="/scripts/jquery.range.js"></script>
           <script>
             $('.single-slider').jRange({
@@ -75,14 +75,14 @@ $(document).ready(function () {
       <h3>Gender</h3>
       <span id="gender"></span>
       <form action="#" method="post">
-  	<input type="checkbox" name="gender" value="M">Male</input>
-  	<input type="checkbox" name="gender" value="F">Female</input>
+  	<input class="gen_checkbox" type="checkbox" name="gender" value="M">Male</input>
+  	<input class="gen_checkbox" type="checkbox" name="gender" value="F">Female</input>
   	</form>
 
       <h3>Age</h3>
       <br>
       <!-- Adapted from https://github.com/nitinhayaran/jRange -->
-      <div id="age"><input type="hidden" class="range-slider" value="33.5,49" />
+      <div id="age"><input id="age-slider" type="hidden" class="range-slider" value="33.5,49" />
         <script src="/scripts/jquery.range.js"></script>
         <!-- <script src="/DemographicAnalysis/scripts/jquery.range.js"></script> [Use this for GitHub Hosting]-->
         <script>
@@ -103,33 +103,33 @@ $(document).ready(function () {
       <h3>Education</h3>
       <span id="education"></span>
       <form action="#" method="post">
-  	<input type="checkbox" name="education" value="No HS">No High School</input><br>
-    <input type="checkbox" name="education" value="HS/GED">High School/GED</input><br>
-  	<input type="checkbox" name="education" value="Some College">Some College</input><br>
-  	<input type="checkbox" name="education" value="Bachelors">Bachelor’s</input><br>
-  	<input type="checkbox" name="education" value="Graduate/Professional">Graduate/Professional</input><br>
+  	<input class="edu_checkbox" type="checkbox" name="education" value="No HS">No High School</input><br>
+    <input class="edu_checkbox" type="checkbox" name="education" value="HS/GED">High School/GED</input><br>
+  	<input class="edu_checkbox" type="checkbox" name="education" value="Some College">Some College</input><br>
+  	<input class="edu_checkbox" type="checkbox" name="education" value="Bachelors">Bachelor’s</input><br>
+  	<input class="edu_checkbox" type="checkbox" name="education" value="Graduate/Professional">Graduate/Professional</input><br>
   	</form>
 
       <h3>Race</h3>
       <span id="race"></span>
       <form action="#" method="post">
-  	<input type="checkbox" name="race" value="White">White</input><br>
-  	<input type="checkbox" name="race" value="Black">Black</input><br>
-  	<input type="checkbox" name="race" value="Asian">Asian</input><br>
-  	<input type="checkbox" name="race" value="American Indian or Alaskan Native">American Indian/Alaskan Native</input><br>
-  	<input type="checkbox" name="race" value="Native Hawaiian and Other Paciffic Islander">Native Hawaiians/Pacific Islanders</input><br>
-    <input type="checkbox" name="race" value="Other">Other Race</input><br>
-  	<input type="checkbox" name="race" value="Two or More">Two or More</input>
+  	<input class="race_checkbox" type="checkbox" name="race" value="White">White</input><br>
+  	<input class="race_checkbox" type="checkbox" name="race" value="Black">Black</input><br>
+  	<input class="race_checkbox" type="checkbox" name="race" value="Asian">Asian</input><br>
+  	<input class="race_checkbox" type="checkbox" name="race" value="American Indian or Alaskan Native">American Indian/Alaskan Native</input><br>
+  	<input class="race_checkbox" type="checkbox" name="race" value="Native Hawaiian and Other Paciffic Islander">Native Hawaiians/Pacific Islanders</input><br>
+    <input class="race_checkbox" type="checkbox" name="race" value="Other">Other Race</input><br>
+  	<input class="race_checkbox" type="checkbox" name="race" value="Two or More">Two or More</input>
   	</form>
 
     <h3>Marital Status</h3>
     <span id="marital"></span>
     <form action="#" method="post">
-  <input type="checkbox" name="marital_status" value="Married">Married</input><br>
-  <input type="checkbox" name="marital_status" value="Separated">Separated</input><br>
-  <input type="checkbox" name="marital_status" value="Widowed">Widowed</input><br>
-  <input type="checkbox" name="marital_status" value="Divorced">Divorced</input><br>
-  <input type="checkbox" name="marital_status" value="Never Married">Never Married</input><br>
+  <input class="mar_checkbox" type="checkbox" name="marital_status" value="Married">Married</input><br>
+  <input class="mar_checkbox" type="checkbox" name="marital_status" value="Separated">Separated</input><br>
+  <input class="mar_checkbox" type="checkbox" name="marital_status" value="Widowed">Widowed</input><br>
+  <input class="mar_checkbox" type="checkbox" name="marital_status" value="Divorced">Divorced</input><br>
+  <input class="mar_checkbox" type="checkbox" name="marital_status" value="Never Married">Never Married</input><br>
 </form><br>
 
   <button type="submit" name="submit" class="button">Submit</button>
