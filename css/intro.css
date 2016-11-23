@@ -4,7 +4,7 @@ body{
 }
 
 h2{
-  margin-top: 40px;
+  padding-top: 15px;
 }
 
 .main{
@@ -71,6 +71,20 @@ blockquote p {
   display: inline;
 }
 
+i{
+  border:2px solid rgba(255, 0, 0, 0);
+  transition: border 0.2s linear;
+  background-color: white;
+  border-radius:100%;
+  width: 49px;
+  height: 48px;
+  text-align:center;
+}
+
+i:hover{
+  border: 2px solid rgba(255, 0, 0, 1)
+}
+
 #quote-acs{
   font-size: 20px;
   padding-top: 10px;
@@ -83,16 +97,14 @@ blockquote p {
   margin-bottom: 20px;
 }
 
-.fa-github-square {
+.fa-github {
+  margin-top: 15px;
+  float: right;
   color: black;
   opacity: .7;
   transition: opacity .3s linear;
 }
 
-.fa-github-square:hover{
+.fa-github:hover{
   opacity: 1;
-}
-
-#fa-github{
-  margin-bottom: 20px;
 }
