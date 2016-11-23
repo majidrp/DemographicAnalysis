@@ -1,5 +1,4 @@
-var percent_width = 0.8;
-var percent_height = 0.8;
+var percent_width = 0.7;
 var states_data = [];
 var counties_data = [];
 
@@ -10,14 +9,13 @@ var us_json_file = DATA_BASE_DIR + "us.json";
 var mapSVG = document.getElementById("#map");
 
 var window_width = window.innerWidth;
-var window_height = window.innerHeight;
 
-var width = window_width * percent_width,
-    height = window_height * percent_height,
+var width = 1400,//window_width * percent_width,
+    height = 750,
     active = d3.select(null);
 
 var projection = d3.geoAlbersUsa()
-    .scale(window_width * .7)
+    .scale(width)
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
@@ -105,9 +103,9 @@ function stopped()
   if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
 
-function chooseData()
+function UpdateData()
 {
-
+  BubbleChart();
 }
 
 function LoadData()
