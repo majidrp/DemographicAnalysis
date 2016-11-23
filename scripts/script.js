@@ -107,6 +107,169 @@ function stopped()
   if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
 
+function CalculatePopulation(ages, genValues, eduValues, raceValues, marValues)
+{
+  var years = Object.keys(states_data);
+  var state_ids = Object.keys(states_data[years[0]]);
+  var county_ids = Object.keys(counties_data[years[0]]);
+  var scaleFactor = 100;
+
+  // Calculates the values for the states based on user input
+  for(var yr_idx = 0; yr_idx < years.length; yr_idx++)
+  {
+    var year = years[yr_idx];
+    for(var st_idx = 0; st_idx < state_ids.length; st_idx++)
+    {
+      var state = state_ids[st_idx];
+      var pop_total = states_data[year][state]["Total"];
+      var value = 0;
+
+      if(raceValues.length == 0)
+      {
+        var race_sum = 1.0;
+      }
+      else
+      {
+        var race_sum = 0.0;
+      }
+
+      for(var rc_idx = 0; rc_idx < raceValues.length; rc_idx++)
+      {
+        var race = raceValues[rc_idx];
+        race_sum = race_sum + states_data[year][state][race];
+      }
+
+      for(var gn_idx = 0; gn_idx < genValues.length; gn_idx++)
+      {
+        var gender = genValues[gn_idx];
+        for(var ag_idx = 0; ag_idx < ages.length; ag_idx++)
+        {
+          var age = ages[ag_idx];
+          var per_pop = states_data[year][state][gender][age]["Population"];
+          per_pop = per_pop / pop_total;
+
+          if(eduValues.length == 0 && marValues.length == 0)
+          {
+            var edu_sum = 1.0;
+            var mar_sum = 1.0;
+          }
+          else if(eduValues.length == 0)
+          {
+            var edu_sum = 1.0;
+            var mar_sum = 0;
+          }
+          else if(marValues.length == 0)
+          {
+            var edu_sum = 0;
+            var mar_sum = 1.0;
+          }
+          else
+          {
+            var edu_sum = 0;
+            var mar_sum = 0;
+          }
+
+          for(var ed_idx = 0; ed_idx < eduValues.length; ed_idx++)
+          {
+            var edu = eduValues[ed_idx];
+            edu_sum = edu_sum + states_data[year][state][gender][age][edu];
+          }
+
+          for(var ma_idx = 0; ma_idx < marValues.length; ma_idx++)
+          {
+            var mar = marValues[ma_idx];
+            mar_sum = mar_sum + states_data[year][state][gender][age][mar];
+          }
+          value = value + per_pop * edu_sum * mar_sum;
+        }
+      }
+      states_data[year][state]["Value"] = Math.round(race_sum * value * scaleFactor * 100)/100;
+    }
+  }
+
+  // Calculates the values for the counties based on user input
+  for(var yr_idx = 0; yr_idx < years.length; yr_idx++)
+  {
+    var year = years[yr_idx];
+    for(var cty_idx = 0; cty_idx < county_ids.length; cty_idx++)
+    {
+      var county = county_ids[cty_idx];
+      var pop_total = counties_data[year][county]["Total"];
+
+      var value = 0;
+
+      if(raceValues.length == 0)
+      {
+        var race_sum = 1.0;
+      }
+      else
+      {
+        var race_sum = 0.0;
+      }
+
+      for(var rc_idx = 0; rc_idx < raceValues.length; rc_idx++)
+      {
+        var race = raceValues[rc_idx];
+        race_sum = race_sum + counties_data[year][county][race];
+      }
+
+      for(var gn_idx = 0; gn_idx < genValues.length; gn_idx++)
+      {
+        var gender = genValues[gn_idx];
+        for(var ag_idx = 0; ag_idx < ages.length; ag_idx++)
+        {
+          var age = ages[ag_idx];
+          var per_pop = counties_data[year][county][gender][age]["Population"];
+          per_pop = per_pop / pop_total;
+
+          if(eduValues.length == 0 && marValues.length == 0)
+          {
+            var edu_sum = 1.0;
+            var mar_sum = 1.0;
+          }
+          else if(eduValues.length == 0)
+          {
+            var edu_sum = 1.0;
+            var mar_sum = 0;
+          }
+          else if(marValues.length == 0)
+          {
+            var edu_sum = 0;
+            var mar_sum = 1.0;
+          }
+          else
+          {
+            var edu_sum = 0;
+            var mar_sum = 0;
+          }
+
+          for(var ed_idx = 0; ed_idx < eduValues.length; ed_idx++)
+          {
+            var edu = eduValues[ed_idx];
+            edu_sum = edu_sum + counties_data[year][county][gender][age][edu];
+          }
+
+          for(var ma_idx = 0; ma_idx < marValues.length; ma_idx++)
+          {
+            var mar = marValues[ma_idx];
+            mar_sum = mar_sum + counties_data[year][county][gender][age][mar];
+          }
+          value = value + per_pop * edu_sum * mar_sum;
+        }
+      }
+
+      if(pop_total > 0)
+      {
+        counties_data[year][county]["Value"] = Math.round(race_sum * value * scaleFactor * 100)/100;
+      }
+      else {
+        counties_data[year][county]["Value"] = -1;
+      }
+
+    }
+  }
+}
+
 function UpdateData()
 {
   var year = parseInt(d3.select("#year-slider").property("value"));
@@ -123,7 +286,7 @@ function UpdateData()
   }
   else
   {
-    if(ages[1] != "65+")
+    if(ages[1] != "65.00")
     {
       ages[0] = '' + parseInt(ages[0]);
       ages[1] = '' + parseInt(ages[1]);
@@ -132,6 +295,7 @@ function UpdateData()
     else
     {
       ages[0] = '' + parseInt(ages[0]);
+      ages[1] = "65+";
       var diff = 65 - parseInt(ages[0]);
     }
     for(var i = 1; i < diff; i++)
@@ -145,6 +309,11 @@ function UpdateData()
   for(var i = 0; i < genValues.length; i++)
   {
     genValues[i] = genValues[i].value;
+  }
+
+  if(genValues.length == 0)
+  {
+    genValues = ["M", "F"];
   }
 
   for(var i = 0; i < eduValues.length; i++)
@@ -163,7 +332,8 @@ function UpdateData()
   }
 
   // Calls the appropriate functions for the check boxes
-  BubbleChart(year, ages, genValues, eduValues, raceValues, marValues);
+  CalculatePopulation(ages, genValues, eduValues, raceValues, marValues);
+  BubbleChart(year);
 }
 
 function LoadData()

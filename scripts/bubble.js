@@ -1,4 +1,4 @@
-function BubbleChart(year, ages, genValues, eduValues, raceValues, marValues)
+function BubbleChart(year)
 {
   var svg = d3.select("#dist-plot")
   var margin = {"left":10, "right": 10, "top":10, "bottom":10};
