@@ -1,0 +1,46 @@
+body{
+  background-color: #999;
+  font-family: "Lato";
+}
+
+h2{
+  margin-top: 40px;
+}
+
+.main{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+.main .text{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.quote{
+  background-color: #e6e6e6;
+  text-align: center;
+  font-style: italic;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-family: "Arizona";
+}
+
+#quote_acs{
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#yt_video{
+  margin-bottom: 20px;
+}
