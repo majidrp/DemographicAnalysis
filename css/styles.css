@@ -65,6 +65,8 @@ display: inline-block;
 font-size: 16px;
 -webkit-transition-duration: 0.2s; /* Safari */
 transition-duration: 0.2s;
+border-radius: 10px;
+
 }
 
 .button:hover {
