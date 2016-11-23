@@ -36,25 +36,25 @@ svg.append("rect")
 
 var g = svg.append("g");
 
-
 d3.json(us_json_file, function(error, us)
 {
    g.append("g")
-    .attr("id", "counties")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
     .attr("d", path)
     .attr("class", "county-boundary")
+    .attr("id", function(d){return d.id})
     .on("click", reset);
 
    g.append("g")
-    .attr("id", "states")
+    //.attr("id", "states")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
     .attr("d", path)
     .attr("class", "state")
+    .attr("id", function(d){return d.id*1000})
     .on("click", clicked);
 
    g.append("path")

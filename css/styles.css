@@ -145,13 +145,13 @@ footer{
   overflow: hidden;
 }
 
-#states {
+.state {
   fill: #aaa;
   stroke: #000;
   stroke-width: .5px;
 }
 
-#states .active {
+.state .active {
   fill: #1E90FF;
   display:none;
 }
