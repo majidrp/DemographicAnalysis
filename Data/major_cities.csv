@@ -1,115 +1,115 @@
-city,lat_n,lon_w
-"Albany, New York",42.40,73.45
-"Albuquerque, New Mexico",35.5,106.39
-"Amarillo, Texas",35.11,101.50
-"Anchorage, Alaska",61.13,149.54
-"Atlanta, Georgia",33.45,84.23
-"Austin, Texas",30.16,97.44
-"Baker, Oregon",44.47,117.50
-"Baltimore, Maryland",39.18,76.38
-"Bangor, Maine",44.48,68.47
-"Birmingham, Alaska",33.30,86.50
-"Bismarck, North Dakota",46.48,100.47
-"Boise, Idaho",43.36,116.13
-"Boston, Massachusetts",42.21,71.5
-"Buffalo, New York",42.55,78.50
-"Carlsbad, New Mexico",32.26,104.15
-"Charleston, South Carolina",32.47,79.56
-"Charleston, West Virgina",38.21,81.38
-"Charlotte, North Carolina",35.14,80.50
-"Cheyenne, Wyoming",41.9,104.52
-"Chicago, Illinois",41.50,87.37
-"Cincinnati, Ohio",39.8,84.30
-"Cleveland, Ohio",41.28,81.37
-"Columbia, South Carolina",34.0,81.2
-"Columbus, Ohio",40.0,83.1
-"Dallas, Texas",32.46,96.46
-"Denver, Colorado",39.45,105.0
-"Des Moines, Iowa",41.35,93.37
-"Detroit, Michigan",42.20,83.3
-"Dubuque, Iowa",42.31,90.40
-"Duluth, Minnesota",46.49,92.5
-"Eastport, Maine",44.54,67.0
-"El Centro, California",32.38,115.33
-"El Paso, Texas",31.46,106.29
-"Eugene, Oregon",44.3,123.5
-"Fargo, North Dakota",46.52,96.48
-"Flagstaff, Arizona",35.13,111.41
-"Fort Worth, Texas",32.43,97.19
-"Fresno, California",36.44,119.48
-"Grand Junction, Colorado",39.5,108.33
-"Grand Rapids, Michigan",42.58,85.40
-"Havre, Montana",48.33,109.43
-"Helena, Montana",46.35,112.2
-"Honolulu, Hawaii",21.18,157.50
-"Hot Springs, Arkansas",34.31,93.3
-"Houston, Texas",29.45,95.21
-"Idaho Falls, Idaho",43.30,112.1
-"Indianapolis, Indiana",39.46,86.10
-"Jackson, Mississippi",32.20,90.12
-"Jacksonville, Florida",30.22,81.40
-"Juneau, Alaska",58.18,134.24
-"Kansas City, Missouri",39.6,94.35
-"Key West, Florida",24.33,81.48
-"Klamath Falls, Oregon",42.10,121.44
-"Knoxville, Tennessee",35.57,83.56
-"Las Vegas, Nevada",36.10,115.12
-"Lewiston, Idaho",46.24,117.2
-"Lincoln, Nebraska",40.50,96.40
-"Long Beach, California",33.46,118.11
-"Los Angeles, California",34.3,118.15
-"Louisville, Kentucky",38.15,85.46
-"Manchester, New Hampshire",43.0,71.30
-"Memphis, Tennessee",35.9,90.3
-"Miami, Florida",25.46,80.12
-"Milwaukee, Wisconsin",43.2,87.55
-"Minneapolis, Minnesota",44.59,93.14
-"Mobile, Alabama",30.42,88.3
-"Montgomery, Alabama",32.21,86.18
-"Montpelier, Vermont",44.15,72.32
-"Nashville, Tennessee",36.10,86.47
-"Newark, New Jersey",40.44,74.10
-"New Haven, Connecticut",41.19,72.55
-"New Orleans, Louisiana",29.57,90.4
-"New York, New York",40.47,73.58
-"Nome, Alaska",64.25,165.30
-"Oakland, California",37.48,122.16
-"Oklahoma City, Oklahoma",35.26,97.28
-"Omaha, Nebraska",41.15,95.56
-"Philadelphia, Pennsylvania",39.57,75.10
-"Phoenix, Arizona",33.29,112.4
-"Pierre, South Dakota",44.22,100.21
-"Pittsburgh, Pennsylvania",40.27,79.57
-"Portland, Maine",43.40,70.15
-"Portland, Oregon",45.31,122.41
-"Providence, Rhode Island",41.50,71.24
-"Raleigh, North Carolina",35.46,78.39
-"Reno, Nevada",39.30,119.49
-"Richfield, Utah",38.46,112.5
-"Richmond, Virgina",37.33,77.29
-"Roanoke, Virginia",37.17,79.57
-"Sacramento, California",38.35,121.30
-"St. Louis, Missouri",38.35,90.12
-"Salt Lake City, Utah",40.46,111.54
-"San Antonio, Texas",29.23,98.33
-"San Diego, California",32.42,117.10
-"San Francisco, California",37.47,122.26
-"San Jose, California",37.20,121.53
-"Santa Fe, New Mexico",35.41,105.57
-"Savannah, Georgia",32.5,81.5
-"Seattle, Washington",47.37,122.20
-"Shreveport, Louisiana",32.28,93.42
-"Sioux Falls, South Dakota",43.33,96.44
-"Sitka, Alaska",57.10,135.15
-"Spokane, Washington",47.40,117.26
-"Springfield, Illinois",39.48,89.38
-"Springfield, Massachusetts",42.6,72.34
-"Springfield, Missouri",37.13,93.17
-"Syracuse, New York",43.2,76.8
-"Tampa, Florida",27.57,82.27
-"Toledo, Ohio",41.39,83.33
-"Tulsa, Oklahoma",36.90,95.59
-"Virginia Beach, Virginia",36.51,75.58
-"Washington, D.C.",38.53,77.20
-"Wichita, Kansas",37.43,97.17
-"Wilmington, North Carolina",34.14,77.57
+city,lat,lon
+"Albany, New York",42.6526,-73.7562
+"Albuquerque, New Mexico",35.0853,-106.6056
+"Amarillo, Texas",35.2220,-101.8313
+"Anchorage, Alaska",61.2181,-149.9003
+"Atlanta, Georgia",33.7490,-84.3880
+"Austin, Texas",30.2672,-97.7431
+"Baker, Oregon",44.7749,-117.8344
+"Baltimore, Maryland",39.2904,-76.6122
+"Bangor, Maine",44.8012,-68.7778
+"Birmingham, Alabama",33.5207,-86.8025
+"Bismarck, North Dakota",46.8083,-100.7837
+"Boise, Idaho",43.6187,-116.2146
+"Boston, Massachusetts",42.3601,-71.0589
+"Buffalo, New York",42.8864,-78.8784
+"Carlsbad, New Mexico",32.4207,-104.2288
+"Charleston, South Carolina",32.7765,-79.9311
+"Charleston, West Virgina",38.3498,-81.6326
+"Charlotte, North Carolina",35.2271,-80.8431
+"Cheyenne, Wyoming",41.1400,-104.8202
+"Chicago, Illinois",41.8781,-87.6298
+"Cincinnati, Ohio",39.1031,-84.5120
+"Cleveland, Ohio",41.4993,-81.6944
+"Columbia, South Carolina",34.0007,-81.0348
+"Columbus, Ohio",39.9612,-82.9988
+"Dallas, Texas",32.7767,-96.7970
+"Denver, Colorado",39.7392,-104.9903
+"Des Moines, Iowa",41.6005,-93.6091
+"Detroit, Michigan",42.3314,-83.0458
+"Dubuque, Iowa",42.5006,-90.6646
+"Duluth, Minnesota",46.7867,-92.1005
+"Eastport, Maine",44.9062,-66.9900
+"El Centro, California",32.7920,-115.5631
+"El Paso, Texas",31.7619,-106.4850
+"Eugene, Oregon",44.0521,-123.0868
+"Fargo, North Dakota",46.8772,-96.7898
+"Flagstaff, Arizona",35.1983,-111.6513
+"Fort Worth, Texas",32.7555,-97.3308
+"Fresno, California",36.7468,-119.7726
+"Grand Junction, Colorado",39.0639,-108.5506
+"Grand Rapids, Michigan",42.9634,-85.6681
+"Havre, Montana",48.5500,-109.6841
+"Helena, Montana",46.5884,-112.0245
+"Honolulu, Hawaii",21.3069,-157.8583
+"Hot Springs, Arkansas",34.5037,-93.0552
+"Houston, Texas",29.7604,-95.3698
+"Idaho Falls, Idaho",43.4917,-112.0340
+"Indianapolis, Indiana",39.7684,-86.1581
+"Jackson, Mississippi",32.2988,-90.1848
+"Jacksonville, Florida",30.3322,-81.6557
+"Juneau, Alaska",58.3019,-134.4197
+"Kansas City, Missouri",39.0997,-94.5786
+"Key West, Florida",24.5551,-81.7800
+"Klamath Falls, Oregon",42.2249,-121.7817
+"Knoxville, Tennessee",35.9606,-83.9207
+"Las Vegas, Nevada",36.1699,-115.1398
+"Lewiston, Idaho",46.4004,-117.0012
+"Lincoln, Nebraska",40.8258,-96.6852
+"Long Beach, California",33.7701,-118.1937
+"Los Angeles, California",34.0522,-118.2437
+"Louisville, Kentucky",38.2527,-85.7585
+"Manchester, New Hampshire",42.9956,-71.4548
+"Memphis, Tennessee",35.1495,-90.0490
+"Miami, Florida",25.7617,-80.1918
+"Milwaukee, Wisconsin",43.0389,-87.9065
+"Minneapolis, Minnesota",44.9778,-93.2650
+"Mobile, Alabama",30.6954,-88.0399
+"Montgomery, Alabama",32.3668,-86.3000
+"Montpelier, Vermont",44.2601,-72.5754
+"Nashville, Tennessee",36.1627,-86.7816
+"Newark, New Jersey",40.7357,-74.1724
+"New Haven, Connecticut",41.3083,-72.9279
+"New Orleans, Louisiana",29.9511,-90.0715
+"New York City, New York",40.7128,-74.0059
+"Nome, Alaska",64.5011,-165.4064
+"Oakland, California",37.8044,-122.2711
+"Oklahoma City, Oklahoma",35.4676,-97.5164
+"Omaha, Nebraska",41.2524,-95.9980
+"Philadelphia, Pennsylvania",39.9526,-75.1652
+"Phoenix, Arizona",33.4484,-112.0740
+"Pierre, South Dakota",44.3683,-100.3510
+"Pittsburgh, Pennsylvania",40.4406,-79.9959
+"Portland, Maine",43.6615,-70.2553
+"Portland, Oregon",45.5231,-122.6765
+"Providence, Rhode Island",41.8240,-71.4128
+"Raleigh, North Carolina",35.7796,-78.6382
+"Reno, Nevada",39.5296,-119.8138
+"Richfield, Utah",38.7725,-112.0841
+"Richmond, Virgina",37.5407,-77.4360
+"Roanoke, Virginia",37.2710,-79.9414
+"Sacramento, California",38.5816,-121.4944
+"St. Louis, Missouri",38.6270,-90.1994
+"Salt Lake City, Utah",40.7608,-111.8910
+"San Antonio, Texas",29.4241,-98.4936
+"San Diego, California",32.7157,-117.1611
+"San Francisco, California",37.7749,-122.4194
+"San Jose, California",37.3382,-121.8863
+"Santa Fe, New Mexico",35.6870,-105.9378
+"Savannah, Georgia",32.0835,-81.0998
+"Seattle, Washington",47.6062,-122.3321
+"Shreveport, Louisiana",32.5252,-93.7502
+"Sioux Falls, South Dakota",43.5446,-96.7311
+"Sitka, Alaska",57.0531,-135.3300
+"Spokane, Washington",47.6588,-117.4260
+"Springfield, Illinois",39.7817,-89.6501
+"Springfield, Massachusetts",42.1015,-72.5898
+"Springfield, Missouri",37.2090,-93.2923
+"Syracuse, New York",43.0481,-76.1474
+"Tampa, Florida",27.9506,-82.4572
+"Toledo, Ohio",41.6639,-83.5552
+"Tulsa, Oklahoma",36.1540,-95.9928
+"Virginia Beach, Virginia",36.8529,-75.9780
+"Washington, D.C.",38.9072,-77.0369
+"Wichita, Kansas",37.6872,-97.3301
+"Wilmington, North Carolina",34.2257,-77.9447

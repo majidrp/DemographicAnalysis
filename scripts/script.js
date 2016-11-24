@@ -2,13 +2,15 @@ var percent_width = 0.7;
 var states_data = [];
 var counties_data = [];
 
-Array.prototype.insert = function (index, item) {
+Array.prototype.insert = function(index, item)
+{
   this.splice(index, 0, item);
 };
 
 //var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
 var DATA_BASE_DIR = "/Data/" // For "local" hosting
 var us_json_file = DATA_BASE_DIR + "us.json";
+var cities_file = DATA_BASE_DIR + "major_cities.csv";
 
 var mapSVG = document.getElementById("#map");
 
@@ -40,6 +42,23 @@ svg.append("rect")
 
 var g = svg.append("g");
 
+d3.csv(cities_file, function(error, city)
+{
+  g.append("g").selectAll(".cities").data(city).enter()
+                                    .append("circle")
+                                    .attr("id", function(d) {return d["city"];})
+                                    .attr("r", 3)
+                                    .attr("cx", function(d){
+                                        var loc = [+d["lon"], +d["lat"]];
+                                        return projection(loc)[0];
+                                    })
+                                   .attr("cy", function(d){
+                                        var loc = [+d["lon"], +d["lat"]];
+                                        return projection(loc)[1];
+                                   })
+                                   .attr("class", "cities");
+});
+
 d3.json(us_json_file, function(error, us)
 {
    g.append("g")
@@ -66,6 +85,7 @@ d3.json(us_json_file, function(error, us)
     .attr("id", "state-borders")
     .attr("d", path);
 });
+
 
 function clicked(d)
 {
@@ -262,7 +282,8 @@ function CalculatePopulation(ages, genValues, eduValues, raceValues, marValues)
       {
         counties_data[year][county]["Value"] = Math.round(race_sum * value * scaleFactor * 100)/100;
       }
-      else {
+      else
+      {
         counties_data[year][county]["Value"] = -1;
       }
 
