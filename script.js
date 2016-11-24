@@ -2,11 +2,6 @@ var percent_width = 0.7;
 var states_data = [];
 var counties_data = [];
 
-var color = d3.scaleQuantize()
-            .domain([0,100])
-            .range(["rgb(247,251,255)","rgb(222,235,247)","rgb(198,219,239)","rgb(158,202,225)","rgb(107,174,214)","rgb(66,146,198)","rgb(33,113,181)","rgb(8,81,156)","rgb(8,48,107)"]); //green, Alex's Tutorial
-            //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
-
 Array.prototype.insert = function(index, item)
 {
   this.splice(index, 0, item);
@@ -120,6 +115,8 @@ d3.json(us_json_file, function(error, us)
     .attr("id", "state-borders")
     .attr("d", path);
 });
+
+
 
 function clicked(d)
 {
@@ -388,9 +385,7 @@ function UpdateData()
 
   // Calls the appropriate functions for the check boxes
   CalculatePopulation(ages, genValues, eduValues, raceValues, marValues);
-  //console.log(states_data[2015][1000]["Value"]);
-  colorMap(year);
-  //BubbleChart(year);
+  BubbleChart(year);
 }
 
 function LoadData()
@@ -525,21 +520,4 @@ function ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_label
     });
   }
   counties_data = year_data;
-}
-
-function colorMap(year){
-    d3.select("#stateg").selectAll("path")
-        .style("fill", function(d){
-            if (d.id >= 72) return "#aaa";
-            var val = states_data[year][((d.id)*1000)]["Value"];
-            //val = val * (100 / 79.28);
-            console.log("id=", d.id, ", val=", val);
-            if (val != -1){
-              return color(val);
-            }
-            else{
-              return "#aaa";
-            }
-        });
-        //.style("opacity", 0.7);
 }
