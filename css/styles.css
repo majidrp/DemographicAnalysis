@@ -37,6 +37,20 @@ h3{
   margin-left: 15px;
 }
 
+.axis line{
+  stroke: steelblue;
+}
+
+.axis text{
+  fill: steelblue;
+  font-size: 14px;
+  font-family: "Lato";
+}
+
+.axis path{
+  stroke: steelblue;
+}
+
 .cities{
   fill: #fff;
   stroke-width: 1px;
