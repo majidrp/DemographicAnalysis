@@ -62,9 +62,27 @@ svg.append("rect")
 
 svg.call(city_tip);
 
+
+d3.csv(cities_file, function(error, city)
+{
+  svg.append("g").selectAll(".cities").data(city).enter()
+                                    .append("circle")
+                                    .attr("id", function(d) {return d["city"];})
+                                    .attr("r", 3)
+                                    .attr("cx", function(d){
+                                        var loc = [+d["lon"], +d["lat"]];
+                                        return projection(loc)[0];
+                                    })
+                                   .attr("cy", function(d){
+                                        var loc = [+d["lon"], +d["lat"]];
+                                        return projection(loc)[1];
+                                   })
+                                   .attr("class", "cities")
+                                   .on("mouseover", city_tip.show)
+                                   .on("mouseout", city_tip.hide);
+});
+
 var g = svg.append("g");
-
-
 
 d3.json(us_json_file, function(error, us)
 {
@@ -93,24 +111,7 @@ d3.json(us_json_file, function(error, us)
     .attr("d", path);
 });
 
-d3.csv(cities_file, function(error, city)
-{
-  g.append("g").attr("class", "cities").selectAll(".cities").data(city).enter()
-                                    .append("circle")
-                                    .attr("id", function(d) {return d["city"];})
-                                    .attr("r", 3)
-                                    .attr("cx", function(d){
-                                        var loc = [+d["lon"], +d["lat"]];
-                                        return projection(loc)[0];
-                                    })
-                                   .attr("cy", function(d){
-                                        var loc = [+d["lon"], +d["lat"]];
-                                        return projection(loc)[1];
-                                   })
-                                   .attr("z-index", 10)
-                                   .on("mouseover", city_tip.show)
-                                   .on("mouseout", city_tip.hide);
-});
+
 
 function clicked(d)
 {
