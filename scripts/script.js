@@ -4,7 +4,7 @@ var counties_data = [];
 
 var color = d3.scaleQuantize()
             .domain([0,100])
-            .range(["rgb(247,251,255)","rgb(222,235,247)","rgb(198,219,239)","rgb(158,202,225)","rgb(107,174,214)","rgb(66,146,198)","rgb(33,113,181)","rgb(8,81,156)","rgb(8,48,107)"]); //green, Alex's Tutorial
+            .range(["#E5BF00", "#E0AD00", "#DC9B00", "D88900", "D47700", "CF6600", "#CB5400", "#C74200", "#C33000", "#BF1F00"]); //green, Alex's Tutorial
             //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
 
 Array.prototype.insert = function(index, item)
