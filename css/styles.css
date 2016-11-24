@@ -43,6 +43,26 @@ h3{
   stroke: #000;
 }
 
+.d3-tip-cities {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
 #year{
   margin-left: 15px;
   margin-top: 15px;

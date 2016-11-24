@@ -20,6 +20,25 @@ var width = 1400,//window_width * percent_width,
     height = 750,
     active = d3.select(null);
 
+var city_tip = d3.tip()
+                 .attr("class", "d3-tip-cities")
+                 .offset([-8, 0])
+                 .html(function(d) { return d["city"]; });
+
+var state_tip = d3.tip()
+               .attr("class", "d3-tip")
+               .offset([-8, 0])
+               .html(function(d) {
+                 years = Object.keys(states_data);
+                 return states_data[years[0]][d.id]["Geo"]; });
+
+var county_tip = d3.tip()
+               .attr("class", "d3-tip")
+               .offset([-8, 0])
+               .html(function(d) {
+                 return states_data[2015][d.id]["Geo"]; });
+
+
 var projection = d3.geoAlbersUsa()
     .scale(width)
     .translate([width / 2, height / 2]);
@@ -29,7 +48,8 @@ var path = d3.geoPath()
 
 var svg = d3.select("body").append("svg")
 	.attr("width", width)
-	.attr("height", height);
+	.attr("height", height)
+  .attr("id", "us_map");
 
 var zoom = d3.zoom()
     .scaleExtent([1, 8]);
@@ -40,24 +60,11 @@ svg.append("rect")
     .attr("height", height)
     .on("click", reset);
 
+svg.call(city_tip);
+
 var g = svg.append("g");
 
-d3.csv(cities_file, function(error, city)
-{
-  g.append("g").selectAll(".cities").data(city).enter()
-                                    .append("circle")
-                                    .attr("id", function(d) {return d["city"];})
-                                    .attr("r", 3)
-                                    .attr("cx", function(d){
-                                        var loc = [+d["lon"], +d["lat"]];
-                                        return projection(loc)[0];
-                                    })
-                                   .attr("cy", function(d){
-                                        var loc = [+d["lon"], +d["lat"]];
-                                        return projection(loc)[1];
-                                   })
-                                   .attr("class", "cities");
-});
+
 
 d3.json(us_json_file, function(error, us)
 {
@@ -86,6 +93,24 @@ d3.json(us_json_file, function(error, us)
     .attr("d", path);
 });
 
+d3.csv(cities_file, function(error, city)
+{
+  g.append("g").attr("class", "cities").selectAll(".cities").data(city).enter()
+                                    .append("circle")
+                                    .attr("id", function(d) {return d["city"];})
+                                    .attr("r", 3)
+                                    .attr("cx", function(d){
+                                        var loc = [+d["lon"], +d["lat"]];
+                                        return projection(loc)[0];
+                                    })
+                                   .attr("cy", function(d){
+                                        var loc = [+d["lon"], +d["lat"]];
+                                        return projection(loc)[1];
+                                   })
+                                   .attr("z-index", 10)
+                                   .on("mouseover", city_tip.show)
+                                   .on("mouseout", city_tip.hide);
+});
 
 function clicked(d)
 {
