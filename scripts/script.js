@@ -3,7 +3,7 @@ var states_data = [];
 var counties_data = [];
 
 var color = null;
-
+var color_array = ["#E5BF00", "#E0AD00", "#DC9B00", "D88900", "D47700", "CF6600", "#CB5400", "#C74200", "#C33000", "#BF1F00"];
 
 Array.prototype.insert = function(index, item)
 {
@@ -92,7 +92,6 @@ d3.json(us_json_file, function(error, us)
 
     d3.csv(cities_file, function(error, city)
     {
-      //svg.append("g")
       d3.select("#stateg")
         .selectAll(".cities").data(city).enter()
         .append("circle")
@@ -525,17 +524,15 @@ function ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_label
 
 function colorMap(year){
 
-  console.log(states_data[year]);
   var state_array = d3.values(states_data[year]);
   var county_array = d3.values(counties_data[year]);
   var state_max = d3.max(state_array, function(d){return d["Value"];});
   var county_max = d3.max(county_array, function(d){return d["Value"];});
   var max_val = Math.max(state_max, county_max);
 
-  console.log(state_max);
   color = d3.scaleQuantize()
                 .domain([0, max_val])
-                .range(["#E5BF00", "#E0AD00", "#DC9B00", "D88900", "D47700", "CF6600", "#CB5400", "#C74200", "#C33000", "#BF1F00"]); //green, Alex's Tutorial
+                .range(color_array); //green, Alex's Tutorial
                 //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
 
     d3.select("#stateg").selectAll("path")
