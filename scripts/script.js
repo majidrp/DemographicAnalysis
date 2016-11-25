@@ -1,7 +1,7 @@
 var percent_width = 0.7;
 var states_data = [];
 var counties_data = [];
-
+var filled_array = [];
 var color = null;
 var color_array = ["#fbb702", "#BF1F00"];
 var first_load = false;
@@ -135,7 +135,9 @@ d3.json(us_json_file, function(error, us)
     .attr("id", function(d){return d.id})
     .on("click", reset)
     .on("mouseover", function(d) {county_tip.show(d);})
-    .on("mouseout", function(d) {county_tip.hide(d);});
+    .on("mouseout", function(d) {county_tip.hide(d);})
+    .on("contextmenu", function (d, i) {
+    d3.event.preventDefault();});
 
    g.append("g")
     .attr("id", "stateg")
@@ -145,10 +147,30 @@ d3.json(us_json_file, function(error, us)
     .enter().append("path")
     .attr("d", path)
     .attr("class", "state")
-    .attr("id", function(d){return d.id*1000})
+    .attr("id", function(d){return d.id * 1000;})
     .on("click", clicked)
     .on("mouseover", function(d) {state_tip.show(d);})
-    .on("mouseout", function(d) {state_tip.hide(d);});
+    .on("mouseout", function(d) {state_tip.hide(d);})
+    .on("contextmenu", function (d, i) {
+    d3.event.preventDefault();
+    if(filled_array[d.id * 1000] == true && curr_year != 0)
+    {
+      d3.select(this).style("fill", "transparent");
+      filled_array[d.id * 1000] = false;
+    }
+    else
+    {
+      if(curr_year == 0)
+      {
+
+      }
+      else
+      {
+        d3.select(this).style("fill", color(states_data[curr_year][d.id * 1000]["Value"]));
+        filled_array[d.id * 1000] = true;
+      }
+    }
+    });
 
     d3.csv(cities_file, function(error, city)
     {
@@ -167,13 +189,18 @@ d3.json(us_json_file, function(error, us)
        })
        .attr("class", "cities")
        .on("mouseover", function(d) {city_tip.show(d);})
-       .on("mouseout", function(d) {city_tip.hide(d);});
-    });
+       .on("mouseout", function(d) {city_tip.hide(d);})
+       .on("contextmenu", function (d, i) {
+       d3.event.preventDefault();
+     });});
 
    g.append("path")
     .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
     .attr("id", "state-borders")
-    .attr("d", path);
+    .attr("d", path)
+    .on("contextmenu", function (d, i) {
+        d3.event.preventDefault();
+      });
 });
 
 function clicked(d)
@@ -493,7 +520,6 @@ function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels,
       var geo_data = [];
       for(var ind = 0; ind < d.length; ind++)
       {
-
         var local_geo = parseInt(d[ind].id);
         var gen_data = [];
         for(var gen = 0; gen < genders.length; gen++)
@@ -524,6 +550,8 @@ function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels,
           {
             geo_data[local_geo][other_labels[i]] = +d[ind][other_labels[i]];
           }
+
+          filled_array[local_geo] = true;
         }
       }
       year_data[years[temp]] = geo_data;
