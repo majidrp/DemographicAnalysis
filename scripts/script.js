@@ -59,7 +59,8 @@ var path = d3.geoPath()
 var svg = d3.select("body").append("svg")
 	.attr("width", width)
 	.attr("height", height)
-  .attr("id", "us_map");
+  .attr("id", "us_map")
+  .style("border-radius", "10px");
 
 var zoom = d3.zoom()
     .scaleExtent([1, 8]);
