@@ -81,8 +81,6 @@ d3.json(us_json_file, function(error, us)
     .on("click", reset);
 
    g.append("g")
-    .attr("id", "stateg")
-    //.attr("id", "states")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
@@ -532,32 +530,29 @@ function colorMap(year){
   var max_val = Math.max(state_max, county_max);
 
   color = d3.scaleQuantize()
-                .domain([0, max_val])
-                .range(color_array); //green, Alex's Tutorial
-                //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
+            .domain([0, max_val])
+            .range(color_array);
 
-    d3.select("#stateg").selectAll("path")
-        .transition().duration(1000)
-        .style("fill", function(d){
-            if(d.id >= 72) return "#aaa";
-            var val = states_data[year][((d.id)*1000)]["Value"];
-            //val = val * (100 / 79.28);
-            //console.log("id=", d.id, ", val=", val);
-            if (val != -1){
-              return color(val);
-            }
-            else{
-              return "#aaa";
-            }
-        });
+  d3.selectAll(".state")
+    .transition().duration(1000)
+    .style("fill", function(d){
+        if(d.id >= 72) return "#aaa";
+        var val = states_data[year][((d.id)*1000)]["Value"];
+        //console.log("id=", d.id, ", val=", val);
+        if (val != -1)
+        {
+          return color(val);
+        }
+        else
+        {
+          return "#aaa";
+        }});
 
-    if(first_load == false)
-    {
-      d3.selectAll(".cities")
-        .transition().duration(1000)
-        .attr("r", 3);
-
-      first_load = true;
-    }
-        //.style("opacity", 0.7);
+ if(first_load == false)
+ {
+  d3.selectAll(".cities")
+    .transition().duration(1000)
+    .attr("r", 3);
+  first_load = true;
+  }
 }
