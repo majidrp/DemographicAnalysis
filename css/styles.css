@@ -52,9 +52,9 @@ h3{
 }
 
 .cities{
-  fill: #fff;
+  fill: transparent;
   stroke-width: 1px;
-  stroke: #000;
+  stroke: #e0e0e0;
 }
 
 .d3-tip-cities {
