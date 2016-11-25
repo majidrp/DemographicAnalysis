@@ -55,7 +55,6 @@ city,lat,lon
 "Las Vegas, Nevada",36.1699,-115.1398
 "Lewiston, Idaho",46.4004,-117.0012
 "Lincoln, Nebraska",40.8258,-96.6852
-"Long Beach, California",33.7701,-118.1937
 "Los Angeles, California",34.0522,-118.2437
 "Louisville, Kentucky",38.2527,-85.7585
 "Manchester, New Hampshire",42.9956,-71.4548
@@ -63,6 +62,7 @@ city,lat,lon
 "Miami, Florida",25.7617,-80.1918
 "Milwaukee, Wisconsin",43.0389,-87.9065
 "Minneapolis, Minnesota",44.9778,-93.2650
+"Moab, Utah",38.5733,-109.5498
 "Mobile, Alabama",30.6954,-88.0399
 "Montgomery, Alabama",32.3668,-86.3000
 "Montpelier, Vermont",44.2601,-72.5754
@@ -82,7 +82,6 @@ city,lat,lon
 "Providence, Rhode Island",41.8240,-71.4128
 "Raleigh, North Carolina",35.7796,-78.6382
 "Reno, Nevada",39.5296,-119.8138
-"Richfield, Utah",38.7725,-112.0841
 "Richmond, Virgina",37.5407,-77.4360
 "Roanoke, Virginia",37.2710,-79.9414
 "Sacramento, California",38.5816,-121.4944
