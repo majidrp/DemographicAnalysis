@@ -36,7 +36,8 @@
 
     <h3>About the data</h3>
 
-    <p>The data was downloaded from the United States Census Bureau for their <a target="_blank" href="http://factfinder.census.gov/">American Community Survey</a>. </p>
+    <p>The data was downloaded from the United States Census Bureau's
+      <a target="_blank" href="http://factfinder.census.gov/">American Community Survey</a>. </p>
 
     <blockquote>
       The American Community Survey helps local officials, community leaders and businesses understand
@@ -44,6 +45,19 @@
       about the American people and workforce.
       <br><div id="quote-source">United States Census Bureau</div>
     </blockquote>
+
+    <p>The Census Bureau provides the data in easy .csv format with the info we need from
+      2010-2015 with the appropriate categories. The only “data cleanup” that needs to
+      be done is to turn the columns of the data selections/attributes into percentages
+      so that we can perform statistical analysis on those columns to give the user appropriate numbers.</p>
+
+
+    <p>After calculating the percentages for the year in question, the percentages
+    are multiplied together for each attribute that the user selects. For example,
+    if a user chooses males 18-34 who are divorced, the program goes through and
+    calculates the percentage of the population that fits these attributes. It then
+    takes this percentage and multiplies it by 100, which is telling the user
+    the number of people out of 100 in that location that fit those attributes. </p>
 
     <h3>How to use this site</h3>
 
