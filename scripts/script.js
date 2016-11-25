@@ -19,8 +19,14 @@ var cities_file = DATA_BASE_DIR + "major_cities.csv";
 var mapSVG = document.getElementById("#map");
 
 var window_width = window.innerWidth;
+var width_map = window_width - 400;
 
-var width = 1400,//window_width * percent_width,
+if(width_map < 400)
+{
+  width_map = 1400;
+}
+
+var width = width_map,//window_width * percent_width,
     height = 750,
     active = d3.select(null);
 
