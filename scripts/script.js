@@ -3,7 +3,7 @@ var states_data = [];
 var counties_data = [];
 
 var color = null;
-var color_array = ["#E5BF00", "#BF1F00"];
+var color_array = ["#fbb702", "#BF1F00"];
 var first_load = false;
 
 Array.prototype.insert = function(index, item)
