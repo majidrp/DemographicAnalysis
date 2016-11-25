@@ -54,13 +54,15 @@ h3{
 
 .cities{
   fill: transparent;
+  font-family: "Lato";
   stroke-width: 1px;
-  stroke: #fff;
+  stroke: #e0e0e0;
 }
 
 .state-tooltip-title{
   font-size: 14px;
   font-weight: 700;
+  font-family: "Lato";
   color: #e0e0e0;
   text-align: center;
 }
@@ -101,6 +103,7 @@ h3{
   padding: 8px;
   background: rgba(0, 0, 0, 0.8);
   color: #e0e0e0;
+  font-family: "Lato";
   border-radius: 2px;
   font-size: 10px;
   border-radius: 10px;
