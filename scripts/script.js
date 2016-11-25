@@ -4,6 +4,7 @@ var counties_data = [];
 
 var color = null;
 var color_array = ["#E5BF00", "#E0AD00", "#DC9B00", "D88900", "D47700", "CF6600", "#CB5400", "#C74200", "#C33000", "#BF1F00"];
+var first_load = false;
 
 Array.prototype.insert = function(index, item)
 {
@@ -96,7 +97,7 @@ d3.json(us_json_file, function(error, us)
         .selectAll(".cities").data(city).enter()
         .append("circle")
         .attr("id", function(d) {return d["city"];})
-        .attr("r", 3)
+        .attr("r", 0)
         .attr("cx", function(d){
             var loc = [+d["lon"], +d["lat"]];
             return projection(loc)[0];
@@ -549,5 +550,14 @@ function colorMap(year){
               return "#aaa";
             }
         });
+
+    if(first_load == false)
+    {
+      d3.selectAll(".cities")
+        .transition().duration(1000)
+        .attr("r", 3);
+
+      first_load = true;
+    }
         //.style("opacity", 0.7);
 }
