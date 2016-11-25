@@ -53,7 +53,7 @@ var state_tip = d3.tip()
                  }
                  else
                  {
-                   var value = states_data[curr_year][d.id * 1000]["Value"] + '%';
+                   var value = states_data[curr_year][d.id * 1000]["Value"].toFixed(2) + '%';
                    var pop = NumberWithCommas(states_data[curr_year][d.id * 1000]["Total"]);
                    var num = NumberWithCommas(parseInt(states_data[curr_year][d.id * 1000]["Value"]/100 * states_data[curr_year][d.id * 1000]["Total"]));
                  }
@@ -81,7 +81,7 @@ var county_tip = d3.tip()
                 }
                 else
                 {
-                  var value = counties_data[curr_year][d.id]["Value"] + '%';
+                  var value = counties_data[curr_year][d.id]["Value"].toFixed(2) + '%';
                   var pop = NumberWithCommas(counties_data[curr_year][d.id]["Total"]);
                   var num = NumberWithCommas(parseInt(counties_data[curr_year][d.id]["Value"]/100 * counties_data[curr_year][d.id]["Total"]));
                 }
