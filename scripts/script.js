@@ -536,10 +536,12 @@ function colorMap(year){
                 //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
 
     d3.select("#stateg").selectAll("path")
+        .transition().duration(1000)
         .style("fill", function(d){
+            if(d.id >= 72) return "#aaa";
             var val = states_data[year][((d.id)*1000)]["Value"];
             //val = val * (100 / 79.28);
-            console.log("id=", d.id, ", val=", val);
+            //console.log("id=", d.id, ", val=", val);
             if (val != -1){
               return color(val);
             }
