@@ -2,6 +2,7 @@ body{
   font-family: "Lato";
   background-image: url("../background.png");
   background-repeat: repeat;
+  font-size: 15.5px;
 }
 
 h1 {
