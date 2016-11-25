@@ -50,7 +50,7 @@ var county_tip = d3.tip()
 
 
 var projection = d3.geoAlbersUsa()
-    .scale(width)
+    .scale(window_width - 100)
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
