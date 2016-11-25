@@ -58,6 +58,44 @@ h3{
   stroke: #fff;
 }
 
+.state-tooltip-title{
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.state-label-P{
+  color: red;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.state-value-P{
+  color: white;
+  font-size: 10px;
+  font-weight: normal;
+}
+
+.county-tooltip-title{
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.county-label-P{
+  color: red;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.county-value-P{
+  color: white;
+  font-size: 10px;
+  font-weight: normal;
+}
+
 .d3-tip-cities {
   line-height: 1;
   font-weight: bold;
@@ -74,7 +112,7 @@ h3{
   padding: 12px;
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
-  border-radius: 2px;
+  border-radius: 10px;
   font-size: 14px;
 }
 

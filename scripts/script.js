@@ -5,11 +5,17 @@ var counties_data = [];
 var color = null;
 var color_array = ["#fbb702", "#BF1F00"];
 var first_load = false;
+var curr_year = 0;
 
 Array.prototype.insert = function(index, item)
 {
   this.splice(index, 0, item);
 };
+
+function NumberWithCommas(x)
+{
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 //var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
 var DATA_BASE_DIR = "/Data/" // For "local" hosting
@@ -39,14 +45,56 @@ var state_tip = d3.tip()
                .attr("class", "d3-tip")
                .offset([-8, 0])
                .html(function(d) {
-                 return states_data[2015][d.id * 1000]["Geo"]; });
+                 if(curr_year == 0)
+                 {
+                   var value = "N/A";
+                   var pop = "N/A";
+                   var num = "N/A";
+                 }
+                 else
+                 {
+                   var value = states_data[curr_year][d.id * 1000]["Value"] + '%';
+                   var pop = NumberWithCommas(states_data[curr_year][d.id * 1000]["Total"]);
+                   var num = NumberWithCommas(parseInt(states_data[curr_year][d.id * 1000]["Value"]/100 * states_data[curr_year][d.id * 1000]["Total"]));
+                 }
+                 var str = '<div class="state-tooltip-title">' +
+                 states_data[2015][d.id * 1000]["Geo"] + '</div><br/>'
+                 + '<span class=state-label-P>Percentage: </span>'
+                 + '<span class=state-value-P>' + value + '</span><br/>'
+                 + '<span class=state-label-P>Total Population: </span>'
+                 + '<span class=state-value-P>' + pop + '</span><br/>'
+                 + '<span class=state-label-P>Matching Population: </span>'
+                 + '<span class=state-value-P>' + num + '</span>';
+                 return str;
+               });
+
 
 var county_tip = d3.tip()
-               .attr("class", "d3-tip")
-               .offset([-8, 0])
-               .html(function(d) {
-                 return states_data[2015][d.id]["Geo"]; });
-
+              .attr("class", "d3-tip")
+              .offset([-8, 0])
+              .html(function(d) {
+                if(curr_year == 0)
+                {
+                  var value = "N/A";
+                  var pop = "N/A";
+                  var num = "N/A";
+                }
+                else
+                {
+                  var value = counties_data[curr_year][d.id]["Value"] + '%';
+                  var pop = NumberWithCommas(counties_data[curr_year][d.id]["Total"]);
+                  var num = NumberWithCommas(parseInt(counties_data[curr_year][d.id]["Value"]/100 * counties_data[curr_year][d.id]["Total"]));
+                }
+                var str = '<div class="county-tooltip-title">' +
+                counties_data[2015][d.id * 1000]["Geo"] + '</div><br/>'
+                + '<span class=county-label-P>Percentage: </span>'
+                + '<span class=county-value-P>' + value + '</span><br/>'
+                + '<span class=county-label-P>Total Population: </span>'
+                + '<span class=county-value-P>' + pop + '</span><br/>'
+                + '<span class=county-label-P>Matching Population: </span>'
+                + '<span class=county-value-P>' + num + '</span>';
+                return str;
+              });
 
 var projection = d3.geoAlbersUsa()
     .scale(Math.min(window_width - 100, 1500))
@@ -71,7 +119,8 @@ svg.append("rect")
     .on("click", reset);
 
 svg.call(city_tip);
-
+svg.call(state_tip);
+svg.call(county_tip);
 
 var g = svg.append("g");
 
@@ -84,7 +133,9 @@ d3.json(us_json_file, function(error, us)
     .attr("d", path)
     .attr("class", "county-boundary")
     .attr("id", function(d){return d.id})
-    .on("click", reset);
+    .on("click", reset)
+    .on("mouseover", function(d) {county_tip.show(d);})
+    .on("mouseout", function(d) {county_tip.hide(d);});
 
    g.append("g")
     .attr("id", "stateg")
@@ -337,6 +388,8 @@ function UpdateData()
   var raceValues = d3.selectAll('input[class="race_checkbox"]:checked').nodes();
   var marValues = d3.selectAll('input[class="mar_checkbox"]:checked').nodes();
   var ages = d3.select("#age-slider").property("value").split(",");
+
+  curr_year = year;
 
   // Gets the range of ages from the slider
   if(ages[0] == ages[1])
