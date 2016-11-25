@@ -58,7 +58,7 @@ var state_tip = d3.tip()
                    var num = NumberWithCommas(parseInt(states_data[curr_year][d.id * 1000]["Value"]/100 * states_data[curr_year][d.id * 1000]["Total"]));
                  }
                  var str = '<div class="state-tooltip-title">' +
-                 states_data[2015][d.id * 1000]["Geo"] + '</div><br/>'
+                 states_data[2015][d.id * 1000]["Geo"] + '</div>'
                  + '<span class=state-label-P>Percentage: </span>'
                  + '<span class=state-value-P>' + value + '</span><br/>'
                  + '<span class=state-label-P>Total Population: </span>'
@@ -86,7 +86,7 @@ var county_tip = d3.tip()
                   var num = NumberWithCommas(parseInt(counties_data[curr_year][d.id]["Value"]/100 * counties_data[curr_year][d.id]["Total"]));
                 }
                 var str = '<div class="county-tooltip-title">' +
-                counties_data[2015][d.id * 1000]["Geo"] + '</div><br/>'
+                counties_data[2015][d.id * 1000]["Geo"] + '</div>'
                 + '<span class=county-label-P>Percentage: </span>'
                 + '<span class=county-value-P>' + value + '</span><br/>'
                 + '<span class=county-label-P>Total Population: </span>'
