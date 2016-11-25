@@ -39,8 +39,7 @@ var state_tip = d3.tip()
                .attr("class", "d3-tip")
                .offset([-8, 0])
                .html(function(d) {
-                 years = Object.keys(states_data);
-                 return states_data[years[0]][d.id]["Geo"]; });
+                 return states_data[2015][d.id * 1000]["Geo"]; });
 
 var county_tip = d3.tip()
                .attr("class", "d3-tip")
@@ -96,7 +95,9 @@ d3.json(us_json_file, function(error, us)
     .attr("d", path)
     .attr("class", "state")
     .attr("id", function(d){return d.id*1000})
-    .on("click", clicked);
+    .on("click", clicked)
+    .on("mouseover", function(d) {state_tip.show(d);})
+    .on("mouseout", function(d) {state_tip.hide(d);});
 
     d3.csv(cities_file, function(error, city)
     {
@@ -114,8 +115,8 @@ d3.json(us_json_file, function(error, us)
             return projection(loc)[1];
        })
        .attr("class", "cities")
-       .on("mouseover", city_tip.show)
-       .on("mouseout", city_tip.hide);
+       .on("mouseover", function(d) {city_tip.show(d);})
+       .on("mouseout", function(d) {city_tip.hide(d);});
     });
 
    g.append("path")
