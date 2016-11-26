@@ -5,8 +5,9 @@ function DrawAxis()
 {
   var svg = d3.select("#dist-plot")
   margin = {"left":10, "right": 15, "top":10, "bottom":30};
+  var window_width = window.innerWidth;
   var height = 300;
-  var width = 1100;
+  var width = window_width - 400;
   var width = width - margin.left - margin.right;
   var height = height - margin.top - margin.bottom;
 

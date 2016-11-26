@@ -97,14 +97,14 @@
 */
 #age .theme-green .back-bar .selected-bar {
   border-radius: 2px;
-  background-color: #981E00;
-  background-image: -moz-linear-gradient(top, #981E00, #9A371F);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#981E00), to(#9A371F));
-  background-image: -webkit-linear-gradient(top, #981E00, #9A371F);
-  background-image: -o-linear-gradient(top, #981E00, #9A371F9A371F);
-  background-image: linear-gradient(to bottom, #981E00, #9A371F);
+  background-color: #CF6600;
+  background-image: -moz-linear-gradient(top, #CF6600, #D88900);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#CF6600), to(#D88900));
+  background-image: -webkit-linear-gradient(top, #CF6600, #D88900);
+  background-image: -o-linear-gradient(top, #CF6600, #D88900);
+  background-image: linear-gradient(to bottom, #CF6600, #D88900);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbdfade', endColorstr='#ff9A371F', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffCF6600', endColorstr='#ffD88900', GradientType=0);
 }
 
 /*
