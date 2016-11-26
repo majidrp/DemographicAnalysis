@@ -6,6 +6,8 @@ var color = null;
 var color_array = ["#fbb702", "#BF1F00"];
 var first_load = false;
 var curr_year = 0;
+var max_state = null;
+var max_county = null;
 
 Array.prototype.insert = function(index, item)
 {
@@ -616,9 +618,9 @@ function colorMap(year){
 
   var state_array = d3.values(states_data[year]);
   var county_array = d3.values(counties_data[year]);
-  var state_max = d3.max(state_array, function(d){return d["Value"];});
-  var county_max = d3.max(county_array, function(d){return d["Value"];});
-  var max_val = Math.max(state_max, county_max);
+  max_state = d3.max(state_array, function(d){return d["Value"];});
+  max_county = d3.max(county_array, function(d){return d["Value"];});
+  var max_val = Math.max(max_state, max_county);
 
   color = d3.scaleLinear().clamp(true)
                 .domain([0, max_val])
