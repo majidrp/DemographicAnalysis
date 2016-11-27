@@ -1,11 +1,23 @@
 var percent_width = 0.7;
 var states_data = [];
 var counties_data = [];
+var filled_array = [];
+var color = null;
+var color_array = ["#fbb702", "#BF1F00"];
+var first_load = false;
+var curr_year = 0;
+var max_state = null;
+var max_county = null;
 
 Array.prototype.insert = function(index, item)
 {
   this.splice(index, 0, item);
 };
+
+function NumberWithCommas(x)
+{
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 //var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
 var DATA_BASE_DIR = "/Data/" // For "local" hosting
@@ -15,8 +27,14 @@ var cities_file = DATA_BASE_DIR + "major_cities.csv";
 var mapSVG = document.getElementById("#map");
 
 var window_width = window.innerWidth;
+var width_map = window_width - 400;
 
-var width = 1400,//window_width * percent_width,
+if(width_map < 400)
+{
+  width_map = 1400;
+}
+
+var width = width_map,//window_width * percent_width,
     height = 750,
     active = d3.select(null);
 
@@ -29,18 +47,59 @@ var state_tip = d3.tip()
                .attr("class", "d3-tip")
                .offset([-8, 0])
                .html(function(d) {
-                 years = Object.keys(states_data);
-                 return states_data[years[0]][d.id]["Geo"]; });
+                 if(curr_year == 0)
+                 {
+                   var value = "N/A";
+                   var pop = "N/A";
+                   var num = "N/A";
+                 }
+                 else
+                 {
+                   var value = states_data[curr_year][d.id * 1000]["Value"].toFixed(2) + '%';
+                   var pop = NumberWithCommas(states_data[curr_year][d.id * 1000]["Total"]);
+                   var num = NumberWithCommas(parseInt(states_data[curr_year][d.id * 1000]["Value"]/100 * states_data[curr_year][d.id * 1000]["Total"]));
+                 }
+                 var str = '<div class="state-tooltip-title">' +
+                 states_data[2015][d.id * 1000]["Geo"] + '</div>'
+                 + '<span class=state-label-P>Percentage: </span>'
+                 + '<span class=state-value-P>' + value + '</span><br/>'
+                 + '<span class=state-label-P>Total Population: </span>'
+                 + '<span class=state-value-P>' + pop + '</span><br/>'
+                 + '<span class=state-label-P>Matching Population: </span>'
+                 + '<span class=state-value-P>' + num + '</span>';
+                 return str;
+               });
+
 
 var county_tip = d3.tip()
-               .attr("class", "d3-tip")
-               .offset([-8, 0])
-               .html(function(d) {
-                 return states_data[2015][d.id]["Geo"]; });
-
+              .attr("class", "d3-tip")
+              .offset([-8, 0])
+              .html(function(d) {
+                if(curr_year == 0)
+                {
+                  var value = "N/A";
+                  var pop = "N/A";
+                  var num = "N/A";
+                }
+                else
+                {
+                  var value = counties_data[curr_year][d.id]["Value"].toFixed(2) + '%';
+                  var pop = NumberWithCommas(counties_data[curr_year][d.id]["Total"]);
+                  var num = NumberWithCommas(parseInt(counties_data[curr_year][d.id]["Value"]/100 * counties_data[curr_year][d.id]["Total"]));
+                }
+                var str = '<div class="county-tooltip-title">' +
+                counties_data[2015][d.id * 1000]["Geo"] + '</div>'
+                + '<span class=county-label-P>Percentage: </span>'
+                + '<span class=county-value-P>' + value + '</span><br/>'
+                + '<span class=county-label-P>Total Population: </span>'
+                + '<span class=county-value-P>' + pop + '</span><br/>'
+                + '<span class=county-label-P>Matching Population: </span>'
+                + '<span class=county-value-P>' + num + '</span>';
+                return str;
+              });
 
 var projection = d3.geoAlbersUsa()
-    .scale(width)
+    .scale(Math.min(window_width - 100, 1500))
     .translate([width / 2, height / 2]);
 
 var path = d3.geoPath()
@@ -49,7 +108,8 @@ var path = d3.geoPath()
 var svg = d3.select("body").append("svg")
 	.attr("width", width)
 	.attr("height", height)
-  .attr("id", "us_map");
+  .attr("id", "us_map")
+  .style("border-radius", "10px");
 
 var zoom = d3.zoom()
     .scaleExtent([1, 8]);
@@ -61,42 +121,66 @@ svg.append("rect")
     .on("click", reset);
 
 svg.call(city_tip);
-
-
-
+svg.call(state_tip);
+svg.call(county_tip);
 
 var g = svg.append("g");
 
 d3.json(us_json_file, function(error, us)
 {
    g.append("g")
+    .attr("id", "countyg")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
     .attr("d", path)
     .attr("class", "county-boundary")
     .attr("id", function(d){return d.id})
-    .on("click", reset);
+    .on("click", reset)
+    .on("mouseover", function(d) {county_tip.show(d);})
+    .on("mouseout", function(d) {county_tip.hide(d);})
+    .on("contextmenu", function (d, i) {
+        d3.event.preventDefault();});
 
    g.append("g")
     .attr("id", "stateg")
-    //.attr("id", "states")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
     .attr("d", path)
     .attr("class", "state")
-    .attr("id", function(d){return d.id*1000})
-    .on("click", clicked);
+    .attr("id", function(d){return d.id * 1000;})
+    .on("click", clicked)
+    .on("mouseover", function(d) {state_tip.show(d);})
+    .on("mouseout", function(d) {state_tip.hide(d);})
+    .on("contextmenu", function (d, i) {
+        d3.event.preventDefault();
+        if(filled_array[d.id * 1000] == true && curr_year != 0)
+        {
+          d3.select(this).style("fill", "transparent");
+          filled_array[d.id * 1000] = false;
+        }
+        else
+        {
+          if(curr_year == 0)
+          {
+
+          }
+          else
+          {
+            d3.select(this).style("fill", color(states_data[curr_year][d.id * 1000]["Value"]));
+            filled_array[d.id * 1000] = true;
+          }
+        }
+    });
 
     d3.csv(cities_file, function(error, city)
     {
-      //svg.append("g")
       d3.select("#stateg")
         .selectAll(".cities").data(city).enter()
         .append("circle")
         .attr("id", function(d) {return d["city"];})
-        .attr("r", 3)
+        .attr("r", 0)
         .attr("cx", function(d){
             var loc = [+d["lon"], +d["lat"]];
             return projection(loc)[0];
@@ -106,22 +190,25 @@ d3.json(us_json_file, function(error, us)
             return projection(loc)[1];
        })
        .attr("class", "cities")
-       .on("mouseover", city_tip.show)
-       .on("mouseout", city_tip.hide);
-    });
+       .on("mouseover", function(d) {city_tip.show(d);})
+       .on("mouseout", function(d) {city_tip.hide(d);})
+       .on("contextmenu", function (d, i) {
+          d3.event.preventDefault();
+       });});
 
    g.append("path")
     .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
     .attr("id", "state-borders")
-    .attr("d", path);
+    .attr("d", path)
+    .on("contextmenu", function (d, i) {
+        d3.event.preventDefault();
+    });
 });
-
-
 
 function clicked(d)
 {
   if(active.node() === this)
-    {return reset();}
+      {return reset();}
 
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
@@ -153,10 +240,10 @@ function reset()
 
 // If the drag behavior prevents the default click,
 // also stop propagation so we don’t click-to-zoom.
-function stopped()
-{
-  if (d3.event.defaultPrevented) d3.event.stopPropagation();
-}
+// function stopped()
+// {
+//   if (d3.event.defaultPrevented) d3.event.stopPropagation();
+// }
 
 function CalculatePopulation(ages, genValues, eduValues, raceValues, marValues)
 {
@@ -331,6 +418,8 @@ function UpdateData()
   var marValues = d3.selectAll('input[class="mar_checkbox"]:checked').nodes();
   var ages = d3.select("#age-slider").property("value").split(",");
 
+  curr_year = year;
+
   // Gets the range of ages from the slider
   if(ages[0] == ages[1])
   {
@@ -385,7 +474,9 @@ function UpdateData()
 
   // Calls the appropriate functions for the check boxes
   CalculatePopulation(ages, genValues, eduValues, raceValues, marValues);
-  BubbleChart(year);
+  //console.log(states_data[2015][1000]["Value"]);
+  colorMap(year);
+  //BubbleChart(year);
 }
 
 function LoadData()
@@ -431,7 +522,6 @@ function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels,
       var geo_data = [];
       for(var ind = 0; ind < d.length; ind++)
       {
-
         var local_geo = parseInt(d[ind].id);
         var gen_data = [];
         for(var gen = 0; gen < genders.length; gen++)
@@ -462,6 +552,8 @@ function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels,
           {
             geo_data[local_geo][other_labels[i]] = +d[ind][other_labels[i]];
           }
+
+          filled_array[local_geo] = true;
         }
       }
       year_data[years[temp]] = geo_data;
@@ -520,4 +612,54 @@ function ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_label
     });
   }
   counties_data = year_data;
+}
+
+function colorMap(year){
+
+  var state_array = d3.values(states_data[year]);
+  var county_array = d3.values(counties_data[year]);
+  max_state = d3.max(state_array, function(d){return d["Value"];});
+  max_county = d3.max(county_array, function(d){return d["Value"];});
+  var max_val = Math.max(max_state, max_county);
+
+  color = d3.scaleLinear().clamp(true)
+                .domain([0, max_val])
+                .range(color_array);
+                //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
+
+    d3.select("#stateg").selectAll("path")
+        .transition().duration(1500)
+        .style("fill", function(d){
+            if(d.id >= 72) return "#aaa";
+            var val = states_data[year][((d.id)*1000)]["Value"];
+            return color(val);
+        });
+
+    d3.select("#countyg").selectAll("path")
+        .transition().duration(1500)
+        .style("fill", function(d){
+            //console.log("id=", d.id);
+            try {
+                  var val2 = counties_data[year][d.id]["Value"];
+                  //console.log("id=", d.id, ", val=", val2);
+                  if (val2 != -1){
+                    return color(val2);
+                  }
+                  else{
+                    return "#aaa";
+                  }
+            }
+            catch(err) {
+                return "steelblue";
+            }
+        });
+
+    if(first_load == false)
+    {
+      d3.selectAll(".cities")
+        .transition().duration(1500)
+        .attr("r", 3);
+
+      first_load = true;
+    }
 }
