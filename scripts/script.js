@@ -210,6 +210,7 @@ function clicked(d)
   if(active.node() === this)
       {return reset();}
 
+  active.style("stroke-width", "0.5px");
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
 
@@ -221,14 +222,16 @@ function clicked(d)
       scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
       translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-  g.style("stroke-width", 1.5 / d3.event.scale + "px");
+  //g.style("stroke-width", 1.5 / d3.event.scale + "px");
   g.transition().duration(1300)
                 .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
   d3.select('body').select('svg').select('rect').call(zoom);
+  active.style("stroke-width", "1.5px");
 }
 
 function reset()
 {
+  active.style("stroke-width", "0.5px");
   active.classed("active", false);
   active = d3.select(null);
 
@@ -642,7 +645,7 @@ function colorMap(year){
             try {
                   var val2 = counties_data[year][d.id]["Value"];
                   //console.log("id=", d.id, ", val=", val2);
-                  if (val2 != -1){
+                  if (val2 > 0){
                     return color(val2);
                   }
                   else{
