@@ -129,6 +129,7 @@ var g = svg.append("g");
 d3.json(us_json_file, function(error, us)
 {
    g.append("g")
+    .attr("id", "countyg")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.counties).features)
     .enter().append("path")
@@ -139,11 +140,10 @@ d3.json(us_json_file, function(error, us)
     .on("mouseover", function(d) {county_tip.show(d);})
     .on("mouseout", function(d) {county_tip.hide(d);})
     .on("contextmenu", function (d, i) {
-    d3.event.preventDefault();});
+        d3.event.preventDefault();});
 
    g.append("g")
     .attr("id", "stateg")
-    //.attr("id", "states")
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
@@ -154,24 +154,24 @@ d3.json(us_json_file, function(error, us)
     .on("mouseover", function(d) {state_tip.show(d);})
     .on("mouseout", function(d) {state_tip.hide(d);})
     .on("contextmenu", function (d, i) {
-    d3.event.preventDefault();
-    if(filled_array[d.id * 1000] == true && curr_year != 0)
-    {
-      d3.select(this).style("fill", "transparent");
-      filled_array[d.id * 1000] = false;
-    }
-    else
-    {
-      if(curr_year == 0)
-      {
+        d3.event.preventDefault();
+        if(filled_array[d.id * 1000] == true && curr_year != 0)
+        {
+          d3.select(this).style("fill", "transparent");
+          filled_array[d.id * 1000] = false;
+        }
+        else
+        {
+          if(curr_year == 0)
+          {
 
-      }
-      else
-      {
-        d3.select(this).style("fill", color(states_data[curr_year][d.id * 1000]["Value"]));
-        filled_array[d.id * 1000] = true;
-      }
-    }
+          }
+          else
+          {
+            d3.select(this).style("fill", color(states_data[curr_year][d.id * 1000]["Value"]));
+            filled_array[d.id * 1000] = true;
+          }
+        }
     });
 
     d3.csv(cities_file, function(error, city)
@@ -193,8 +193,8 @@ d3.json(us_json_file, function(error, us)
        .on("mouseover", function(d) {city_tip.show(d);})
        .on("mouseout", function(d) {city_tip.hide(d);})
        .on("contextmenu", function (d, i) {
-       d3.event.preventDefault();
-     });});
+          d3.event.preventDefault();
+       });});
 
    g.append("path")
     .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -202,13 +202,13 @@ d3.json(us_json_file, function(error, us)
     .attr("d", path)
     .on("contextmenu", function (d, i) {
         d3.event.preventDefault();
-      });
+    });
 });
 
 function clicked(d)
 {
   if(active.node() === this)
-    {return reset();}
+      {return reset();}
 
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
@@ -240,10 +240,10 @@ function reset()
 
 // If the drag behavior prevents the default click,
 // also stop propagation so we don’t click-to-zoom.
-function stopped()
-{
-  if (d3.event.defaultPrevented) d3.event.stopPropagation();
-}
+// function stopped()
+// {
+//   if (d3.event.defaultPrevented) d3.event.stopPropagation();
+// }
 
 function CalculatePopulation(ages, genValues, eduValues, raceValues, marValues)
 {
@@ -624,7 +624,7 @@ function colorMap(year){
 
   color = d3.scaleLinear().clamp(true)
                 .domain([0, max_val])
-                .range(color_array); //green, Alex's Tutorial
+                .range(color_array);
                 //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
 
     d3.select("#stateg").selectAll("path")
@@ -632,13 +632,25 @@ function colorMap(year){
         .style("fill", function(d){
             if(d.id >= 72) return "#aaa";
             var val = states_data[year][((d.id)*1000)]["Value"];
-            //val = val * (100 / 79.28);
-            //console.log("id=", d.id, ", val=", val);
-            if (val != -1){
-              return color(val);
+            return color(val);
+        });
+
+    d3.select("#countyg").selectAll("path")
+        .transition().duration(1500)
+        .style("fill", function(d){
+            //console.log("id=", d.id);
+            try {
+                  var val2 = counties_data[year][d.id]["Value"];
+                  //console.log("id=", d.id, ", val=", val2);
+                  if (val2 != -1){
+                    return color(val2);
+                  }
+                  else{
+                    return "#aaa";
+                  }
             }
-            else{
-              return "#aaa";
+            catch(err) {
+                return "steelblue";
             }
         });
 
@@ -650,5 +662,4 @@ function colorMap(year){
 
       first_load = true;
     }
-        //.style("opacity", 0.7);
 }
