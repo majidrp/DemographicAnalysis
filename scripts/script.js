@@ -650,7 +650,7 @@ function colorMap(year){
                   }
             }
             catch(err) {
-                return "steelblue";
+                return "#aaa";
             }
         });
 
