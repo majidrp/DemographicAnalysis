@@ -8,7 +8,7 @@ function BubbleChart(year)
   var nodes = [];
   var window_width = window.innerWidth;
   var height = 300;
-  var width = 800;//window_width - 400;
+  var width = 1400;//window_width - 400;
   var width = width - margin.left - margin.right;
   var height = height - margin.top - margin.bottom;
 
@@ -30,13 +30,13 @@ function BubbleChart(year)
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
-  var forceStrength = 0.05;
+  var forceStrength = 0.03;
   var svg = document.getElementById("#bubble-chart");
   var midHeight = (height - margin.top + margin.bottom)/2;
 
   function Charge(d)
   {
-    return -Math.pow(d.radius, 2.1) * forceStrength;
+    return -Math.pow(d.radius, 2) * forceStrength;
   }
 
   // Returns the value of d.x
@@ -59,10 +59,9 @@ function BubbleChart(year)
   function createNodes()
   {
     var maxVal = d3.max(globalArray, function(d) {return d["value"];});
-    var maxVal = maxVal * 1.1;
     var radiusScale = d3.scalePow()
                         .exponent(0.75)
-                        .range([10, 50])
+                        .range([10, 40])
                         .domain([0, maxVal]);
 
     var myNodes = globalArray.map(function(d) {
