@@ -26,6 +26,17 @@ function DrawAxis()
 
 function BubbleChart(year)
 {
+  function rescaleAxis()
+  {
+    xScale.domain([0, max_state]);
+    var svg = d3.select("#dist-plot").selectAll("axis")
+                .transition().duration(1500).ease("sin-in-out")
+                .call(xScale);
+  }
+
+  rescaleAxis();
+
+
   var forceStrength = 0.03;
   var svg = document.getElementById("#dist-plot");
   var rect = svg.getBoundingClientRect();
