@@ -10,6 +10,7 @@ function BubbleChart(year)
   var height = 500;
   var width = 1200;//window_width - 400;
   var width = width - margin.left - margin.right;
+  console.log("width = ", width);
   var height = height - margin.top - margin.bottom;
 
   var x_scale = d3.scaleLinear()
@@ -24,7 +25,6 @@ function BubbleChart(year)
   d3.select("#dist-plot").append("svg").attr("width", width).attr("height", height).attr("id","bubble-chart");
 
   var svg = d3.select("#bubble-chart");
-
 
   svg.append("g").classed("axis", true).attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")").call(xAxis);
 
@@ -161,3 +161,6 @@ function BubbleChart(year)
 
   chart();
 }
+
+var year = 2015;
+var myBubbleChart = BubbleChart(year);
