@@ -1,6 +1,3 @@
-var globalArray = [{"id":"0", "value":65},{"id":"1", "value":20},{"id":"2", "value":75},{"id":"3", "value":3},{"id":"4", "value":40},{"id":"5", "value":13},{"id":"6", "value":94},{"id":"7", "value":83},{"id":"8", "value":50},{"id":"9", "value":87}];
-console.log(globalArray);
-
 function BubbleChart(year)
 {
   margin = {"left":60, "right": 70, "top":10, "bottom":30};
@@ -58,23 +55,26 @@ function BubbleChart(year)
 
   function createNodes()
   {
-    var maxVal = d3.max(globalArray, function(d) {return d["value"];});
+    var state_array = d3.values(states_data[year]);
+    var maxVal = d3.max(state_array, function(d) {var temp = (+d["Value"]) * (+d["Total"]); return temp;});
     var radiusScale = d3.scalePow()
                         .exponent(0.75)
                         .range([10, 40])
                         .domain([0, maxVal]);
 
-    var myNodes = globalArray.map(function(d) {
+    var myNodes = states_data[year].map(function(d) {
+      var rad = (+d["Value"]) * (+d["Total"]);
       return{
-        id: d.id,
-        radius: radiusScale(+d.value),
-        value: +d.value,
+        id: d["Geo"],
+        radius: radiusScale(rad),
+        pop: rad,
+        value: +d["Value"],
         x: Math.random() * 100,
         y: Math.random() * 300
       };
     });
 
-    myNodes.sort(function(a,b) {return b.value - a.value});
+    myNodes.sort(function(a,b) {return b.pop - a.pop});
 
     return myNodes;
   }
@@ -105,7 +105,7 @@ function BubbleChart(year)
    */
   var chart = function chart() {
     // convert raw data into nodes data
-    var nodes = createNodes(globalArray);
+    var nodes = createNodes(states_data);
 
     // Create a SVG element inside the provided selector
     // with desired size.
@@ -113,7 +113,7 @@ function BubbleChart(year)
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
-                 .data(nodes, function (d) { return d.id; });
+                 .data(nodes, function (d, i) {console.log(d, i); return d.id; });
 
     // Create new circle elements each with class `bubble`.
     // There will be one circle.bubble for each object in the nodes array.

@@ -480,6 +480,7 @@ function UpdateData()
   //console.log(states_data[2015][1000]["Value"]);
   colorMap(year);
   //BubbleChart(year);
+  BubbleChart(year);
 }
 
 function LoadData()
