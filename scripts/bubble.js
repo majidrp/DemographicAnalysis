@@ -3,12 +3,12 @@ console.log(globalArray);
 
 function BubbleChart(year)
 {
-  margin = {"left":20, "right": 25, "top":10, "bottom":30};
+  margin = {"left":60, "right": 70, "top":10, "bottom":30};
   var bubbles = null;
   var nodes = [];
   var window_width = window.innerWidth;
-  var height = 500;
-  var width = 1200;//window_width - 400;
+  var height = 300;
+  var width = 800;//window_width - 400;
   var width = width - margin.left - margin.right;
   var height = height - margin.top - margin.bottom;
 
@@ -43,13 +43,13 @@ function BubbleChart(year)
   // "nodeYearPos" in his code
   function Pos_X(d)
   {
-    return globalArray[d.id]["value"];
+    return xScale(d.value);
   }
 
 
   var simulation = d3.forceSimulation()
                      .velocityDecay(0.2)
-                     .force('x', d3.forceX().strength(forceStrength).x(xScale(Pos_X)))
+                     .force('x', d3.forceX().strength(forceStrength).x(Pos_X))
                      .force('y', d3.forceY().strength(forceStrength).y(midHeight))
                      .force("charge", d3.forceManyBody().strength(Charge))
                      .on("tick", ticked);
@@ -70,8 +70,8 @@ function BubbleChart(year)
         id: d.id,
         radius: radiusScale(+d.value),
         value: +d.value,
-        x: xScale(Math.random() * 100),
-        y: Math.random() * 700
+        x: Math.random() * 100,
+        y: Math.random() * 300
       };
     });
 
