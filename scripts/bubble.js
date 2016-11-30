@@ -5,6 +5,7 @@ function BubbleChart(year)
 {
   margin = {"left":20, "right": 25, "top":10, "bottom":30};
   var bubbles = null;
+  var nodes = [];
   var window_width = window.innerWidth;
   var height = 500;
   var width = 1200;//window_width - 400;
@@ -79,9 +80,13 @@ function BubbleChart(year)
     return myNodes;
   }
 
+  // Supposed to run the simulation to get the values for the forces
+  // Though it fails in returning the correct values for 'x' and
+  // does not work if you try to use 'xScale' with 'Pos_X' to scale the
+  // correct x position
   function MoveBubbles()
   {
-    simulation.force('x', d3.forceX().strength(forceStrength).x(500));
+    simulation.force('x', d3.forceX().strength(forceStrength).x(Pos_X));
     simulation.alpha(1).restart();
   }
 
