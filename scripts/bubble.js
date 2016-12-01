@@ -24,8 +24,11 @@ function BubbleChart(year)
 
   var svg = d3.select("#bubble-chart");
 
+  //d3.selectAll("#xAxis").attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")").transition().duration(1000).call(xAxis)
 
-  svg.append("g").classed("axis", true).attr("id", "xAxis").attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")").call(xAxis);
+  svg.append("g").attr("id", "xAxis").classed("axis", true).attr("id", "xAxis").attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")");
+
+  d3.selectAll("#xAxis").transition().duration(1000).call(xAxis);
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
