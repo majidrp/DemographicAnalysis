@@ -9,6 +9,8 @@ function BubbleChart(year)
   var width = width - margin.left - margin.right;
   var height = height - margin.top - margin.bottom;
   var state_array = d3.values(states_data[year]);
+  state_array.pop();
+
   var max_per = d3.max(state_array, function(d) {return d.Value;})
 
   var x_scale = d3.scaleLinear()
@@ -32,9 +34,26 @@ function BubbleChart(year)
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
+  var state_tip = d3.tip()
+                 .attr("class", "d3-tip")
+                 .offset([-8, 0])
+                 .html(function(d) {
+                  var value = (+d.val).toFixed(2) + '%';
+                  var pop = NumberWithCommas(d.pop);
+                  var str = '<div class="state-tooltip-title">' +
+                  d.Geo + '</div>'
+                  + '<span class=state-label-P>Percentage: </span>'
+                  + '<span class=state-value-P>' + value + '</span><br/>'
+                  + '<span class=state-label-P>Matching Population: </span>'
+                  + '<span class=state-value-P>' + pop + '</span>';
+                  return str;
+                  });
+
   var forceStrength = 0.03;
   var svg = document.getElementById("#bubble-chart");
   var midHeight = (height - margin.top + margin.bottom)/2;
+
+  //svg.call(state_tip);
 
   function Charge(d)
   {
@@ -66,14 +85,15 @@ function BubbleChart(year)
                         .range([10, 40])
                         .domain([0, maxVal]);
 
-    var myNodes = state_array.map(function(d) {
+    var myNodes = state_array.map(function(d, i) {
       var rad = (+d["Value"]) * (+d["Total"]);
+      console.log(d, i);
       return{
         id: d["Geo"],
         radius: radiusScale(rad),
         pop: rad,
         value: +d["Value"],
-        x: Math.random() * 100,
+        x: Math.random() * 300,
         y: Math.random() * 300
       };
     });
@@ -126,10 +146,15 @@ function BubbleChart(year)
     //  enter selection to apply our transtition to below.
     var bubblesE = bubbles.enter().append("circle")
                           .classed("bubble", true)
-                          .attr('r', 0)
-                          .attr('fill', function(d) {return color(d.value);})
+                          .attr("id", function(d) {return d.id;})
+                          .attr("pop", function(d) {return d.pop;})
+                          .attr("val", function(d) {return d.value;})
                           .attr('stroke', "#000")
-                          .attr('stroke-width', 2);
+                          .attr('stroke-width', 2)
+                          .attr('r', 0)
+                          .attr('fill', function(d) {return color(d.value);});
+//                          .on("mouseover", state_tip.show)
+//                          .on("mouseout", state_tip.hide);
 
     // @v4 Merge the original empty selection and the enter selection
     bubbles = bubbles.merge(bubblesE);
@@ -156,11 +181,18 @@ function BubbleChart(year)
    */
   function ticked()
    {
-      bubbles.attr('cx', function (d, i) {return d.x; })
-             .attr('cy', function (d) { return d.y; });
+      bubbles.attr('cx', function (d) {return d.x; })
+             .attr('cy', function (d) {return d.y; });
    }
 
   //var state_ids = Object.keys(states_data[year]);
 
+
+
   chart();
+}
+
+function UpdateChart(year)
+{
+
 }
