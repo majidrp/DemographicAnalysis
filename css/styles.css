@@ -180,10 +180,10 @@ border-radius: 10px;
 }
 
 #mainDiv{
-  height: 750px;
+  height: 100%;
   float: right;
   top: 49px!important ;
-  position: fixed;
+  position: relative;
   font-family: "Lato";
   overflow: hidden;
   /*border-left: 0px;
