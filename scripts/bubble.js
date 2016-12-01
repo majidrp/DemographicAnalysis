@@ -1,14 +1,11 @@
-var globalArray = [{"id":"0", "value":65},{"id":"1", "value":20},{"id":"2", "value":75},{"id":"3", "value":3},{"id":"4", "value":40},{"id":"5", "value":13},{"id":"6", "value":94},{"id":"7", "value":83},{"id":"8", "value":50},{"id":"9", "value":87}];
-console.log(globalArray);
-
 function BubbleChart(year)
 {
-  margin = {"left":20, "right": 25, "top":10, "bottom":30};
+  margin = {"left":60, "right": 70, "top":10, "bottom":30};
   var bubbles = null;
   var nodes = [];
   var window_width = window.innerWidth;
-  var height = 500;
-  var width = 1200;//window_width - 400;
+  var height = 300;
+  var width = 1400;//window_width - 400;
   var width = width - margin.left - margin.right;
   console.log("width = ", width);
   var height = height - margin.top - margin.bottom;
@@ -30,26 +27,26 @@ function BubbleChart(year)
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
-  var forceStrength = 0.05;
+  var forceStrength = 0.03;
   var svg = document.getElementById("#bubble-chart");
   var midHeight = (height - margin.top + margin.bottom)/2;
 
   function Charge(d)
   {
-    return -Math.pow(d.radius, 2.1) * forceStrength;
+    return -Math.pow(d.radius, 2) * forceStrength;
   }
 
   // Returns the value of d.x
   // "nodeYearPos" in his code
   function Pos_X(d)
   {
-    return globalArray[d.id]["value"];
+    return xScale(d.value);
   }
 
 
   var simulation = d3.forceSimulation()
                      .velocityDecay(0.2)
-                     .force('x', d3.forceX().strength(forceStrength).x(xScale(Pos_X)))
+                     .force('x', d3.forceX().strength(forceStrength).x(Pos_X))
                      .force('y', d3.forceY().strength(forceStrength).y(midHeight))
                      .force("charge", d3.forceManyBody().strength(Charge))
                      .on("tick", ticked);
@@ -58,24 +55,26 @@ function BubbleChart(year)
 
   function createNodes()
   {
-    var maxVal = d3.max(globalArray, function(d) {return d["value"];});
-    var maxVal = maxVal * 1.1;
+    var state_array = d3.values(states_data[year]);
+    var maxVal = d3.max(state_array, function(d) {var temp = (+d["Value"]) * (+d["Total"]); return temp;});
     var radiusScale = d3.scalePow()
                         .exponent(0.75)
-                        .range([10, 50])
+                        .range([10, 40])
                         .domain([0, maxVal]);
 
-    var myNodes = globalArray.map(function(d) {
+    var myNodes = states_data[year].map(function(d) {
+      var rad = (+d["Value"]) * (+d["Total"]);
       return{
-        id: d.id,
-        radius: radiusScale(+d.value),
-        value: +d.value,
-        x: xScale(Math.random() * 100),
-        y: Math.random() * 700
+        id: d["Geo"],
+        radius: radiusScale(rad),
+        pop: rad,
+        value: +d["Value"],
+        x: Math.random() * 100,
+        y: Math.random() * 300
       };
     });
 
-    myNodes.sort(function(a,b) {return b.value - a.value});
+    myNodes.sort(function(a,b) {return b.pop - a.pop});
 
     return myNodes;
   }
@@ -106,7 +105,7 @@ function BubbleChart(year)
    */
   var chart = function chart() {
     // convert raw data into nodes data
-    var nodes = createNodes(globalArray);
+    var nodes = createNodes(states_data);
 
     // Create a SVG element inside the provided selector
     // with desired size.
@@ -114,7 +113,7 @@ function BubbleChart(year)
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
-                 .data(nodes, function (d) { return d.id; });
+                 .data(nodes, function (d, i) {console.log(d, i); return d.id; });
 
     // Create new circle elements each with class `bubble`.
     // There will be one circle.bubble for each object in the nodes array.
