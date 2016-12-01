@@ -477,10 +477,18 @@ function UpdateData()
 
   // Calls the appropriate functions for the check boxes
   CalculatePopulation(ages, genValues, eduValues, raceValues, marValues);
-  //console.log(states_data[2015][1000]["Value"]);
+
   colorMap(year);
-  //BubbleChart(year);
-  BubbleChart(year);
+
+  if(first_load == false)
+  {
+    BubbleChart(year);
+    first_load = true;
+  }
+  else
+  {
+    UpdateChart(year);
+  }
 }
 
 function LoadData()
@@ -664,7 +672,5 @@ function colorMap(year){
       d3.selectAll(".cities")
         .transition().duration(1500)
         .attr("r", 3);
-
-      first_load = true;
     }
 }
