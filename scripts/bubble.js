@@ -4,13 +4,15 @@ function BubbleChart(year)
   var bubbles = null;
   var nodes = [];
   var window_width = window.innerWidth;
-  var height = 300;
+  var height = 400;
   var width = 1400;//window_width - 400;
   var width = width - margin.left - margin.right;
   var height = height - margin.top - margin.bottom;
+  var state_array = d3.values(states_data[year]);
+  var max_per = d3.max(state_array, function(d) {return d.Value;})
 
   var x_scale = d3.scaleLinear()
-                 .domain([0, 100])
+                 .domain([0, max_per * 1.1])
                  .range([margin.left, width - margin.right])
                  .nice();
   xScale = x_scale;
@@ -23,7 +25,7 @@ function BubbleChart(year)
   var svg = d3.select("#bubble-chart");
 
 
-  svg.append("g").classed("axis", true).attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")").call(xAxis);
+  svg.append("g").classed("axis", true).attr("id", "xAxis").attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")").call(xAxis);
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
@@ -55,14 +57,13 @@ function BubbleChart(year)
 
   function createNodes()
   {
-    var state_array = d3.values(states_data[year]);
     var maxVal = d3.max(state_array, function(d) {var temp = (+d["Value"]) * (+d["Total"]); return temp;});
     var radiusScale = d3.scalePow()
                         .exponent(0.75)
                         .range([10, 40])
                         .domain([0, maxVal]);
 
-    var myNodes = states_data[year].map(function(d) {
+    var myNodes = state_array.map(function(d) {
       var rad = (+d["Value"]) * (+d["Total"]);
       return{
         id: d["Geo"],
@@ -74,7 +75,7 @@ function BubbleChart(year)
       };
     });
 
-    myNodes.sort(function(a,b) {return b.pop - a.pop});
+    myNodes.sort(function(a,b) {return b.radius - a.radius});
 
     return myNodes;
   }
@@ -105,7 +106,7 @@ function BubbleChart(year)
    */
   var chart = function chart() {
     // convert raw data into nodes data
-    var nodes = createNodes(states_data);
+    var nodes = createNodes();
 
     // Create a SVG element inside the provided selector
     // with desired size.
@@ -113,7 +114,7 @@ function BubbleChart(year)
 
     // Bind nodes data to what will become DOM elements to represent them.
     bubbles = svg.selectAll('.bubble')
-                 .data(nodes, function (d, i) {console.log(d, i); return d.id; });
+                 .data(nodes, function (d, i) {return d.id;});
 
     // Create new circle elements each with class `bubble`.
     // There will be one circle.bubble for each object in the nodes array.
@@ -123,7 +124,7 @@ function BubbleChart(year)
     var bubblesE = bubbles.enter().append("circle")
                           .classed("bubble", true)
                           .attr('r', 0)
-                          .attr('fill', "#fff")
+                          .attr('fill', function(d) {return color(d.value);})
                           .attr('stroke', "#000")
                           .attr('stroke-width', 2);
 
@@ -152,7 +153,7 @@ function BubbleChart(year)
    */
   function ticked()
    {
-      bubbles.attr('cx', function (d) { return d.x; })
+      bubbles.attr('cx', function (d, i) {return d.x; })
              .attr('cy', function (d) { return d.y; });
    }
 
