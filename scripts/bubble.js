@@ -79,15 +79,14 @@ function BubbleChart(year)
 
   function createNodes()
   {
-    var maxVal = d3.max(state_array, function(d) {var temp = (+d["Value"]) * (+d["Total"]); return temp;});
+    var maxVal = d3.max(state_array, function(d) {var temp = (+d["Value"]/100) * (+d["Total"]); return temp;});
     var radiusScale = d3.scalePow()
                         .exponent(0.75)
                         .range([10, 40])
                         .domain([0, maxVal]);
 
-    var myNodes = state_array.map(function(d, i) {
-      var rad = (+d["Value"]) * (+d["Total"]);
-      console.log(d, i);
+    var myNodes = state_array.map(function(d) {
+      var rad = (+d["Value"]/100) * (+d["Total"]);
       return{
         id: d["Geo"],
         radius: radiusScale(rad),
