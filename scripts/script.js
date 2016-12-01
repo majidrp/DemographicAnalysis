@@ -623,11 +623,12 @@ function colorMap(year){
   var state_array = d3.values(states_data[year]);
   var county_array = d3.values(counties_data[year]);
   max_state = d3.max(state_array, function(d){return d["Value"];});
-  max_county = d3.max(county_array, function(d){return d["Value"];});
-  var max_val = Math.max(max_state, max_county);
+  var min_state = d3.min(state_array, function(d) {return d["Value"];})
+  //max_county = d3.max(county_array, function(d){return d["Value"];});
+  //var max_val = Math.max(max_state, max_county);
 
   color = d3.scaleLinear().clamp(true)
-                .domain([0, max_val])
+                .domain([min_state, max_state])
                 .range(color_array);
                 //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
 
