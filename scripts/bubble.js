@@ -6,6 +6,20 @@ var margin = {"left":60, "right": 70, "top":10, "bottom":30};
 var height = 400;
 var width = 1400;
 
+var state_tip = d3.tip()
+                  .attr("class", "d3-tip")
+                  .offset([-8, 0])
+                  .html(function(d) {
+                     var value = (+d.val).toFixed(2) + '%';
+                     var pop = NumberWithCommas(d.pop);
+                     var str = '<div class="state-tooltip-title">' +
+                     d.Geo + '</div>'
+                     + '<span class=state-label-P>Percentage: </span>'
+                     + '<span class=state-value-P>' + value + '</span><br/>'
+                     + '<span class=state-label-P>Matching Population: </span>'
+                     + '<span class=state-value-P>' + pop + '</span>';
+                     return str;
+                 });
 
 function CreateNodes(data)
 {
@@ -16,11 +30,11 @@ function CreateNodes(data)
                       .domain([0, maxVal]);
 
   var myNodes = data.map(function(d) {
-    var rad = (+d["Value"]/100) * (+d["Total"]);
+    var population = (+d["Value"]/100) * (+d["Total"]);
     return{
       id: d["Geo"],
-      radius: radiusScale(rad),
-      pop: rad,
+      radius: radiusScale(population),
+      pop: population,
       value: +d["Value"],
       x: Math.random() * 300,
       y: Math.random() * 300
@@ -89,21 +103,6 @@ function BubbleChart(year)
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
-  var state_tip = d3.tip()
-                    .attr("class", "d3-tip")
-                    .offset([-8, 0])
-                    .html(function(d) {
-                       var value = (+d.val).toFixed(2) + '%';
-                       var pop = NumberWithCommas(d.pop);
-                       var str = '<div class="state-tooltip-title">' +
-                       d.Geo + '</div>'
-                       + '<span class=state-label-P>Percentage: </span>'
-                       + '<span class=state-value-P>' + value + '</span><br/>'
-                       + '<span class=state-label-P>Matching Population: </span>'
-                       + '<span class=state-value-P>' + pop + '</span>';
-                       return str;
-                   });
-
   var svg = document.getElementById("#bubble-chart");
   midHeight = (height - margin.top + margin.bottom)/2;
 
@@ -136,8 +135,6 @@ function BubbleChart(year)
                           .attr("id", function(d) {return d.id;})
                           .attr("pop", function(d) {return d.pop;})
                           .attr("val", function(d) {return d.value;})
-                          .attr('stroke', "#000")
-                          .attr('stroke-width', 2)
                           .attr('r', 0)
                           .attr('fill', function(d) {return color(d.value);});
 //                          .on("mouseover", state_tip.show)
@@ -191,8 +188,68 @@ function UpdateChart(year)
 
   d3.selectAll("#xAxis").transition().duration(1000).call(xAxis);
 
-  svg.select("axis").selectAll("text").style("fill", "#fff");
+  simulation = d3.forceSimulation()
+                 .velocityDecay(0.2)
+                 .force('x', d3.forceX().strength(forceStrength).x(Pos_X))
+                 .force('y', d3.forceY().strength(forceStrength).y(midHeight))
+                 .force("charge", d3.forceManyBody().strength(Charge))
+                 .on("tick", ticked);
+
+  simulation.stop();
+
+  function chart()
+  {
+    var nodes = CreateNodes(state_array);
+
+    svg = d3.select("#bubble-chart");
+
+    var temp = d3.select("#bubble-chart").selectAll(".bubble");
+
+    //d3.selectAll(".bubble").data(temp, function(d) {console.log(d)});
+
+    // Bind nodes data to what will become DOM elements to represent them.
+    bubbles = svg.selectAll('.bubble')
+                 .data(nodes, function (d, i) {return d.id;});
+
+    // Create new circle elements each with class `bubble`.
+    // There will be one circle.bubble for each object in the nodes array.
+    var bubblesE = bubbles.enter().append("circle")
+                          .classed("bubble", true)
+                          .attr("id", function(d) {return d.id;})
+                          .attr("pop", function(d) {return d.pop;})
+                          .attr("val", function(d) {return d.value;})
+                          .attr('r', 0)
+                          .attr('fill', function(d) {return color(d.value);});
+//                          .on("mouseover", state_tip.show)
+//                          .on("mouseout", state_tip.hide);
+
+    bubbles = bubbles.merge(bubblesE);
+
+    // Fancy transition to make bubbles appear, ending with the
+    // correct radius
+    bubbles.transition()
+           .duration(2000)
+           .attr('r', function (d) { return d.radius; });
+
+    // Set the simulation's nodes to our newly created nodes array.
+    simulation.nodes(nodes);
+
+    MoveBubbles();
+  }
 
 
-  console.log("here");
+  /*
+   * Callback function that is called after every tick of the
+   * force simulation.
+   * Here we do the acutal repositioning of the SVG circles
+   * based on the current x and y values of their bound node data.
+   * These x and y values are modified by the force simulation.
+   */
+  function ticked()
+  {
+      bubbles.attr('cx', function (d) {return d.x; })
+             .attr('cy', function (d) {return d.y; });
+  }
+
+  chart();
 }
