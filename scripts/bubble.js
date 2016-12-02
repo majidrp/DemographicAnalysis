@@ -33,7 +33,7 @@ function CreateNodes(data)
   var radiusScale = d3.scalePow()
                       .exponent(0.75)
                       .range([10, 40])
-                      .domain([0, maxVal]);
+                      .domain([0, maxVal * 1.1]);
 
   var myNodes = data.map(function(d) {
     var population = (+d["Value"]/100) * (+d["Total"]);
@@ -60,7 +60,7 @@ function MoveBubbles()
 
 function Charge(d)
 {
-  return -Math.pow(d.radius, 2) * forceStrength;
+  return -Math.pow(d.radius, 2.1) * forceStrength;
 }
 
 // Returns the value of d.x
@@ -81,9 +81,10 @@ function BubbleChart(year)
   state_array.pop();
 
   var max_per = d3.max(state_array, function(d) {return d.Value;})
+  var min_per = d3.min(state_array, function(d) {return d.Value;})
 
   var x_scale = d3.scaleLinear()
-                 .domain([0, max_per * 1.1])
+                 .domain([min_per * 0.9, max_per * 1.1])
                  .range([margin.left, width - margin.right])
                  .nice();
 
@@ -185,9 +186,11 @@ function UpdateChart(year)
   var state_array = d3.values(states_data[year]);
   state_array.pop();
   var max_per = d3.max(state_array, function(d) {return d.Value;})
+  var min_per = d3.min(state_array, function(d) {return d.Value;})
+
 
   var x_scale = d3.scaleLinear()
-                 .domain([0, max_per * 1.1])
+                 .domain([min_per * 0.9, max_per * 1.1])
                  .range([margin.left, width - margin.right])
                  .nice();
   xScale = x_scale;
