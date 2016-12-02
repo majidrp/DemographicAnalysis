@@ -6,18 +6,20 @@ var margin = {"left":150, "right": 70, "top":10, "bottom":30};
 var bbl_height = 400;
 var bbl_width = 1500;
 
-d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
-    this.parentNode.appendChild(this);
-  });
-};
+d3.selection.prototype.moveToFront = function()
+  {
+    return this.each(function()
+    {
+      this.parentNode.appendChild(this);
+    });
+  };
 
 var state_bubbles = d3.tip()
                       .attr("class", "d3-tip")
                       .offset([-8, 0])
                       .html(function(d) {
                           var rem = (+d.value) % 1;
-                          if(rem > 0.001)
+                          if(rem > 0.001 && (+d.value) != 0)
                           {
                             var value = Math.min(Math.ceil(Math.abs(Math.log10(+d.value))) + 1, 2);
                             value = (+d.value).toFixed(value) + '%';
@@ -39,12 +41,14 @@ var state_bubbles = d3.tip()
 function CreateNodes(data)
 {
   var maxVal = d3.max(data, function(d) {var temp = (+d["Value"]/100) * (+d["Total"]); return temp;});
+  var minVal = d3.min(data, function(d) {var temp = (+d["Value"]/100) * (+d["Total"]); return temp;});
   var radiusScale = d3.scalePow()
                       .exponent(0.75)
                       .range([10, 40])
-                      .domain([0, maxVal * 1.1]);
+                      .domain([minVal, maxVal]);
 
-  var myNodes = data.map(function(d) {
+  var myNodes = data.map(function(d)
+  {
     var population = (+d["Value"]/100) * (+d["Total"]);
     return{
       id: d["Geo"],
@@ -84,8 +88,8 @@ function BubbleChart(year)
   var bubbles = null;
   var nodes = [];
   var window_width = window.innerWidth;
-  bbl_width = bbl_width - margin.left - margin.right;
-  bbl_height = bbl_height - margin.top - margin.bottom;
+  bbl_width = window_width - margin.left - margin.right;
+  height = window.innerHeight - margin.top - margin.bottom;
   var state_array = d3.values(states_data[year]);
   state_array.pop();
 
@@ -115,12 +119,12 @@ function BubbleChart(year)
     min_per = 0;
   }
 
-  d3.select("#dist-plot").attr("width", width)
-                         .attr("height", height);
+  d3.select("#dist-plot").attr("width", bbl_width)
+                         .attr("height", bbl_height);
 
   d3.select("#dist-plot").append("svg")
-                         .attr("width", width)
-                         .attr("height", height)
+                         .attr("width", bbl_width)
+                         .attr("height", bbl_height)
                          .attr("id","bubble-chart");
 
   var svg = d3.select("#bubble-chart");
@@ -130,14 +134,14 @@ function BubbleChart(year)
   svg.append("g").attr("id", "xAxis")
                  .classed("axis", true)
                  .attr("id", "xAxis")
-                 .attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")");
+                 .attr("transform", "translate(" + 0 + "," + (bbl_height - margin.bottom) + ")");
 
   d3.selectAll("#xAxis").transition().duration(1000).call(xAxis);
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
   var svg = document.getElementById("#bubble-chart");
-  midHeight = (height - margin.top + margin.bottom)/2;
+  midHeight = (bbl_height - margin.top + margin.bottom)/2;
 
   //svg.call(state_tip);
 
