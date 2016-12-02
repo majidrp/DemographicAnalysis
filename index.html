@@ -118,10 +118,10 @@ $(document).ready(function () {
   	<input class="race_checkbox" type="checkbox" name="race" value="White">White</input><br>
   	<input class="race_checkbox" type="checkbox" name="race" value="Black">Black</input><br>
   	<input class="race_checkbox" type="checkbox" name="race" value="Asian">Asian</input><br>
-  	<input class="race_checkbox" type="checkbox" name="race" value="American Indian or Alaskan Native">American Indian/Alaskan Native</input><br>
-  	<input class="race_checkbox" type="checkbox" name="race" value="Native Hawaiian and Other Paciffic Islander">Native Hawaiians/Pacific Islanders</input><br>
-    <input class="race_checkbox" type="checkbox" name="race" value="Other">Other Race</input><br>
-  	<input class="race_checkbox" type="checkbox" name="race" value="Two or More">Two or More</input>
+  	<!--<input class="race_checkbox" type="checkbox" name="race" value="American Indian or Alaskan Native">American Indian/Alaskan Native</input><br>
+  	<input class="race_checkbox" type="checkbox" name="race" value="Native Hawaiian and Other Paciffic Islander">Native Hawaiians/Pacific Islanders</input><br>-->
+    <input class="race_checkbox" type="checkbox" name="race" value="Other">Other Races</input><br>
+  	<input class="race_checkbox" type="checkbox" name="race" value="Two or More">Two or More Races</input>
   	</form>
 
     <h3>Marital Status</h3>
@@ -149,6 +149,19 @@ $(document).ready(function () {
     <svg width="100" height="10%">
         <g id="points"></g>
     </svg>
+
+    <svg id="barChart" width="1100" height="400">
+        <g id="xAxis1"></g>
+        <g id="yAxis1"></g>
+        <g id="bars1"></g>
+    </svg>
+
+    <!--<svg id="lineChart" width="1100" height="400">
+        <g id="xAxis2"></g>
+        <g id="yAxis2"></g>
+        <g id="bars2"></g>
+    </svg>-->
+
 </div>
 
 <br/>
@@ -163,30 +176,36 @@ $(document).ready(function () {
   <tr>
     <td>      <div id="year-chooser">
               <select id="year-sec" onchange="UpdateData()">
-                  <option selected value="0">2010</option>
-                  <option value="1">2011</option>
-                  <option value="2">2012</option>
-                  <option value="3">2013</option>
-                  <option value="4">2014</option>
-                  <option value="5">2015</option>
+                  <option selected value="2010">2010</option>
+                  <option value="2011">2011</option>
+                  <option value="2012">2012</option>
+                  <option value="2013">2013</option>
+                  <option value="2014">2014</option>
+                  <option value="2015">2015</option>
               </select>
           </div></td>
     <td>    <div id="category-selector">
             <select id="dataset" onchange="UpdateData()">
-                <option selected value="1">Gender</option>
-                <option value="2">Age</option>
-                <option value="3">Education</option>
-                <option value="4">Race</option>
-                <option value="5">Marital Status</option>
+                <option selected value="gender">Gender</option>
+                <option value="age">Age</option>
+                <option value="edu">Education</option>
+                <option value="race">Race</option>
+                <option value="marital">Marital Status</option>
             </select>
         </div></td>
   </tr>
 </table>
 
-    <svg id="barChart">
-        <g id="xAxis"></g>
-        <g id="yAxis"></g>
-        <g id="bars"></g>
+    <svg id="stackBarChart" width="1100" height="400">
+        <g id="xAxis3"></g>
+        <g id="yAxis3"></g>
+        <g id="bars3"></g>
+    </svg>
+
+    <svg id="multiLineChart" width="1100" height="400">
+        <g id="xAxis4"></g>
+        <g id="yAxis4"></g>
+        <g id="bars4"></g>
     </svg>
 </div>
 
