@@ -477,10 +477,18 @@ function UpdateData()
 
   // Calls the appropriate functions for the check boxes
   CalculatePopulation(ages, genValues, eduValues, raceValues, marValues);
-  //console.log(states_data[2015][1000]["Value"]);
+
   colorMap(year);
-  //BubbleChart(year);
-  BubbleChart(year);
+
+  if(first_load == false)
+  {
+    BubbleChart(year);
+    first_load = true;
+  }
+  else
+  {
+    UpdateChart(year);
+  }
 }
 
 function LoadData()
@@ -623,11 +631,12 @@ function colorMap(year){
   var state_array = d3.values(states_data[year]);
   var county_array = d3.values(counties_data[year]);
   max_state = d3.max(state_array, function(d){return d["Value"];});
-  max_county = d3.max(county_array, function(d){return d["Value"];});
-  var max_val = Math.max(max_state, max_county);
+  var min_state = d3.min(state_array, function(d) {return d["Value"];})
+  //max_county = d3.max(county_array, function(d){return d["Value"];});
+  //var max_val = Math.max(max_state, max_county);
 
   color = d3.scaleLinear().clamp(true)
-                .domain([0, max_val])
+                .domain([min_state, max_state])
                 .range(color_array);
                 //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
 
@@ -663,7 +672,5 @@ function colorMap(year){
       d3.selectAll(".cities")
         .transition().duration(1500)
         .attr("r", 3);
-
-      first_load = true;
     }
 }
