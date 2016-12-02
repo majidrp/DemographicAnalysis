@@ -16,16 +16,24 @@ var state_bubbles = d3.tip()
                       .attr("class", "d3-tip")
                       .offset([-8, 0])
                       .html(function(d) {
-                         var value = (+d.value).toFixed(2) + '%';
-                         var pop = NumberWithCommas(parseInt(d.pop));
-                         var str = '<div class="state-tooltip-title">' +
-                         d.id + '</div>'
-                         + '<span class=state-label-P>Percentage: </span>'
-                         + '<span class=state-value-P>' + value + '</span><br/>'
-                         + '<span class=state-label-P>Matching Population: </span>'
-                         + '<span class=state-value-P>' + pop + '</span>';
-                         return str;
-                     });
+                          if((+d.value) < 1 && (+d.value) != 0)
+                          {
+                            var value = Math.ceil(Math.abs(Math.log10(+d.value))) + 1;
+                            value = (+d.value).toFixed(value) + '%';
+                          }
+                          else
+                          {
+                            var value = (+d.value).toFixed(2) + '%';
+                          }
+                          var pop = NumberWithCommas(parseInt(d.pop));
+                          var str = '<div class="state-tooltip-title">' +
+                          d.id + '</div>'
+                          + '<span class=state-label-P>Percentage: </span>'
+                          + '<span class=state-value-P>' + value + '</span><br/>'
+                          + '<span class=state-label-P>Matching Population: </span>'
+                          + '<span class=state-value-P>' + pop + '</span>';
+                          return str;
+                        });
 
 function CreateNodes(data)
 {
@@ -82,20 +90,29 @@ function BubbleChart(year)
 
   var max_per = d3.max(state_array, function(d) {return d.Value;});
   var min_per = d3.min(state_array, function(d) {return d.Value;});
-
+  var min_val = 0;
   if(min_per < 1)
   {
-    min_per = 0;
+    var min_val = 0;
+  }
+  else
+  {
+    var min_val = min_per;
   }
 
   var x_scale = d3.scaleLinear()
-                 .domain([min_per * 0.8, max_per * 1.1])
+                 .domain([min_val * 0.8, max_per * 1.1])
                  .range([margin.left, width - margin.right])
                  .nice();
 
   xScale = x_scale;
   var xAxis = d3.axisBottom(xScale)
-                .tickFormat(function(d) {if(min_per <= 1){return d.toFixed(1) + '%';} else{return d + '%';}});
+                .tickFormat(function(d) {if(min_per < 1 && d != 0){var temp = Math.ceil(Math.abs(Math.log10(d))) + 1; console.log(temp); return d.toFixed(temp) + '%';} else{return d.toFixed(1) + '%';}});
+
+  if(min_per < 1)
+  {
+    min_per = 0;
+  }
 
   d3.select("#dist-plot").attr("width", width)
                          .attr("height", height);
@@ -193,20 +210,26 @@ function UpdateChart(year)
   state_array.pop();
   var max_per = d3.max(state_array, function(d) {return d.Value;})
   var min_per = d3.min(state_array, function(d) {return d.Value;})
+  var min_val = 0;
 
   if(min_per < 1)
   {
-    min_per = 0;
+    min_val = 0;
+  }
+
+  else
+  {
+    min_val = min_per;
   }
 
 
   var x_scale = d3.scaleLinear()
-                 .domain([min_per * 0.8, max_per * 1.1])
+                 .domain([min_val * 0.8, max_per * 1.1])
                  .range([margin.left, width - margin.right])
                  .nice();
   xScale = x_scale;
   var xAxis = d3.axisBottom(xScale)
-                .tickFormat(function(d) {if(min_per <= 1){return d.toFixed(1) + '%';} else{return d + '%';}});
+                .tickFormat(function(d) {if(min_per < 1 && d != 0){var temp = Math.ceil(Math.abs(Math.log10(d))) + 1; return d.toFixed(temp) + '%';} else{return d.toFixed(1) + '%';}});
 
   var svg = d3.select("#bubble-chart");
 
