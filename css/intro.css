@@ -1,0 +1,120 @@
+body{
+  background-image: url("../background.png");
+  background-repeat: repeat;
+  font-family: "Lato";
+}
+
+h2{
+  padding-top: 15px;
+}
+
+.main{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#u-logo{
+  margin-right: 20px;
+  margin-top: 20px;
+  float: left;
+}
+
+#u-img{
+  width: 45px;
+  height: 40px;
+}
+
+.main .text{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+a #fa-github{
+  color: transparent;
+}
+
+.quote{
+  background-color: #e6e6e6;
+  text-align: center;
+  font-style: italic;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-family: "Arizona";
+}
+
+#quote-source{
+  color: #ccc;
+  padding-top: 3px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-style: normal;
+  float:right;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  font-size: 20px;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 0.5em 10px;
+  padding-bottom: 20px;
+  quotes: "\201C""\201D""\2018""\2019";
+  font-family: "Arizona";
+  font-style: italic;
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+
+i{
+  border:2px solid rgba(255, 0, 0, 0);
+  transition: border 0.2s linear;
+  background-color: white;
+  border-radius:100%;
+  width: 49px;
+  height: 48px;
+  text-align:center;
+}
+
+i:hover{
+  border: 2px solid rgba(255, 0, 0, 1)
+}
+
+#quote-acs{
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#yt-video{
+  margin-bottom: 20px;
+}
+
+.fa-github {
+  margin-top: 12px;
+  float: right;
+  color: black;
+  transition: opacity .3s linear;
+}

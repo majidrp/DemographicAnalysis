@@ -4,7 +4,7 @@ import os
 from decimal import *
 import json
 
-def Read_AgeSex(filename, m_list, m_add, f_list, f_add, labels):
+def Read_AgeSex(filename, m_list, m_add, f_list, f_add, labels, type_):
     data = {}
     genders = ["M", "F"]
     with open(filename) as csvFile:
@@ -14,6 +14,14 @@ def Read_AgeSex(filename, m_list, m_add, f_list, f_add, labels):
         for item in lineRead:
             geo_data = {}
             geo = item[2]
+            if type_ == "States":
+                id_ = int(item[1]) * 1000
+                state = geo
+            else:
+                id_ = int(item[1])
+                state = geo.split(',',1)[1].strip()
+
+
             if geo == "Puerto Rico":
                 break
             age_data = {}
@@ -55,10 +63,12 @@ def Read_AgeSex(filename, m_list, m_add, f_list, f_add, labels):
                         gen_data[gender] = pop_data
                     age_str = str(age)
                     age_data[age_str] = gen_data
-            data[geo] = age_data
+            data[id_] = age_data
+            data[id_]["Geo"] = geo
+            data[id_]["State"] = state
     return data
 
-def Read_Education(data, filename, m_list, m_add, f_list, f_add, labels):
+def Read_Education(data, filename, m_list, m_add, f_list, f_add, labels, type_):
     genders = ["M", "F"]
     with open(filename) as csvFile:
         next(csvFile, None) # Skips first line
@@ -66,6 +76,10 @@ def Read_Education(data, filename, m_list, m_add, f_list, f_add, labels):
         lineRead = csv.reader(csvFile, delimiter=',')
         for item in lineRead:
             geo = item[2]
+            if type_ == "States":
+                id_ = int(item[1]) * 1000
+            else:
+                id_ = int(item[1])
             if geo == "Puerto Rico":
                 break
             for item_ in labels:
@@ -116,10 +130,10 @@ def Read_Education(data, filename, m_list, m_add, f_list, f_add, labels):
                                     edu_per = float(item[f_list[index]])
                             edu_per = edu_per/100.0
                             edu_per_str = '%.4f' % (edu_per)
-                            data[geo][age][gender][edu] = edu_per_str
+                            data[id_][age][gender][edu] = edu_per_str
     return
 
-def Read_MaritalStatus(data, filename, m_list, m_add, f_list, f_add, labels):
+def Read_MaritalStatus(data, filename, m_list, m_add, f_list, f_add, labels, type_):
     genders = ["M", "F"]
     with open(filename) as csvFile:
         next(csvFile, None) # Skips first line
@@ -128,6 +142,11 @@ def Read_MaritalStatus(data, filename, m_list, m_add, f_list, f_add, labels):
         for item in lineRead:
             index_offset = 0
             geo = item[2]
+            if type_ == "States":
+                id_ = int(item[1]) * 1000
+            else:
+                id_ = int(item[1])
+
             if geo == "Puerto Rico":
                 break
             for item_ in labels:
@@ -155,11 +174,11 @@ def Read_MaritalStatus(data, filename, m_list, m_add, f_list, f_add, labels):
                                     m_per = "0.0"
                                 m_per = float(m_per)/100.0
                                 m_per = '%.4f' % m_per
-                            data[geo][age][gender][m_status] = m_per
+                            data[id_][age][gender][m_status] = m_per
                     index_offset = index_offset + 1
     return
 
-def Read_Races(data, filename, indices, labels):
+def Read_Races(data, filename, indices, labels, type_):
     with open(filename) as csvFile:
         next(csvFile, None) # Skips first line
         next(csvFile, None) # Skips second line
@@ -167,31 +186,38 @@ def Read_Races(data, filename, indices, labels):
         for item in lineRead:
             index_offset = 0
             geo = item[2]
+            if type_ == "States":
+                id_ = int(item[1]) * 1000
+            else:
+                id_ = int(item[1])
             if geo == "Puerto Rico":
                 break
             total = float(item[indices[0]])
             total_str = str(int(total))
-            data[geo]["Total_Population"] = total_str
+            data[id_]["Total_Population"] = total_str
             for i in range(1, len(indices)):
                 per_pop = float(item[indices[i]])/total
                 per_pop = '%.4f' % per_pop
-                data[geo][labels[i]] = per_pop
+                data[id_][labels[i]] = per_pop
     return
 
-def Save_CSV(filename, data, rest_keys):
+def Save_CSV(filename, data, rest_keys, type_):
     outfile = open(filename, 'w')
     genders = ["M", "F"]
     geo_keys = []
     agef_keys = []
     ages = range(18, 66)
-    labels = ["Geo"]
+    labels = ["id", "Geo", "State"]
     first_key = data.keys()
-    geo_keys = first_key
+    id_keys = first_key
+    #geo_keys = first_key
     first_key.sort()
     first_key = first_key[0]
     age_keys = data[first_key]["30"]["M"].keys()
     age_keys.sort()
     agef_keys = age_keys
+
+    # Creates the labels to be used as the headers in the CSV File
     for gender in genders:
         for age in ages:
             if age == 65:
@@ -200,14 +226,21 @@ def Save_CSV(filename, data, rest_keys):
                 temp = str(age) + "_" + gender + "_" + sKeys
                 labels.append(temp)
     labels.extend(rest_keys)
+
+    # Writes out the labels to the CSV File on the first line
     for i in range(len(labels)):
         if i < len(labels)-1:
             outfile.write(str(labels[i]) + ',')
         else:
             outfile.write(str(labels[i]) + '\n')
-    for geo in geo_keys:
-        gkey = '\"' + str(geo) + '\"'
-        row = [gkey]
+
+    # Iterates through the values outputting the data
+    # line by line by geography
+    for id_ in id_keys:
+        row = [id_]
+        gkey = '\"' + str(data[id_]["Geo"]) + '\"'
+        row.append(gkey)
+        row.append(data[id_]["State"])
         for gender in genders:
             for age in ages:
                 if age == 65:
@@ -216,14 +249,14 @@ def Save_CSV(filename, data, rest_keys):
                     if age < 25 and sKeys == "Graduate/Professional":
                         row.append(0.0)
                     else:
-                        row.append(data[geo][str(age)][gender][sKeys])
+                        row.append(data[id_][str(age)][gender][sKeys])
         for i in range(0, len(rest_keys)):
             if i == 0:
                 val = "Total_Population"
             else:
                 val = rest_keys[i]
             try:
-                row.append(data[geo][val])
+                row.append(data[id_][val])
             except KeyError:
                 row.append(0.0)
         for i in range(0, len(row)):
@@ -263,7 +296,7 @@ for type_ in type_list:
         f_add = [89,91,93,95,97,99]
         labels = ["18-19","20","21","22-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-61","62-64","65+"]
 
-        data = Read_AgeSex(currFile, m_list, m_add, f_list, f_add, labels)
+        data = Read_AgeSex(currFile, m_list, m_add, f_list, f_add, labels, type_)
 
         # Education
         tag = "S1501"
@@ -280,7 +313,7 @@ for type_ in type_list:
             f_add = [[43,49],[61,67]]
         labels = [["18-24",["No HS","HS/GED","Some College", "Bachelors"]],["25+",["No HS","HS/GED","Some College","Bachelors","Graduate/Professional"]]]
 
-        Read_Education(data, currFile, m_list, m_add, f_list, f_add, labels)
+        Read_Education(data, currFile, m_list, m_add, f_list, f_add, labels, type_)
 
         # Martial Stauts
         tag = "S1201"
@@ -289,18 +322,21 @@ for type_ in type_list:
         f_list = [113,115,117,119,121,125,127,129,131,133,137,139,141,143,145,149,151,153,155,157,161,143,165,167,169,173,175,177,179,181]
         labels = [["15-19",["Married","Widowed","Divorced","Separated","Never Married"]],["20-34",["Married","Widowed","Divorced","Separated","Never Married"]],["35-44",["Married","Widowed","Divorced","Separated","Never Married"]],["45-54",["Married","Widowed","Divorced","Separated","Never Married"]],["55-64",["Married","Widowed","Divorced","Separated","Never Married"]],["65+",["Married","Widowed","Divorced","Separated","Never Married"]]]
 
-        Read_MaritalStatus(data, currFile, m_list, m_add, f_list, f_add, labels)
+        Read_MaritalStatus(data, currFile, m_list, m_add, f_list, f_add, labels, type_)
 
         # Race
         tag = "B02001"
         currFile = BASE_DIR + "ACS_" + year + FT + tag + end
         ind_list = [3,5,7,9,11,13,15,17]
         labels = ["Total","White","Black","American Indian or Alaskan Native","Asian","Native Hawaiian and Other Paciffic Islander","Other","Two or More"]
-        Read_Races(data, currFile, ind_list, labels)
+        Read_Races(data, currFile, ind_list, labels, type_)
 
         print("Writing to: \"" + output_file + "\"")
         with open(output_file, 'w') as outfile:
             json.dump(data, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
 
         print("Writing to: \"" + output_file_csv + "\"")
-        Save_CSV(output_file_csv, data, labels)
+        Save_CSV(output_file_csv, data, labels, type_)
+
+
+print("DONE")
