@@ -1,19 +1,25 @@
 var simulation = null;
-var forceStrength = 0.03;
+var forceStrength = 0.02;
 var midHeight = null;
 var xScale = null;
 var margin = {"left":100, "right": 70, "top":10, "bottom":30};
 var height = 400;
 var width = 1400;
 
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
 var state_bubbles = d3.tip()
                       .attr("class", "d3-tip")
                       .offset([-8, 0])
                       .html(function(d) {
-                         var value = (+d.val).toFixed(2) + '%';
-                         var pop = NumberWithCommas(d.pop);
+                         var value = (+d.value).toFixed(2) + '%';
+                         var pop = NumberWithCommas(parseInt(d.pop));
                          var str = '<div class="state-tooltip-title">' +
-                         d.Geo + '</div>'
+                         d.id + '</div>'
                          + '<span class=state-label-P>Percentage: </span>'
                          + '<span class=state-value-P>' + value + '</span><br/>'
                          + '<span class=state-label-P>Matching Population: </span>'
@@ -94,6 +100,8 @@ function BubbleChart(year)
 
   var svg = d3.select("#bubble-chart");
 
+  svg.call(state_bubbles);
+
   svg.append("g").attr("id", "xAxis")
                  .classed("axis", true)
                  .attr("id", "xAxis")
@@ -136,9 +144,10 @@ function BubbleChart(year)
                           .attr("pop", function(d) {return d.pop;})
                           .attr("val", function(d) {return d.value;})
                           .attr('r', 0)
-                          .attr('fill', function(d) {return color(d.value);});
-//                          .on("mouseover", state_tip.show)
-//                          .on("mouseout", state_tip.hide);
+                          .attr('fill', function(d) {return color(d.value);})
+                          .on("mouseover", function(d) {d3.select(this).moveToFront();
+                                                        state_bubbles.show(d);})
+                          .on("mouseout", function(d) {state_bubbles.hide(d);});
 
     bubbles = bubbles.merge(bubblesE);
 
@@ -201,6 +210,8 @@ function UpdateChart(year)
 
   svg = d3.select("#bubble-chart");
 
+  //svg.call(state_bubbles);
+
   var oldBubbles = d3.select("#bubble-chart").selectAll(".bubble");
 
   for(var i = 0; i < nodes.length; i++)
@@ -233,8 +244,8 @@ function UpdateChart(year)
                         .attr("val", function(d) {return d.value;})
                         .attr('r', function(d) {return radiusScale(d.value);})
                         .attr('fill', function(d) {return color(d.value);});
-//                          .on("mouseover", state_tip.show)
-//                          .on("mouseout", state_tip.hide);
+//                        .on("mouseover", state_bubbles.show)
+//                        .on("mouseout", state_bubbles.hide);
 
   bubbles = bubbles.merge(bubblesE);
 

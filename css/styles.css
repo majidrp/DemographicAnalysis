@@ -47,6 +47,10 @@ h3{
   stroke-width: 2;
 }
 
+.bubble:hover{
+  stroke: #fff;
+}
+
 .axis text{
   fill: #e0e0e0;
   font-size: 14px;
