@@ -498,7 +498,7 @@ function UpdateData()
 function LoadData()
 {
   var base_labels = ["Bachelors", "Divorced", "Graduate/Professional", "HS/GED", "Married", "Never Married", "No HS", "Population", "Separated", "Some College", "Widowed"];
-  var other_labels = ["Geo", "State", "Asian", "Black", "Native Hawaiian and Other Paciffic Islander", "Other", "Total", "Two or More", "White"];
+  var other_labels = ["Geo", "State", "Asian", "Black", "Native Hawaiian and Other Paciffic Islander", "American Indian or Alaskan Native", "Other", "Total", "Two or More", "White"];
   var ages = [];
   var years = ["2010", "2011", "2012", "2013", "2014", "2015"];
   var geo_ = ["States", "Counties"];
