@@ -265,11 +265,6 @@ footer{
   stroke-width: .5px;
 }
 
-.state:hover
-{
-    opacity: .7;
-}
-
 .state:hover, .county-boundary:hover
 {
   opacity: .7;
