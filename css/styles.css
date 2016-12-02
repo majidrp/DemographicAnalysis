@@ -1,20 +1,21 @@
 body{
   font-family: "Lato";
+  font-size: 15.5px;
+
   background-image: url("../background.png");
   background-repeat: repeat;
-  font-size: 15.5px;
 }
 
 h1 {
     font-size:35px;
-    color: #e0e0e0;
+    color: #000;
     margin: 0px;
     padding: 0px;
 }
 
 h2{
   margin-bottom: 10px;
-  color: #e0e0e0;
+  color: #000;
 }
 
 #mainDiv h2{
@@ -31,7 +32,7 @@ h2{
 h3{
   margin-bottom: 5px;
   margin-top: 10px;
-  color: #e0e0e0;
+  color: #000;
 }
 
 #age{
@@ -39,7 +40,7 @@ h3{
 }
 
 .axis line{
-  stroke: #e0e0e0;
+  stroke: #000;
 }
 
 .bubble{
@@ -52,20 +53,19 @@ h3{
 }
 
 .axis text{
-  fill: #e0e0e0;
+  fill: #000;
   font-size: 14px;
   font-family: "Lato";
 }
 
 .axis path{
-  stroke: #e0e0e0;
+  stroke: #000;
 }
 
 .cities{
   fill: transparent;
-  font-family: "Lato";
   stroke-width: 1px;
-  stroke: #e0e0e0;
+  stroke: #cff9f2;
 }
 
 .state-tooltip-title{
@@ -198,7 +198,7 @@ border-radius: 10px;
   /*border-left: 0px;
   margin-left: 0px;*/
   right: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(225, 225, 225, 0.5);
   border-radius: 10px;
 }
 
