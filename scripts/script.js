@@ -210,6 +210,7 @@ function clicked(d)
   if(active.node() === this)
       {return reset();}
 
+  active.style("fill-opacity", "1");
   active.style("stroke-width", "0.5px");
   active.classed("active", false);
   active = d3.select(this).classed("active", true);
@@ -227,11 +228,13 @@ function clicked(d)
                 .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
   d3.select('body').select('svg').select('rect').call(zoom);
   active.style("stroke-width", "1.5px");
+  active.style("fill-opacity", "0");
 }
 
 function reset()
 {
   active.style("stroke-width", "0.5px");
+  active.style("fill-opacity", "1");
   active.classed("active", false);
   active = d3.select(null);
 
@@ -488,7 +491,7 @@ function UpdateData()
   }
   else
   {
-    UpdateCharts(year);
+    UpdateChart(year);
   }
 }
 
@@ -705,10 +708,10 @@ function SecondCharts()
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
-            
+
             var m = states_data[Year][state]["M"];
             var f = states_data[Year][state]["F"];
-            
+
             var male = female = 0;
             for(var j = 18; j < 66; j++)
             {
@@ -741,10 +744,10 @@ function SecondCharts()
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
-            
+
             var f = states_data[Year][state]["F"];
             var m = states_data[Year][state]["M"];
-            
+
             var twenty = thirty = fourty = fifty = sixty = 0;
             for(var j = 18; j < 66; j++)
             {
@@ -805,10 +808,10 @@ function SecondCharts()
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
-            
+
             var f = states_data[Year][state]["F"];
             var m = states_data[Year][state]["M"];
-            
+
             var bach = grad = hs = nohs = coll = 0;
             for(var j = 18; j < 66; j++)
             {
@@ -874,7 +877,7 @@ function SecondCharts()
             var state = state_ids[i];
             var total = states_data[Year][state]["Total"];
             var info = states_data[Year][state];
-            
+
             var asian, black, other, white, two;
 
             asian = info["Asian"] * total;
@@ -926,7 +929,7 @@ function SecondCharts()
 
             var f = states_data[Year][state]["F"];
             var m = states_data[Year][state]["M"];
-            
+
             var div = mar = nomar = sep = wid = 0;
             for(var j = 18; j < 66; j++)
             {
@@ -1012,7 +1015,7 @@ function SecondCharts()
   var yAxis = d3.axisLeft(y);
 
   x.domain(states.map(function(d) { return d; }));
-  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]); 
+  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]);
 
   // Create the axes
   var xxx = d3.selectAll("#xAxis3")
@@ -1070,7 +1073,7 @@ function FirstCharts(curr_year)
   var selection = [];
   for(var i = 0; i < 51; i++)
   {
-      selection.push(state_array[i]["Value"] * state_array[i]["Total"] / 1000);
+      selection.push(state_array[i]["Value"] * state_array[i]["Total"] / 100000);
   }
   // all the keys
   var state_ids = Object.keys(states_data[curr_year]);
@@ -1164,8 +1167,8 @@ function FirstCharts(curr_year)
   var yAxis = d3.axisLeft(y);
 
   x.domain(["2010", "2011", "2012", "2013"]);//Datas(function(d) { return d[0]; }));
-  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]); 
-  
+  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]);
+
   // Create the axes
   var xxx = d3.selectAll("#xAxis2")
     .classed("axis", true)
