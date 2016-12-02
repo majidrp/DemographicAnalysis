@@ -95,7 +95,7 @@ function BubbleChart(year)
 
   xScale = x_scale;
   var xAxis = d3.axisBottom(xScale)
-                .tickFormat(function(d) {return d + '%';});
+                .tickFormat(function(d) {if(min_per <= 1){return d.toFixed(1) + '%';} else{return d + '%';}});
 
   d3.select("#dist-plot").attr("width", width)
                          .attr("height", height);
@@ -206,7 +206,7 @@ function UpdateChart(year)
                  .nice();
   xScale = x_scale;
   var xAxis = d3.axisBottom(xScale)
-                .tickFormat(function(d) {return d + '%';});
+                .tickFormat(function(d) {if(min_per <= 1){return d.toFixed(1) + '%';} else{return d + '%';}});
 
   var svg = d3.select("#bubble-chart");
 
