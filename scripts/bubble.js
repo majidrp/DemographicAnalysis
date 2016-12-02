@@ -1,10 +1,10 @@
 var simulation = null;
-var forceStrength = 0.02;
+var forceStrength = 0.05;
 var midHeight = null;
 var xScale = null;
-var margin = {"left":100, "right": 70, "top":10, "bottom":30};
+var margin = {"left":150, "right": 70, "top":10, "bottom":30};
 var height = 400;
-var width = 1400;
+var width = 1500;
 
 d3.selection.prototype.moveToFront = function() {
   return this.each(function(){
@@ -80,11 +80,16 @@ function BubbleChart(year)
   var state_array = d3.values(states_data[year]);
   state_array.pop();
 
-  var max_per = d3.max(state_array, function(d) {return d.Value;})
-  var min_per = d3.min(state_array, function(d) {return d.Value;})
+  var max_per = d3.max(state_array, function(d) {return d.Value;});
+  var min_per = d3.min(state_array, function(d) {return d.Value;});
+
+  if(min_per < 1)
+  {
+    min_per = 0;
+  }
 
   var x_scale = d3.scaleLinear()
-                 .domain([min_per * 0.9, max_per * 1.1])
+                 .domain([min_per * 0.8, max_per * 1.1])
                  .range([margin.left, width - margin.right])
                  .nice();
 
@@ -188,9 +193,14 @@ function UpdateChart(year)
   var max_per = d3.max(state_array, function(d) {return d.Value;})
   var min_per = d3.min(state_array, function(d) {return d.Value;})
 
+  if(min_per < 1)
+  {
+    min_per = 0;
+  }
+
 
   var x_scale = d3.scaleLinear()
-                 .domain([min_per * 0.9, max_per * 1.1])
+                 .domain([min_per * 0.8, max_per * 1.1])
                  .range([margin.left, width - margin.right])
                  .nice();
   xScale = x_scale;
