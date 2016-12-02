@@ -479,6 +479,7 @@ function UpdateData()
   CalculatePopulation(ages, genValues, eduValues, raceValues, marValues);
 
   colorMap(year);
+  FirstCharts(year);
 
   if(first_load == false)
   {
@@ -487,7 +488,7 @@ function UpdateData()
   }
   else
   {
-    UpdateChart(year);
+    UpdateCharts(year);
   }
 }
 
@@ -651,10 +652,8 @@ function colorMap(year){
     d3.select("#countyg").selectAll("path")
         .transition().duration(1500)
         .style("fill", function(d){
-            //console.log("id=", d.id);
             try {
                   var val2 = counties_data[year][d.id]["Value"];
-                  //console.log("id=", d.id, ", val=", val2);
                   if (val2 > 0){
                     return color(val2);
                   }
@@ -673,4 +672,590 @@ function colorMap(year){
         .transition().duration(1500)
         .attr("r", 3);
     }
+}
+
+function SecondCharts()
+{
+  //*****Bar Chart*****
+  var svgBounds = d3.select("#barChart").node().getBoundingClientRect();
+
+  //year
+  var Year = d3.select("#year-sec").node().value;
+  //selected value
+  var selectedData = d3.select("#dataset").node().value;
+
+  // all the keys
+  var state_ids = Object.keys(states_data[Year]);
+
+  var states = [];
+  var array = [];
+  var array2 = [];
+  var array3 = [];
+  var array4 = [];
+  var array5 = [];
+  for(var i = 0; i < state_ids.length; i++)
+  {
+      var state = state_ids[i];
+      var name_temp = states_data[Year][state]["Geo"];
+      states.push(abbreviation(name_temp));
+  }
+
+  switch(selectedData) {
+    case "gender":
+        for(var i = 0; i < state_ids.length; i++)
+        {
+            var state = state_ids[i];
+            
+            var m = states_data[Year][state]["M"];
+            var f = states_data[Year][state]["F"];
+            
+            var male = female = 0;
+            for(var j = 18; j < 66; j++)
+            {
+                if(j == 65)
+                {
+                    female += f["65+"]["Population"];
+                    male += m["65+"]["Population"];
+                    break;
+                }
+                female += f[j]["Population"];
+                male += m[j]["Population"];
+            }
+
+            male = Math.round(male/1000);
+            female = Math.round(female/1000);
+            array.push(male);
+            array2.push(female);
+        }
+        var sum = [];
+        for(var i = 0; i <= 50; i++)
+          sum.push(array[i]);
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array2[i]);
+          sum.push(array[i] + array2[i]);
+        }
+        break;
+
+    case "age":
+        for(var i = 0; i < state_ids.length; i++)
+        {
+            var state = state_ids[i];
+            
+            var f = states_data[Year][state]["F"];
+            var m = states_data[Year][state]["M"];
+            
+            var twenty = thirty = fourty = fifty = sixty = 0;
+            for(var j = 18; j < 66; j++)
+            {
+                if(j == 65)
+                {
+                    sixty += f["65+"]["Population"] + m["65+"]["Population"];
+                    break;
+                }
+                if(j < 30)
+                    twenty += f[j]["Population"] + m[j]["Population"];
+                else  if(j < 40)
+                        thirty += f[j]["Population"] + m[j]["Population"];
+                      else  if(j < 50)
+                              fourty += f[j]["Population"] + m[j]["Population"];
+                            else  if(j < 60)
+                                    fifty += f[j]["Population"] + m[j]["Population"];
+                                  else
+                                    sixty += f[j]["Population"] + m[j]["Population"];
+            }
+
+            twenty = Math.round(twenty/1000);
+            thirty = Math.round(thirty/1000);
+            fourty = Math.round(fourty/1000);
+            fifty = Math.round(fifty/1000);
+            sixty = Math.round(sixty/1000);
+            array.push(twenty);
+            array2.push(thirty);
+            array3.push(fourty);
+            array4.push(fifty);
+            array5.push(sixty);
+        }
+        var sum = [];
+        for(var i = 0; i <= 50; i++)
+          sum.push(array[i]);
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array2[i]);
+          sum.push(array[i] + array2[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array3[i]);
+          sum.push(array[i] + array2[i] + array3[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array4[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array5[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i] + array5[i]);
+        }
+        break;
+
+    case "edu":
+        for(var i = 0; i < state_ids.length; i++)
+        {
+            var state = state_ids[i];
+            
+            var f = states_data[Year][state]["F"];
+            var m = states_data[Year][state]["M"];
+            
+            var bach = grad = hs = nohs = coll = 0;
+            for(var j = 18; j < 66; j++)
+            {
+                if(j == 65)
+                {
+                    var total1 = f["65+"]["Population"];
+                    var total2 = m["65+"]["Population"];
+                    bach += f["65+"]["Bachelors"] + m["65+"]["Bachelors"];
+                    grad += f["65+"]["Graduate/Professional"] + m["65+"]["Graduate/Professional"];
+                    hs += f["65+"]["HS/GED"] + m["65+"]["HS/GED"];
+                    nohs += f["65+"]["No HS"] + m["65+"]["No HS"];
+                    coll += f["65+"]["Some College"] + m["65+"]["Some College"];
+                    break;
+                }
+                var total1 = f[j]["Population"];
+                var total2 = m[j]["Population"];
+                bach += f[j]["Bachelors"] * total1 + m[j]["Bachelors"] * total2;
+                grad += f[j]["Graduate/Professional"] * total1 + m[j]["Graduate/Professional"] * total2;
+                hs += f[j]["HS/GED"] * total1 + m[j]["HS/GED"] * total2;
+                nohs += f[j]["No HS"] * total1 + m[j]["No HS"] * total2;
+                coll += f[j]["Some College"] * total1 + m[j]["Some College"] * total2;
+            }
+
+            bach = Math.round(bach/1000);
+            grad = Math.round(grad/1000);
+            hs = Math.round(hs/1000);
+            nohs = Math.round(nohs/1000);
+            coll = Math.round(coll/1000);
+            array.push(nohs);
+            array2.push(hs);
+            array3.push(coll);
+            array4.push(bach);
+            array5.push(grad);
+        }
+        var sum = [];
+        for(var i = 0; i <= 50; i++)
+          sum.push(array[i]);
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array2[i]);
+          sum.push(array[i] + array2[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array3[i]);
+          sum.push(array[i] + array2[i] + array3[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array4[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array5[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i] + array5[i]);
+        }
+        break;
+
+    case "race":
+        for(var i = 0; i < state_ids.length; i++)
+        {
+            var state = state_ids[i];
+            var total = states_data[Year][state]["Total"];
+            var info = states_data[Year][state];
+            
+            var asian, black, other, white, two;
+
+            asian = info["Asian"] * total;
+            black = info["Black"] * total;
+            other = info["Other"] * total + info["Native Hawaiian and Other Paciffic Islander"] * total;
+            white = info["White"] * total;
+            two = info["Two or More"] * total;
+
+            asian = Math.round(asian/1000);
+            black = Math.round(black/1000);
+            white = Math.round(white/1000);
+            other = Math.round(other/1000);
+            two = Math.round(two/1000);
+            array.push(white);
+            array2.push(black);
+            array3.push(asian);
+            array4.push(other);
+            array5.push(two);
+        }
+        var sum = [];
+        for(var i = 0; i <= 50; i++)
+          sum.push(array[i]);
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array2[i]);
+          sum.push(array[i] + array2[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array3[i]);
+          sum.push(array[i] + array2[i] + array3[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array4[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array5[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i] + array5[i]);
+        }
+        break;
+
+    case "marital":
+        for(var i = 0; i < state_ids.length; i++)
+        {
+            var state = state_ids[i];
+
+            var f = states_data[Year][state]["F"];
+            var m = states_data[Year][state]["M"];
+            
+            var div = mar = nomar = sep = wid = 0;
+            for(var j = 18; j < 66; j++)
+            {
+                if(j == 65)
+                {
+                    var total1 = f["65+"]["Population"];
+                    var total2 = m["65+"]["Population"];
+                    div += f["65+"]["Divorced"] * total1 + m["65+"]["Divorced"] * total2;
+                    mar += f["65+"]["Married"] * total1 + m["65+"]["Married"] * total2;
+                    nomar += f["65+"]["Never Married"] * total1 + m["65+"]["Never Married"] * total2;
+                    sep += f["65+"]["Separated"] * total1+ m["65+"]["Separated"] * total2;
+                    wid += f["65+"]["Widowed"] * total1 + m["65+"]["Widowed"] * total2;
+                    break;
+                }
+                var total1 = f[j]["Population"];
+                var total2 = m[j]["Population"];
+                div += f[j]["Divorced"] * total1 + m[j]["Divorced"] * total2;
+                mar += f[j]["Married"] * total1 + m[j]["Married"] * total2;
+                nomar += f[j]["Never Married"] * total1 + m[j]["Never Married"] * total2;
+                sep += f[j]["Separated"] * total1 + m[j]["Separated"] * total2;
+                wid += f[j]["Widowed"] * total1 + m[j]["Widowed"] * total2;
+            }
+
+            div = Math.round(div/1000);
+            mar = Math.round(mar/1000);
+            nomar = Math.round(nomar/1000);
+            sep = Math.round(sep/1000);
+            wid = Math.round(wid/1000);
+            array.push(mar);
+            array2.push(sep);
+            array3.push(wid);
+            array4.push(div);
+            array5.push(nomar);
+        }
+        var sum = [];
+        for(var i = 0; i <= 50; i++)
+          sum.push(array[i]);
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array2[i]);
+          sum.push(array[i] + array2[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array3[i]);
+          sum.push(array[i] + array2[i] + array3[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array4[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array5[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i] + array5[i]);
+        }
+  }
+
+
+  //**********************************************
+  // Create the x and y scales
+  var margin = {top: 0, right: 0, bottom: 50, left: 70},
+    width = svgBounds.width - margin.left - margin.right,
+    height = svgBounds.height - margin.top - margin.bottom;
+
+  var max = 0
+  for(var i = 0; i < sum.length; i++)
+  {
+      if(sum[i] > max)
+          max = sum[i];
+  }
+
+  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05);
+  var y = d3.scaleLinear()
+      .range([height, 0])
+      .domain([0, max]);
+  var coloring = d3.scaleLinear()
+      .range(["royalblue", "crimson", "olive", "orangered", "purple"])
+      .domain([1, 2, 3, 4, 5]);
+
+  var xAxis = d3.axisBottom(x);
+  var yAxis = d3.axisLeft(y);
+
+  x.domain(states.map(function(d) { return d; }));
+  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]); 
+
+  // Create the axes
+  var xxx = d3.selectAll("#xAxis3")
+    .classed("axis", true)
+    .attr("transform", "translate(" + margin.left + "," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", "-.55em")
+    .attr("transform", "rotate(-90)" );
+
+  var yyy = d3.selectAll("#yAxis3")
+    .classed("axis", true)
+    .attr("transform", "translate(" + margin.left + ",0)")
+    .call(yAxis);
+
+  // Create the bars
+  var bars = d3.select("#stackBarChart").selectAll("rect")
+      .data(array);
+  bars.exit().remove();
+  bars = bars.enter().append("rect").merge(bars);
+
+  bars.attr("transform", "translate(" + margin.left + ",0)")
+      .attr("x", function(d, i) { return x(states[i%51]); })
+      .attr("width", x.bandwidth())
+      .transition().duration(3000)
+      .style("fill", function(d, i) {
+          if(i < 51)
+            return coloring(1);
+          else  if(i < 102)
+                  return coloring(2);
+                else  if(i < 153)
+                        return coloring(3);
+                      else  if(i < 204)
+                              return coloring(4);
+                            else
+                              return coloring(5);
+       })
+      .attr("height", function(d, i) { return height - y(d); })
+      .attr("y", function(d, i) {
+          return y(sum[i]);
+      })
+      .attr("opacity", 1);
+}
+
+function FirstCharts(curr_year)
+{
+
+  //*****Bar Chart*****
+  var svgBounds = d3.select("#barChart").node().getBoundingClientRect();
+
+  // selection values
+  var state_array = d3.values(states_data[curr_year]);
+  var selection = [];
+  for(var i = 0; i < 51; i++)
+  {
+      selection.push(state_array[i]["Value"] * state_array[i]["Total"] / 1000);
+  }
+  // all the keys
+  var state_ids = Object.keys(states_data[curr_year]);
+
+  var states = [];
+  for(var i = 0; i < state_ids.length; i++)
+  {
+      var state = state_ids[i];
+      var name_temp = states_data[curr_year][state]["Geo"];
+      states.push(abbreviation(name_temp));
+  }
+
+  //******************************************************
+
+  // Create the x and y scales
+  var margin = {top: 0, right: 0, bottom: 50, left: 70},
+    width = svgBounds.width - margin.left - margin.right,
+    height = svgBounds.height - margin.top - margin.bottom;
+
+  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05);
+  var y = d3.scaleLinear().range([height, 0]).domain([0, max]);
+
+  var xAxis = d3.axisBottom(x);
+  var yAxis = d3.axisLeft(y);
+
+  // Create colorScale
+  var min = d3.min(selection, function(d) { return d; });
+  var max = d3.max(selection, function(d) { return d; });
+  var colorScale = d3.scaleLinear()
+              .domain([min, max])
+              .range(color_array);
+
+  x.domain(states.map(function(d) { return d; }));
+  y.domain([0, max]);
+
+  // Create the axes
+  var xxx = d3.selectAll("#xAxis1")
+    .classed("axis", true)
+    .attr("transform", "translate(" + margin.left + "," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", "-.55em")
+    .attr("transform", "rotate(-90)" );
+
+  var yyy = d3.selectAll("#yAxis1")
+    .classed("axis", true)
+    .attr("transform", "translate(" + margin.left + ",0)")
+    .call(yAxis);
+
+  // Create the bars
+  var bars = d3.select("#barChart").selectAll("rect")
+      .data(selection);
+  bars.exit().remove();
+  bars = bars.enter().append("rect").merge(bars);
+
+  bars.attr("transform", "translate(" + margin.left + ",0)")
+      .attr("x", function(d, i) { return x(states[i]); })
+      .attr("width", x.bandwidth())
+      .transition().duration(3000)
+      .style("fill", function(d) { return colorScale(d); })
+      .attr("y", function(d) { return y(d); })
+      .attr("height", function(d) { return height - y(d); })
+      .attr("opacity", 1);
+  //    .on('mouseover', tip.show)
+  //    .on('mouseout', tip.hide);
+
+  //self.svg.call(tip);
+
+
+  //*****Line Chart*****
+  /*var svgBounds = d3.select("#lineChart").node().getBoundingClientRect();
+
+  //Data
+  var Datas2 = [["2010", 100], ["2011", 500], ["2012", 300], ["2013", 250]];
+  //var chosen = document.getElementById("dataset").value;
+  var chosen = 1;
+
+  var max = 0
+  for(var i = 0; i < Datas2.length; i++)
+  {
+      if(Datas2[i][chosen] > max)
+          max = Datas2[i][chosen];
+  }
+
+  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05);
+  var y = d3.scaleLinear().range([height, 0]).domain([0, max]);
+
+  var xAxis = d3.axisBottom(x);
+  var yAxis = d3.axisLeft(y);
+
+  x.domain(["2010", "2011", "2012", "2013"]);//Datas(function(d) { return d[0]; }));
+  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]); 
+  
+  // Create the axes
+  var xxx = d3.selectAll("#xAxis2")
+    .classed("axis", true)
+    .attr("transform", "translate(" + margin.left + "," + height + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .attr("dx", "-.8em")
+    .attr("dy", "-.55em")
+    .attr("transform", "rotate(-90)" );
+
+  var yyy = d3.selectAll("#yAxis2")
+    .classed("axis", true)
+    .attr("transform", "translate(" + margin.left + ",0)")
+    .call(yAxis);*/
+
+  /*var lines = d3.select("#lineChart")
+      .selectAll("line").data(Datas2);
+
+  lines.exit().remove();
+  lines = lines.enter().append("line")
+      .attr("transform", "translate(" + margin.left + ",0)")
+      .attr("x1", function(d,i) { return x(d[0]); })
+      .attr("x2", function(d) { return height - y(d[chosen]); })
+      .attr("y1", function(d,i) { return x(d[0]); })
+      .attr("y2", function(d) { return height - y(d[chosen]); })
+      .attr("opacity", 1);*/
+}
+
+function abbreviation(input)
+{
+  var states = [
+        ['Arizona', 'AZ'],
+        ['Alabama', 'AL'],
+        ['Alaska', 'AK'],
+        ['Arizona', 'AZ'],
+        ['Arkansas', 'AR'],
+        ['California', 'CA'],
+        ['Colorado', 'CO'],
+        ['Connecticut', 'CT'],
+        ['Delaware', 'DE'],
+        ['District of Columbia', 'DC'],
+        ['Florida', 'FL'],
+        ['Georgia', 'GA'],
+        ['Hawaii', 'HI'],
+        ['Idaho', 'ID'],
+        ['Illinois', 'IL'],
+        ['Indiana', 'IN'],
+        ['Iowa', 'IA'],
+        ['Kansas', 'KS'],
+        ['Kentucky', 'KY'],
+        ['Kentucky', 'KY'],
+        ['Louisiana', 'LA'],
+        ['Maine', 'ME'],
+        ['Maryland', 'MD'],
+        ['Massachusetts', 'MA'],
+        ['Michigan', 'MI'],
+        ['Minnesota', 'MN'],
+        ['Mississippi', 'MS'],
+        ['Missouri', 'MO'],
+        ['Montana', 'MT'],
+        ['Nebraska', 'NE'],
+        ['Nevada', 'NV'],
+        ['New Hampshire', 'NH'],
+        ['New Jersey', 'NJ'],
+        ['New Mexico', 'NM'],
+        ['New York', 'NY'],
+        ['North Carolina', 'NC'],
+        ['North Dakota', 'ND'],
+        ['Ohio', 'OH'],
+        ['Oklahoma', 'OK'],
+        ['Oregon', 'OR'],
+        ['Pennsylvania', 'PA'],
+        ['Rhode Island', 'RI'],
+        ['South Carolina', 'SC'],
+        ['South Dakota', 'SD'],
+        ['Tennessee', 'TN'],
+        ['Texas', 'TX'],
+        ['Utah', 'UT'],
+        ['Vermont', 'VT'],
+        ['Virginia', 'VA'],
+        ['Washington', 'WA'],
+        ['West Virginia', 'WV'],
+        ['Wisconsin', 'WI'],
+        ['Wyoming', 'WY'],
+  ];
+
+  for(i = 0; i < states.length; i++){
+      if(states[i][0] == input){
+            return(states[i][1]);
+      }
+  }
 }
