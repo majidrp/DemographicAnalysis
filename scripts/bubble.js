@@ -3,8 +3,8 @@ var forceStrength = 0.05;
 var midHeight = null;
 var xScale = null;
 var margin = {"left":150, "right": 70, "top":10, "bottom":30};
-var height = 400;
-var width = 1500;
+var bbl_height = 400;
+var bbl_width = 1500;
 
 d3.selection.prototype.moveToFront = function() {
   return this.each(function(){
@@ -17,9 +17,9 @@ var state_bubbles = d3.tip()
                       .offset([-8, 0])
                       .html(function(d) {
                           var rem = (+d.value) % 1;
-                          if(rem > 0.0001)
+                          if(rem > 0.001)
                           {
-                            var value = Math.ceil(Math.abs(Math.log10(+d.value))) + 1;
+                            var value = Math.min(Math.ceil(Math.abs(Math.log10(+d.value))) + 1, 2);
                             value = (+d.value).toFixed(value) + '%';
                           }
                           else
@@ -84,8 +84,8 @@ function BubbleChart(year)
   var bubbles = null;
   var nodes = [];
   var window_width = window.innerWidth;
-  width = width - margin.left - margin.right;
-  height = height - margin.top - margin.bottom;
+  bbl_width = bbl_width - margin.left - margin.right;
+  bbl_height = bbl_height - margin.top - margin.bottom;
   var state_array = d3.values(states_data[year]);
   state_array.pop();
 
@@ -103,7 +103,7 @@ function BubbleChart(year)
 
   var x_scale = d3.scaleLinear()
                  .domain([min_val * 0.8, max_per * 1.1])
-                 .range([margin.left, width - margin.right])
+                 .range([margin.left, bbl_width - margin.right])
                  .nice();
 
   xScale = x_scale;
@@ -226,7 +226,7 @@ function UpdateChart(year)
 
   var x_scale = d3.scaleLinear()
                  .domain([min_val * 0.8, max_per * 1.1])
-                 .range([margin.left, width - margin.right])
+                 .range([margin.left, bbl_width - margin.right])
                  .nice();
   xScale = x_scale;
   var xAxis = d3.axisBottom(xScale)
