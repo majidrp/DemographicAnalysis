@@ -251,14 +251,13 @@ function reset()
 function CalculatePopulation(ages, genValues, eduValues, raceValues, marValues)
 {
   var years = Object.keys(states_data);
-  var state_ids = Object.keys(states_data[years[0]]);
-  var county_ids = Object.keys(counties_data[years[0]]);
   var scaleFactor = 100;
 
   // Calculates the values for the states based on user input
   for(var yr_idx = 0; yr_idx < years.length; yr_idx++)
   {
     var year = years[yr_idx];
+    var state_ids = Object.keys(states_data[year]);
     for(var st_idx = 0; st_idx < state_ids.length; st_idx++)
     {
       var state = state_ids[st_idx];
@@ -332,6 +331,7 @@ function CalculatePopulation(ages, genValues, eduValues, raceValues, marValues)
   for(var yr_idx = 0; yr_idx < years.length; yr_idx++)
   {
     var year = years[yr_idx];
+    var county_ids = Object.keys(counties_data[year]);
     for(var cty_idx = 0; cty_idx < county_ids.length; cty_idx++)
     {
       var county = county_ids[cty_idx];
