@@ -3,7 +3,7 @@ var forceStrength = 0.05;
 var midHeight = null;
 var xScale = null;
 var margin = {"left":150, "right": 70, "top":10, "bottom":30};
-var bbl_height = 400;
+var bbl_height = 325;
 var bbl_width = 1500;
 
 d3.selection.prototype.moveToFront = function()
