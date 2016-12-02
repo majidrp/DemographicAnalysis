@@ -16,7 +16,8 @@ var state_bubbles = d3.tip()
                       .attr("class", "d3-tip")
                       .offset([-8, 0])
                       .html(function(d) {
-                          if((+d.value) < 1 && (+d.value) != 0)
+                          var rem = (+d.value) % 1;
+                          if(rem > 0.0001)
                           {
                             var value = Math.ceil(Math.abs(Math.log10(+d.value))) + 1;
                             value = (+d.value).toFixed(value) + '%';
@@ -107,7 +108,7 @@ function BubbleChart(year)
 
   xScale = x_scale;
   var xAxis = d3.axisBottom(xScale)
-                .tickFormat(function(d) {if(d < 1 && d != 0){var temp = Math.ceil(Math.abs(Math.log10(d))) + 1; console.log(temp); return d.toFixed(temp) + '%';} else{return d.toFixed(1) + '%';}});
+                .tickFormat(function(d) {var rem = d % 1; if(rem > 0.0001){var temp = Math.ceil(Math.abs(Math.log10(rem))) + 1; return d.toFixed(temp) + '%';} else{return d + '%';}});
 
   if(min_per < 1)
   {
@@ -229,7 +230,7 @@ function UpdateChart(year)
                  .nice();
   xScale = x_scale;
   var xAxis = d3.axisBottom(xScale)
-                .tickFormat(function(d) {if(d < 1 && d != 0){var temp = Math.ceil(Math.abs(Math.log10(d))) + 1; return d.toFixed(temp) + '%';} else{return d.toFixed(1) + '%';}});
+                .tickFormat(function(d) {var rem = d % 1; if(rem > 0.0001){var temp = Math.ceil(Math.abs(Math.log10(rem))) + 1; return d.toFixed(temp) + '%';} else{return d + '%';}});
 
   var svg = d3.select("#bubble-chart");
 
