@@ -3,39 +3,52 @@ var forceStrength = 0.05;
 var midHeight = null;
 var xScale = null;
 var margin = {"left":150, "right": 70, "top":10, "bottom":30};
-var height = 400;
-var width = 1500;
+var bbl_height = 400;
+var bbl_width = 1500;
 
-d3.selection.prototype.moveToFront = function() {
-  return this.each(function(){
-    this.parentNode.appendChild(this);
-  });
-};
+d3.selection.prototype.moveToFront = function()
+  {
+    return this.each(function()
+    {
+      this.parentNode.appendChild(this);
+    });
+  };
 
 var state_bubbles = d3.tip()
                       .attr("class", "d3-tip")
                       .offset([-8, 0])
                       .html(function(d) {
-                         var value = (+d.value).toFixed(2) + '%';
-                         var pop = NumberWithCommas(parseInt(d.pop));
-                         var str = '<div class="state-tooltip-title">' +
-                         d.id + '</div>'
-                         + '<span class=state-label-P>Percentage: </span>'
-                         + '<span class=state-value-P>' + value + '</span><br/>'
-                         + '<span class=state-label-P>Matching Population: </span>'
-                         + '<span class=state-value-P>' + pop + '</span>';
-                         return str;
-                     });
+                          var rem = (+d.value) % 1;
+                          if(rem > 0.001 && (+d.value) != 0)
+                          {
+                            var value = Math.min(Math.ceil(Math.abs(Math.log10(+d.value))) + 1, 2);
+                            value = (+d.value).toFixed(value) + '%';
+                          }
+                          else
+                          {
+                            var value = (+d.value).toFixed(2) + '%';
+                          }
+                          var pop = NumberWithCommas(parseInt(d.pop));
+                          var str = '<div class="state-tooltip-title">' +
+                          d.id + '</div>'
+                          + '<span class=state-label-P>Percentage: </span>'
+                          + '<span class=state-value-P>' + value + '</span><br/>'
+                          + '<span class=state-label-P>Matching Population: </span>'
+                          + '<span class=state-value-P>' + pop + '</span>';
+                          return str;
+                        });
 
 function CreateNodes(data)
 {
   var maxVal = d3.max(data, function(d) {var temp = (+d["Value"]/100) * (+d["Total"]); return temp;});
+  var minVal = d3.min(data, function(d) {var temp = (+d["Value"]/100) * (+d["Total"]); return temp;});
   var radiusScale = d3.scalePow()
                       .exponent(0.75)
                       .range([10, 40])
-                      .domain([0, maxVal * 1.1]);
+                      .domain([minVal, maxVal]);
 
-  var myNodes = data.map(function(d) {
+  var myNodes = data.map(function(d)
+  {
     var population = (+d["Value"]/100) * (+d["Total"]);
     return{
       id: d["Geo"],
@@ -75,33 +88,43 @@ function BubbleChart(year)
   var bubbles = null;
   var nodes = [];
   var window_width = window.innerWidth;
-  width = width - margin.left - margin.right;
-  height = height - margin.top - margin.bottom;
+  bbl_width = window_width - margin.left - margin.right;
+  height = window.innerHeight - margin.top - margin.bottom;
   var state_array = d3.values(states_data[year]);
   state_array.pop();
 
   var max_per = d3.max(state_array, function(d) {return d.Value;});
   var min_per = d3.min(state_array, function(d) {return d.Value;});
+  var min_val = 0;
+  if(min_per < 1)
+  {
+    var min_val = 0;
+  }
+  else
+  {
+    var min_val = min_per;
+  }
+
+  var x_scale = d3.scaleLinear()
+                 .domain([min_val * 0.8, max_per * 1.1])
+                 .range([margin.left, bbl_width - margin.right])
+                 .nice();
+
+  xScale = x_scale;
+  var xAxis = d3.axisBottom(xScale)
+                .tickFormat(function(d) {var rem = d % 1; if(rem > 0.0001){var temp = Math.ceil(Math.abs(Math.log10(rem))) + 1; return d.toFixed(temp) + '%';} else{return d + '%';}});
 
   if(min_per < 1)
   {
     min_per = 0;
   }
 
-  var x_scale = d3.scaleLinear()
-                 .domain([min_per * 0.8, max_per * 1.1])
-                 .range([margin.left, width - margin.right])
-                 .nice();
-
-  xScale = x_scale;
-  var xAxis = d3.axisBottom(xScale);
-
-  d3.select("#dist-plot").attr("width", width)
-                         .attr("height", height);
+  d3.select("#dist-plot").attr("width", bbl_width)
+                         .attr("height", bbl_height);
 
   d3.select("#dist-plot").append("svg")
-                         .attr("width", width)
-                         .attr("height", height)
+                         .attr("width", bbl_width)
+                         .attr("height", bbl_height)
                          .attr("id","bubble-chart");
 
   var svg = d3.select("#bubble-chart");
@@ -111,14 +134,14 @@ function BubbleChart(year)
   svg.append("g").attr("id", "xAxis")
                  .classed("axis", true)
                  .attr("id", "xAxis")
-                 .attr("transform", "translate(" + 0 + "," + (height - margin.bottom) + ")");
+                 .attr("transform", "translate(" + 0 + "," + (bbl_height - margin.bottom) + ")");
 
   d3.selectAll("#xAxis").transition().duration(1000).call(xAxis);
 
   svg.select("axis").selectAll("text").style("fill", "#fff");
 
   var svg = document.getElementById("#bubble-chart");
-  midHeight = (height - margin.top + margin.bottom)/2;
+  midHeight = (bbl_height - margin.top + margin.bottom)/2;
 
   //svg.call(state_tip);
 
@@ -192,19 +215,26 @@ function UpdateChart(year)
   state_array.pop();
   var max_per = d3.max(state_array, function(d) {return d.Value;})
   var min_per = d3.min(state_array, function(d) {return d.Value;})
+  var min_val = 0;
 
   if(min_per < 1)
   {
-    min_per = 0;
+    min_val = 0;
+  }
+
+  else
+  {
+    min_val = min_per;
   }
 
 
   var x_scale = d3.scaleLinear()
-                 .domain([min_per * 0.8, max_per * 1.1])
-                 .range([margin.left, width - margin.right])
+                 .domain([min_val * 0.8, max_per * 1.1])
+                 .range([margin.left, bbl_width - margin.right])
                  .nice();
   xScale = x_scale;
-  var xAxis = d3.axisBottom(xScale);
+  var xAxis = d3.axisBottom(xScale)
+                .tickFormat(function(d) {var rem = d % 1; if(rem > 0.0001){var temp = Math.ceil(Math.abs(Math.log10(rem))) + 1; return d.toFixed(temp) + '%';} else{return d + '%';}});
 
   var svg = d3.select("#bubble-chart");
 
