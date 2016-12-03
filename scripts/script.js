@@ -496,6 +496,7 @@ function UpdateData()
 
   colorMap(year);
   FirstCharts(year);
+  //PopulationChart(year);
 
   if(first_load == false)
   {
@@ -1256,6 +1257,185 @@ function FirstCharts(curr_year)
                .attr("x", function(d) {return x0(d.id);});
 
      transition.select("#xAxis1").call(xAxis).selectAll("g").delay(delay);
+
+     temp_bars = bar_values_v;
+   }
+}
+
+function PopulationChart(curr_year)
+{
+  var char1_width = window.innerWidth - margin.left - margin.right;
+  var char1_height = 400 - margin.bottom - margin.top;
+
+
+  //*****Bar Chart*****
+  var svgBounds = d3.select("#popChart")
+                    .attr("width", char1_width)
+                    .attr("height", char1_height + margin.bottom + margin.top)
+                    //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  // selection values
+  var state_array = d3.values(states_data[curr_year]);
+  state_array.pop();
+
+  var bar_values = state_array.map(function(d){
+                               var population = (+d["Value"]/100) * (+d["Total"]);
+                               return{
+                                "state":d["Geo"],
+                                "id":abbreviation(d["Geo"]),
+                                "pop":parseInt(population),
+                                "per":(+d["Value"])
+                               }});
+
+   bar_values = bar_values.sort(function(a, b) {return d3.descending(b.id, a.id)});
+
+   var bar_tip = d3.tip()
+                   .attr("class", "d3-tip")
+                   .offset([-8, 0])
+                   .html(function(d) {
+                       var rem = (+d.per) % 1;
+                       if(rem > 0.001 && (+d.per) != 0)
+                       {
+                         var value = Math.min(Math.ceil(Math.abs(Math.log10(+d.per))) + 1, 2);
+                         value = (+d.per).toFixed(value) + '%';
+                       }
+                       else
+                       {
+                         var value = (+d.per).toFixed(2) + '%';
+                       }
+                       var pop = NumberWithCommas(parseInt(d.pop));
+                       var str = '<div class="state-tooltip-title">' +
+                       d.state + '</div>'
+                       + '<span class=state-label-P>Percentage: </span>'
+                       + '<span class=state-value-P>' + value + '</span><br/>'
+                       + '<span class=state-label-P>Matching Population: </span>'
+                       + '<span class=state-value-P>' + pop + '</span>';
+                       return str;
+                     });
+
+  var svg = d3.select("#popChart");
+  svg.call(bar_tip);
+
+  var minPop = d3.min(bar_values, function(d) { return d.pop; });
+  var maxPop = d3.max(bar_values, function(d) { return d.pop; });
+
+  PopColor = d3.scaleLinear().clamp(true)
+                .domain([minPop, maxPop])
+                .range(color_array);
+
+  //******************************************************
+
+  // Create the x and y scales
+
+  var xPop = d3.scaleBand().rangeRound([0, char1_width - margin.right - margin.left])
+                        .paddingInner(0.10)
+                        .domain(bar_values.map(function(d) {return d.id;}));
+  var yPop = d3.scaleLinear().range([char1_height - margin.top, 0])
+                          .domain([0, maxPop])
+                          .nice()
+
+
+  var xAxis = d3.axisBottom(xPop);
+  var yAxis = d3.axisLeft(yPop);
+
+  // Create the axes
+  var xxx = d3.selectAll("#xAxisPop")
+              .classed("axis", true)
+              .attr("transform", "translate(" + margin.left + "," + char1_height + ")")
+              .transition().duration(1000)
+              .call(xAxis)
+              .selectAll("text")
+              .style("text-anchor", "end")
+              .attr("dx", "-.8em")
+              .attr("dy", "-.3em")
+              .attr("transform", "rotate(-90)" );
+
+  var yyy = d3.selectAll("#yAxisPop")
+              .classed("axis", true)
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+              .transition().duration(1000)
+              .call(yAxis);
+
+  // Create the bars
+  var bars = d3.select("#popChart").selectAll("rect")
+                                   .data(bar_values);
+  bars.exit().remove();
+  bars = bars.enter()
+             .append("rect")
+             .merge(bars);
+
+  bars.attr("transform", "translate(" + margin.left + ",0)")
+      .attr("x", function(d)
+                  {
+                    return xPop(d.id);
+                  })
+      .attr("width", xPop.bandwidth())
+      .classed("bars", true)
+      .on("mouseover", function(d) {bar_tip.show(d)})
+      .on("mouseout", function(d) {bar_tip.hide(d)})
+            .attr("opacity", 1)
+      .transition().duration(1000)
+      .attr("y", function(d) {return yPop(d.pop)})
+      .style("fill", function(d)
+                      {
+                        return PopColor(d.pop);
+                      })
+      .attr("height", function(d)
+                      {
+                        return char1_height - yPop(d.pop);
+                      });
+
+   var names = d3.select("#xAxisPop").selectAll("text").on("click", SortName)
+                                                     .on("mouseover", function(d) {
+                                                       d3.select(this).style("cursor", "pointer");
+                                                     })
+                                                     .on("mouseout", function(d) {
+                                                       d3.select(this).style("cursor", "default")
+                                                     });
+   var vals = d3.select("#yAxisPop").selectAll("text").on("click", SortValue)
+                                                    .on("mouseover", function(d) {
+                                                       d3.select(this).style("cursor", "pointer");
+                                                     })
+                                                     .on("mouseout", function(d) {
+                                                       d3.select(this).style("cursor", "default")
+                                                     });
+
+   var temp_bars = bar_values;
+
+   function SortName()
+   {
+     var bar_values = temp_bars.sort(function(a, b) {return d3.descending(b.id, a.id)});
+     var x0 = xPop.domain(bar_values.map(function(d) {return d.id;})).copy();
+
+     svg.selectAll(".bars").sort(function(a, b) {return x0(b.id) - x0(a.id)});
+
+     var transition = svg.transition().duration(750),
+              delay = function(d, i) {return i * 50};
+
+     transition.selectAll(".bars")
+               .delay(delay)
+               .attr("x", function(d) {return x0(d.id);});
+
+     transition.select("#xAxisPop").call(xAxis).selectAll("g").delay(delay);
+
+     temp_bars = bar_values;
+   }
+
+   function SortValue()
+   {
+     var bar_values_v = temp_bars.sort(function(a,b) {return b.pop - a.pop});
+
+     var x0 = xPop.domain(bar_values_v.map(function(d) {return d.id;})).copy();
+
+     svg.selectAll(".bars").sort(function(a, b) {return x0(b.id) - x0(a.id)});
+
+     var transition = svg.transition().duration(750),
+              delay = function(d, i) {return i * 50};
+
+     transition.selectAll(".bars")
+               .delay(delay)
+               .attr("x", function(d) {return x0(d.id);});
+
+     transition.select("#xAxisPop").call(xAxis).selectAll("g").delay(delay);
 
      temp_bars = bar_values_v;
    }
