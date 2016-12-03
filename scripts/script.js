@@ -1099,6 +1099,8 @@ function FirstCharts(curr_year)
                                 "per":(+d["Value"])
                                }});
 
+   bar_values = bar_values.sort(function(a, b) {return d3.descending(b.id, a.id)});
+
    var bar_tip = d3.tip()
                    .attr("class", "d3-tip")
                    .offset([-8, 0])
@@ -1123,26 +1125,8 @@ function FirstCharts(curr_year)
                        return str;
                      });
 
-    var svg = d3.select("#barChart");
-    svg.call(bar_tip);
-
-/*
-  var selection = [];
-  for(var i = 0; i < 51; i++)
-  {
-      selection.push(state_array[i]["Value"] * 100);
-  }
-  // all the keys
-  var state_ids = Object.keys(states_data[curr_year]);
-
-  var states = [];
-  for(var i = 0; i < state_ids.length; i++)
-  {
-      var state = state_ids[i];
-      var name_temp = states_data[curr_year][state]["Geo"];
-      states.push(abbreviation(name_temp));
-  }
-  */
+  var svg = d3.select("#barChart");
+  svg.call(bar_tip);
 
   var min = d3.min(bar_values, function(d) { return d.per; });
   var max = d3.max(bar_values, function(d) { return d.per; });
@@ -1155,7 +1139,8 @@ function FirstCharts(curr_year)
                         .paddingInner(0.10)
                         .domain(bar_values.map(function(d) {return d.id;}));
   var y = d3.scaleLinear().range([char1_height, 0])
-                          .domain([0, max * 1.1]);
+                          .domain([0, max])
+                          .nice()
 
 
   var xAxis = d3.axisBottom(x);
@@ -1219,14 +1204,25 @@ function FirstCharts(curr_year)
                         return char1_height - y(d.per);
                       });
 
-   var names = d3.select("#xAxis1").selectAll("text").on("click", SortName);
-   var vals = d3.select("#yAxis1").selectAll("text").on("click", SortValue);
+   var names = d3.select("#xAxis1").selectAll("text").on("click", SortName)
+                                                     .on("mouseover", function(d) {
+                                                       d3.select(this).style("cursor", "pointer");
+                                                     })
+                                                     .on("mouseout", function(d) {
+                                                       d3.select(this).style("cursor", "default")
+                                                     });
+   var vals = d3.select("#yAxis1").selectAll("text").on("click", SortValue)
+                                                    .on("mouseover", function(d) {
+                                                       d3.select(this).style("cursor", "pointer");
+                                                     })
+                                                     .on("mouseout", function(d) {
+                                                       d3.select(this).style("cursor", "default")
+                                                     });
 
    var temp_bars = bar_values;
 
    function SortName()
    {
-     console.log(bar_values);
      var bar_values = temp_bars.sort(function(a, b) {return d3.descending(b.id, a.id)});
      var x0 = x.domain(bar_values.map(function(d) {return d.id;})).copy();
 
@@ -1263,61 +1259,6 @@ function FirstCharts(curr_year)
 
      temp_bars = bar_values_v;
    }
-
-                      //self.svg.call(tip);
-
-
-  //*****Line Chart*****
-  /*var svgBounds = d3.select("#lineChart").node().getBoundingClientRect();
-
-  //Data
-  var Datas2 = [["2010", 100], ["2011", 500], ["2012", 300], ["2013", 250]];
-  //var chosen = document.getElementById("dataset").value;
-  var chosen = 1;
-
-  var max = 0
-  for(var i = 0; i < Datas2.length; i++)
-  {
-      if(Datas2[i][chosen] > max)
-          max = Datas2[i][chosen];
-  }
-
-  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05);
-  var y = d3.scaleLinear().range([height, 0]).domain([0, max]);
-
-  var xAxis = d3.axisBottom(x);
-  var yAxis = d3.axisLeft(y);
-
-  x.domain(["2010", "2011", "2012", "2013"]);//Datas(function(d) { return d[0]; }));
-  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]);
-
-  // Create the axes
-  var xxx = d3.selectAll("#xAxis2")
-    .classed("axis", true)
-    .attr("transform", "translate(" + margin.left + "," + height + ")")
-    .call(xAxis)
-    .selectAll("text")
-    .style("text-anchor", "end")
-    .attr("dx", "-.8em")
-    .attr("dy", "-.55em")
-    .attr("transform", "rotate(-90)" );
-
-  var yyy = d3.selectAll("#yAxis2")
-    .classed("axis", true)
-    .attr("transform", "translate(" + margin.left + ",0)")
-    .call(yAxis);*/
-
-  /*var lines = d3.select("#lineChart")
-      .selectAll("line").data(Datas2);
-
-  lines.exit().remove();
-  lines = lines.enter().append("line")
-      .attr("transform", "translate(" + margin.left + ",0)")
-      .attr("x1", function(d,i) { return x(d[0]); })
-      .attr("x2", function(d) { return height - y(d[chosen]); })
-      .attr("y1", function(d,i) { return x(d[0]); })
-      .attr("y2", function(d) { return height - y(d[chosen]); })
-      .attr("opacity", 1);*/
 }
 
 function abbreviation(input)
