@@ -273,7 +273,7 @@ function CalculatePopulation(ages, genValues, eduValues, raceValues, marValues)
   for(var yr_idx = 0; yr_idx < years.length; yr_idx++)
   {
     var year = years[yr_idx];
-    var state_ids = Object.keys(states_data[year]);
+    state_ids = Object.keys(states_data[year]);
     for(var st_idx = 0; st_idx < state_ids.length; st_idx++)
     {
       var state = state_ids[st_idx];
@@ -537,7 +537,6 @@ function LoadData()
 
   BASE_DIR = DATA_BASE_DIR + geo_[1] + "/";
   ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
-  //SecondCharts();
 }
 
 function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels)
@@ -702,11 +701,8 @@ function SecondCharts()
   //selected value
   var selectedData = d3.select("#dataset").node().value;
 
-  //console.log(states_data);
-  //console.log(states_data);
-
   // all the keys
-  var state_ids = Object.keys(states_data[Year]);
+  state_ids = Object.keys(states_data[Year]);
 
   var states = [];
   var array = [];
@@ -1061,7 +1057,7 @@ function SecondCharts()
   var xAxis = d3.axisBottom(x);
   var yAxis = d3.axisLeft(y);
 
-  x.domain(array.map(function(d) { return d.id; }));
+  x.domain(states.map(function(d) { return d; }));
   y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]);
 
   // Create the axes
@@ -1174,31 +1170,8 @@ function SecondCharts()
       .attr("text-anchor", "end")
       .attr("fill", "white")
       .text(function(d) { return d; });
-
-    // var col = d3.scaleOrdinal()
-    //     .range(["#8cd98c", "#80b3ff", "#ff80df", "#ff6666", "#cc99ff"])
-    //     .domain(leg);
-    //
-    // var legend = d3.select("#stackedBarChart").selectAll(".legend")
-    //     .data(leg.reverse())
-    //     .enter().append("g")
-    //     .attr("class", "legend")
-    //     .attr("transform", function(d,i) {return "translate(0" + i * 20 + ")"; })
-    //     .style("font", "20px sans-serif");
-    //
-    // legend.append("rect")
-    //     .attr("x", width-18)
-    //     .attr("width", 18)
-    //     .attr("height", 18)
-    //     .attr("fill", col);
-    //
-    // legend.append("text")
-    //     .attr("x", width-24)
-    //     .attr("y", 9)
-    //     .attr("dy", ".35em")
-    //     .attr("text-anchor", "end")
-    //     .text(function(d) { return d; });
 }
+
 
 function FirstCharts(curr_year)
 {
@@ -1264,8 +1237,7 @@ function FirstCharts(curr_year)
                         .paddingInner(0.10)
                         .domain(bar_values.map(function(d) {return d.id;}));
   var y = d3.scaleLinear().range([char1_height - margin.top, 0])
-                          .domain([0, max])
-                          .nice()
+                          .domain([0, max]);
 
 
   var xAxis = d3.axisBottom(x);
