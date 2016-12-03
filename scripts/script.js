@@ -102,6 +102,7 @@ var geo_tip = d3.tip()
                  return str;
                });
 
+// Here drawing the US map is done.
 var projection = d3.geoAlbersUsa()
     .scale(Math.min(window_width - 100, 1500))
     .translate([width / 2, height / 2]);
@@ -118,6 +119,7 @@ var svg = d3.select("body").append("svg")
 var zoom = d3.zoom()
     .scaleExtent([1, 8]);
 
+// This rectangle is added, so when the user clicks on a space which is not any part of the US map, it zooms out.
 svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
@@ -139,6 +141,7 @@ d3.csv(tags_file, function(error, tag)
   }
 });
 
+// States, counties and cities are being created.
 d3.json(us_json_file, function(error, us)
 {
    g.append("g")
@@ -218,6 +221,7 @@ d3.json(us_json_file, function(error, us)
     });
 });
 
+// This is the event that is called when the user clicks on the US map. It zooms in, and shows the counties.
 function clicked(d)
 {
   if(active.node() === this)
@@ -236,7 +240,6 @@ function clicked(d)
       scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
       translate = [width / 2 - scale * x, height / 2 - scale * y];
 
-  //g.style("stroke-width", 1.5 / d3.event.scale + "px");
   g.transition().duration(1300)
                 .attr('transform', 'translate(' + translate + ') scale(' + scale + ')');
   d3.select('body').select('svg').select('rect').call(zoom);
@@ -244,6 +247,7 @@ function clicked(d)
   active.style("fill-opacity", "0");
 }
 
+// If the user clicks on the same state that is zoomed on, or a part of the svg that is not any part of the US map, it zooms out.
 function reset()
 {
   active.style("stroke-width", "0.5px");
@@ -644,19 +648,16 @@ function ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_label
   counties_data = year_data;
 }
 
+// This function colors the US map, based the selections that the user has made. It colors both states and counties.
 function colorMap(year){
-
   var state_array = d3.values(states_data[year]);
   var county_array = d3.values(counties_data[year]);
   max_state = d3.max(state_array, function(d){return d["Value"];});
   var min_state = d3.min(state_array, function(d) {return d["Value"];})
-  //max_county = d3.max(county_array, function(d){return d["Value"];});
-  //var max_val = Math.max(max_state, max_county);
 
   color = d3.scaleLinear().clamp(true)
                 .domain([min_state, max_state])
                 .range(color_array);
-                //.range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]); //green, Alex's Tutorial
 
     d3.select("#stateg").selectAll("path")
         .transition().duration(1500)
@@ -691,26 +692,32 @@ function colorMap(year){
     }
 }
 
+//This function creates the Stacked-bar-chart
 function SecondCharts()
 {
   //*****Bar Chart*****
   var svgBounds = d3.select("#stackBarChart").node().getBoundingClientRect();
 
-  //year
+  //selected year
   var Year = d3.select("#year-sec").node().value;
-  //selected value
+  //selected categories
   var selectedData = d3.select("#dataset").node().value;
 
-  // all the keys
+  //all the keys for states
   state_ids = Object.keys(states_data[Year]);
 
-  var states = [];
+  //the final array that we use for creating bar charts
   var array = [];
+  //temporary arrays for keeping the data for each sub-category
   var array2 = [];
   var array3 = [];
   var array4 = [];
   var array5 = [];
+  //name of the sub-categories for labeling
   var leg = [];
+
+  //name of the states for x axis
+  var states = [];
   for(var i = 0; i < state_ids.length; i++)
   {
       var state = state_ids[i];
@@ -718,6 +725,7 @@ function SecondCharts()
       states.push(abbreviation(name_temp));
   }
 
+  //Compute the population of each sub-category for each state
   switch(selectedData) {
     case "gender":
         leg = ["Male", "Female"];
@@ -741,8 +749,6 @@ function SecondCharts()
                 male += m[j]["Population"];
             }
 
-            male = Math.round(male/1000);
-            female = Math.round(female/1000);
             array.push(male);
             array2.push(female);
             array3.push(0);
@@ -803,11 +809,6 @@ function SecondCharts()
                                     sixty += f[j]["Population"] + m[j]["Population"];
             }
 
-            twenty = Math.round(twenty/1000);
-            thirty = Math.round(thirty/1000);
-            fourty = Math.round(fourty/1000);
-            fifty = Math.round(fifty/1000);
-            sixty = Math.round(sixty/1000);
             array.push(twenty);
             array2.push(thirty);
             array3.push(fourty);
@@ -871,11 +872,6 @@ function SecondCharts()
                 coll += f[j]["Some College"] * total1 + m[j]["Some College"] * total2;
             }
 
-            bach = Math.round(bach/1000);
-            grad = Math.round(grad/1000);
-            hs = Math.round(hs/1000);
-            nohs = Math.round(nohs/1000);
-            coll = Math.round(coll/1000);
             array.push(nohs);
             array2.push(hs);
             array3.push(coll);
@@ -923,11 +919,6 @@ function SecondCharts()
             white = info["White"] * total;
             two = info["Two or More"] * total;
 
-            asian = Math.round(asian/1000);
-            black = Math.round(black/1000);
-            white = Math.round(white/1000);
-            other = Math.round(other/1000);
-            two = Math.round(two/1000);
             array.push(white);
             array2.push(black);
             array3.push(asian);
@@ -991,11 +982,6 @@ function SecondCharts()
                 wid += f[j]["Widowed"] * total1 + m[j]["Widowed"] * total2;
             }
 
-            div = Math.round(div/1000);
-            mar = Math.round(mar/1000);
-            nomar = Math.round(nomar/1000);
-            sep = Math.round(sep/1000);
-            wid = Math.round(wid/1000);
             array.push(mar);
             array2.push(sep);
             array3.push(wid);
@@ -1027,14 +1013,15 @@ function SecondCharts()
         }
   }
 
+  //round them and divides them by 1,000,000
   for(var i = 0; i < sum.length; i++)
-    {
-      sum[i] = Math.round(sum[i]/1000);
-      array[i] = Math.round(array[i]/1000);
-    }
+  {
+    sum[i] = Math.round(sum[i]/1000000);
+    array[i] = Math.round(array[i]/1000000);
+  }
 
   //**********************************************
-  // Create the x and y scales
+  //svgbounds
   var width = window.innerWidth - margin.left - margin.right - 200;
   var height = 400 - margin.bottom - margin.top;
 
@@ -1042,13 +1029,9 @@ function SecondCharts()
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom + 200)
 
-  var max = 0
-  for(var i = 0; i < sum.length; i++)
-  {
-      if(sum[i] > max)
-          max = sum[i];
-  }
+  var max = d3.max(sum, function(d) { return d; });
 
+  //Create x axis and y axis
   var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05);
   var y = d3.scaleLinear()
       .range([height, 0])
@@ -1061,9 +1044,9 @@ function SecondCharts()
   var yAxis = d3.axisLeft(y);
 
   x.domain(states.map(function(d) { return d; }));
-  y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]);
+  y.domain([0, max]);
 
-  // Create the axes
+  //Append the axes
   var xxx = d3.selectAll("#xAxis3")
     .classed("axis", true)
     .attr("transform", "translate(" + margin.left + "," + (height+10) + ")")
@@ -1088,7 +1071,7 @@ function SecondCharts()
     .style("font", "16px sans-serif")
     .text("Population (million)");
 
-  // Create the bars
+  //Create the bars
   array = array.reverse();
   sum = sum.reverse();
   states = states.reverse();
@@ -1120,7 +1103,7 @@ function SecondCharts()
       .attr("opacity", 1);
 
 
-
+  //Create Labels
   var col = d3.scaleOrdinal()
     .range(["#a58ec4", "#bfadd8", "#992288", "#441188", "#bbdddd"]);
     col.domain(leg);
