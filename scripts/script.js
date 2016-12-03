@@ -694,7 +694,7 @@ function colorMap(year){
 function SecondCharts()
 {
   //*****Bar Chart*****
-  var svgBounds = d3.select("#barChart").node().getBoundingClientRect();
+  var svgBounds = d3.select("#stackBarChart").node().getBoundingClientRect();
 
   //year
   var Year = d3.select("#year-sec").node().value;
@@ -1035,7 +1035,6 @@ function SecondCharts()
 
   //**********************************************
   // Create the x and y scales
-
   var width = window.innerWidth - margin.left - margin.right - 200;
   var height = 400 - margin.bottom - margin.top;
 
@@ -1050,7 +1049,7 @@ function SecondCharts()
           max = sum[i];
   }
 
-  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.10);
+  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05);
   var y = d3.scaleLinear()
       .range([height, 0])
       .domain([0, max]);
@@ -1067,23 +1066,22 @@ function SecondCharts()
   // Create the axes
   var xxx = d3.selectAll("#xAxis3")
     .classed("axis", true)
-    .attr("transform", "translate(" + margin.left + "," + (height+50) + ")")
-    .transition().duration(1500)
+    .attr("transform", "translate(" + margin.left + "," + (height+10) + ")")
     .call(xAxis)
     .selectAll("text")
     .style("text-anchor", "end")
     .attr("dx", "-.8em")
-    .attr("dy", "-.3em")
+    .attr("dy", "-.55em")
     .attr("transform", "rotate(-90)" );
 
   var yyy = d3.selectAll("#yAxis3")
     .classed("axis", true)
-    .attr("transform", "translate(" + margin.left + ",50)")
+    .attr("transform", "translate(" + margin.left + ",10)")
     .call(yAxis);
 
   yyy.append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 0 - 50)
+    .attr("y", 0 - margin.left)
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
@@ -1099,7 +1097,7 @@ function SecondCharts()
   bars.exit().remove();
   bars = bars.enter().append("rect").merge(bars);
 
-  bars.attr("transform", "translate(" + margin.left + ",50)")
+  bars.attr("transform", "translate(" + margin.left + ",10)")
       .attr("x", function(d, i) { return x(states[i%51]); })
       .attr("width", x.bandwidth())
       .transition().duration(3000)
