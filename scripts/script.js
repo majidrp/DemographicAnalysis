@@ -538,6 +538,7 @@ function LoadData()
 
   BASE_DIR = DATA_BASE_DIR + geo_[1] + "/";
   ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels);
+  //SecondCharts();
 }
 
 function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels)
@@ -591,6 +592,7 @@ function ReadStates(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels,
     });
   }
   states_data = year_data;
+  stt = states_data;
 }
 
 function ReadCounties(BASE_DIR, FILE_EXT, years, geo_, genders, ages, base_labels, other_labels)
@@ -701,6 +703,9 @@ function SecondCharts()
   //selected value
   var selectedData = d3.select("#dataset").node().value;
 
+  //console.log(states_data);
+  //console.log(states_data);
+
   // all the keys
   var state_ids = Object.keys(states_data[Year]);
 
@@ -710,6 +715,7 @@ function SecondCharts()
   var array3 = [];
   var array4 = [];
   var array5 = [];
+  var leg = [];
   for(var i = 0; i < state_ids.length; i++)
   {
       var state = state_ids[i];
@@ -719,6 +725,7 @@ function SecondCharts()
 
   switch(selectedData) {
     case "gender":
+        leg = ["Male", "Female"];
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
@@ -743,6 +750,9 @@ function SecondCharts()
             female = Math.round(female/1000);
             array.push(male);
             array2.push(female);
+            array3.push(0);
+            array4.push(0);
+            array5.push(0);
         }
         var sum = [];
         for(var i = 0; i <= 50; i++)
@@ -752,9 +762,25 @@ function SecondCharts()
           array.push(array2[i]);
           sum.push(array[i] + array2[i]);
         }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array3[i]);
+          sum.push(array[i] + array2[i] + array3[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array4[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i]);
+        }
+        for(var i = 0; i <= 50; i++)
+        {
+          array.push(array5[i]);
+          sum.push(array[i] + array2[i] + array3[i] + array4[i] + array5[i]);
+        }
         break;
 
     case "age":
+        leg = ["18-29", "30-39", "40-49", "50-59", "60-65+"];
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
@@ -819,6 +845,7 @@ function SecondCharts()
         break;
 
     case "edu":
+        leg = ["No High School", "High School/GED", "Some College", "Bachelor's", "Graduate/Professional"];
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
@@ -886,6 +913,7 @@ function SecondCharts()
         break;
 
     case "race":
+        leg = ["White", "Black", "Asian", "Other Races", "Two or more Races"];
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
@@ -937,6 +965,7 @@ function SecondCharts()
         break;
 
     case "marital":
+        leg = ["Married", "Seperated", "Widowed", "Divorced", "Never Married"];
         for(var i = 0; i < state_ids.length; i++)
         {
             var state = state_ids[i];
@@ -1003,6 +1032,11 @@ function SecondCharts()
         }
   }
 
+  for(var i = 0; i < sum.length; i++)
+    {
+      sum[i] = Math.round(sum[i]/1000);
+      array[i] = Math.round(array[i]/1000);
+    }
 
   //**********************************************
   // Create the x and y scales
@@ -1022,7 +1056,7 @@ function SecondCharts()
       .range([height, 0])
       .domain([0, max]);
   var coloring = d3.scaleLinear()
-      .range(["royalblue", "crimson", "olive", "orangered", "purple"])
+      .range(["#8cd98c", "#80b3ff", "#ff80df", "#ff6666", "#cc99ff"])
       .domain([1, 2, 3, 4, 5]);
 
   var xAxis = d3.axisBottom(x);
@@ -1034,7 +1068,7 @@ function SecondCharts()
   // Create the axes
   var xxx = d3.selectAll("#xAxis3")
     .classed("axis", true)
-    .attr("transform", "translate(" + margin.left + "," + height + ")")
+    .attr("transform", "translate(" + margin.left + "," + (height+50) + ")")
     .call(xAxis)
     .selectAll("text")
     .style("text-anchor", "end")
@@ -1044,16 +1078,28 @@ function SecondCharts()
 
   var yyy = d3.selectAll("#yAxis3")
     .classed("axis", true)
-    .attr("transform", "translate(" + margin.left + ",0)")
+    .attr("transform", "translate(" + margin.left + ",50)")
     .call(yAxis);
 
+  yyy.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .style("font", "16px sans-serif")
+    .text("Population (million)");
+
   // Create the bars
+  array = array.reverse();
+  sum = sum.reverse();
+  states = states.reverse();
   var bars = d3.select("#stackBarChart").selectAll("rect")
       .data(array);
   bars.exit().remove();
   bars = bars.enter().append("rect").merge(bars);
 
-  bars.attr("transform", "translate(" + margin.left + ",0)")
+  bars.attr("transform", "translate(" + margin.left + ",50)")
       .attr("x", function(d, i) { return x(states[i%51]); })
       .attr("width", x.bandwidth())
       .transition().duration(3000)
@@ -1069,11 +1115,90 @@ function SecondCharts()
                             else
                               return coloring(5);
        })
-      .attr("height", function(d, i) { return height - y(d); })
+      .attr("height", function(d, i) { return height - y(sum[i]); })
       .attr("y", function(d, i) {
           return y(sum[i]);
       })
       .attr("opacity", 1);
+
+
+
+  var col = d3.scaleOrdinal()
+    .range(["#cc99ff", "#ff6666" , "#ff80df" , "#80b3ff", "#8cd98c"]);
+    col.domain(leg);
+
+  temp = [];
+  var legend = d3.select("#stackBarChart").selectAll(".legend")
+      .data(temp);
+
+  legend.exit().remove();
+
+  legend = legend.enter().append("g").merge(legend)
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; })
+      .style("font", "16px sans-serif");
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .attr("fill", col);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".70em")
+      .attr("text-anchor", "end")
+      .attr("fill", "white")
+      .text(function(d) { return d; });
+
+  var legend = d3.select("#stackBarChart").selectAll(".legend")
+      .data(leg.reverse());
+
+  legend.exit().remove();
+
+  legend = legend.enter().append("g").merge(legend)
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; })
+      .style("font", "16px sans-serif");
+
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .attr("fill", col);
+
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".70em")
+      .attr("text-anchor", "end")
+      .attr("fill", "white")
+      .text(function(d) { return d; });
+
+    // var col = d3.scaleOrdinal()
+    //     .range(["#8cd98c", "#80b3ff", "#ff80df", "#ff6666", "#cc99ff"])
+    //     .domain(leg);
+    //
+    // var legend = d3.select("#stackedBarChart").selectAll(".legend")
+    //     .data(leg.reverse())
+    //     .enter().append("g")
+    //     .attr("class", "legend")
+    //     .attr("transform", function(d,i) {return "translate(0" + i * 20 + ")"; })
+    //     .style("font", "20px sans-serif");
+    //
+    // legend.append("rect")
+    //     .attr("x", width-18)
+    //     .attr("width", 18)
+    //     .attr("height", 18)
+    //     .attr("fill", col);
+    //
+    // legend.append("text")
+    //     .attr("x", width-24)
+    //     .attr("y", 9)
+    //     .attr("dy", ".35em")
+    //     .attr("text-anchor", "end")
+    //     .text(function(d) { return d; });
 }
 
 function FirstCharts(curr_year)
@@ -1177,8 +1302,8 @@ function FirstCharts(curr_year)
               .call(yAxis);
 
   // Create the bars
-  var bars = d3.select("#barChart").selectAll("rect")
-                                   .data(bar_values);
+  var bars = d3.select("#barChart").selectAll("rect").data(bar_values);
+
   bars.exit().remove();
   bars = bars.enter()
              .append("rect")
