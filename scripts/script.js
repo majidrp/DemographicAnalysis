@@ -1107,6 +1107,7 @@ function SecondCharts()
   var col = d3.scaleOrdinal()
     .range(["#a58ec4", "#bfadd8", "#992288", "#441188", "blue"]);//#bbdddd"]);
     col.domain(leg);
+	console.log("Hello");
 
   temp = [];
   var legend = d3.select("#stackBarChart").selectAll(".legend")
