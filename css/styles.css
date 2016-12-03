@@ -253,7 +253,6 @@ footer{
 
 .state .active {
   fill: #1E90FF;
-  display:none;
 }
 
 #state-borders {
@@ -271,13 +270,12 @@ footer{
   stroke-width: .5px;
 }
 
-.state:hover
+.state:hover, .county-boundary:hover
 {
-  fill: rgba(255, 255, 255, 0.25);
   opacity: .7;
+  fill: orange;
 }
 
-.county-boundary:hover
-{
-  opacity: .7;
+#stateg .active {
+  display:none;
 }
