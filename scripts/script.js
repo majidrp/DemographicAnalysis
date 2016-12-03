@@ -21,8 +21,8 @@ function NumberWithCommas(x)
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-//var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
-var DATA_BASE_DIR = "/Data/" // For "local" hosting
+var DATA_BASE_DIR = "/DemographicAnalysis/Data/"; // Use this value for hosting on GitHub
+//var DATA_BASE_DIR = "/Data/" // For "local" hosting
 var us_json_file = DATA_BASE_DIR + "us.json";
 var cities_file = DATA_BASE_DIR + "major_cities.csv";
 var tags_file = DATA_BASE_DIR + "tags.csv";
