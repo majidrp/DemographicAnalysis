@@ -1223,7 +1223,8 @@ function FirstCharts(curr_year)
                         .paddingInner(0.10)
                         .domain(bar_values.map(function(d) {return d.id;}));
   var y = d3.scaleLinear().range([char1_height - margin.top, 0])
-                          .domain([0, max]);
+                          .domain([0, max])
+                          .nice();
 
 
   var xAxis = d3.axisBottom(x);
