@@ -2,6 +2,7 @@ var percent_width = 0.7;
 var states_data = [];
 var counties_data = [];
 var filled_array = [];
+var geo_labels = {};
 var color = null;
 var color_array = ["#BFD3E6", "#88419D"];
 var first_load = false;
@@ -23,6 +24,7 @@ function NumberWithCommas(x)
 var DATA_BASE_DIR = "/Data/" // For "local" hosting
 var us_json_file = DATA_BASE_DIR + "us.json";
 var cities_file = DATA_BASE_DIR + "major_cities.csv";
+var tags_file = DATA_BASE_DIR + "tags.csv";
 
 var mapSVG = document.getElementById("#map");
 
@@ -43,10 +45,20 @@ var city_tip = d3.tip()
                  .offset([-8, 0])
                  .html(function(d) { return d["city"]; });
 
-var state_tip = d3.tip()
-               .attr("class", "d3-tip")
-               .offset([-8, 0])
-               .html(function(d) {
+var geo_tip = d3.tip()
+                .attr("class", "d3-tip")
+                .offset([-8, 0])
+                .html(function(d) {
+
+                 if(d.id < 1000)
+                 {
+                   var id = d.id * 1000;
+                 }
+                 else
+                 {
+                   var id = d.id;
+                 }
+
                  if(curr_year == 0)
                  {
                    var value = "N/A";
@@ -55,12 +67,31 @@ var state_tip = d3.tip()
                  }
                  else
                  {
-                   var value = states_data[curr_year][d.id * 1000]["Value"].toFixed(2) + '%';
-                   var pop = NumberWithCommas(states_data[curr_year][d.id * 1000]["Total"]);
-                   var num = NumberWithCommas(parseInt(states_data[curr_year][d.id * 1000]["Value"]/100 * states_data[curr_year][d.id * 1000]["Total"]));
+                   try
+                   {
+                     if(d.id < 1000)
+                     {
+                       var value = states_data[curr_year][id]["Value"].toFixed(2) + '%';
+                       var pop = NumberWithCommas(states_data[curr_year][id]["Total"]);
+                       var num = NumberWithCommas(parseInt(states_data[curr_year][id]["Value"]/100 * states_data[curr_year][id]["Total"]));
+                     }
+                     else
+                     {
+                       var value = counties_data[curr_year][id]["Value"].toFixed(2) + '%';
+                       var pop = NumberWithCommas(counties_data[curr_year][id]["Total"]);
+                       var num = NumberWithCommas(parseInt(counties_data[curr_year][id]["Value"]/100 * counties_data[curr_year][id]["Total"]));
+                     }
+                   }
+                   catch(err)
+                   {
+                     var value = "N/A";
+                     var pop = "N/A";
+                     var num = "N/A";
+                   }
                  }
+
                  var str = '<div class="state-tooltip-title">' +
-                 states_data[2015][d.id * 1000]["Geo"] + '</div>'
+                 geo_labels[id] + '</div>'
                  + '<span class=state-label-P>Percentage: </span>'
                  + '<span class=state-value-P>' + value + '</span><br/>'
                  + '<span class=state-label-P>Total Population: </span>'
@@ -69,34 +100,6 @@ var state_tip = d3.tip()
                  + '<span class=state-value-P>' + num + '</span>';
                  return str;
                });
-
-
-var county_tip = d3.tip()
-              .attr("class", "d3-tip")
-              .offset([-8, 0])
-              .html(function(d) {
-                if(curr_year == 0)
-                {
-                  var value = "N/A";
-                  var pop = "N/A";
-                  var num = "N/A";
-                }
-                else
-                {
-                  var value = counties_data[curr_year][d.id]["Value"].toFixed(2) + '%';
-                  var pop = NumberWithCommas(counties_data[curr_year][d.id]["Total"]);
-                  var num = NumberWithCommas(parseInt(counties_data[curr_year][d.id]["Value"]/100 * counties_data[curr_year][d.id]["Total"]));
-                }
-                var str = '<div class="county-tooltip-title">' +
-                counties_data[2015][d.id * 1000]["Geo"] + '</div>'
-                + '<span class=county-label-P>Percentage: </span>'
-                + '<span class=county-value-P>' + value + '</span><br/>'
-                + '<span class=county-label-P>Total Population: </span>'
-                + '<span class=county-value-P>' + pop + '</span><br/>'
-                + '<span class=county-label-P>Matching Population: </span>'
-                + '<span class=county-value-P>' + num + '</span>';
-                return str;
-              });
 
 var projection = d3.geoAlbersUsa()
     .scale(Math.min(window_width - 100, 1500))
@@ -121,10 +124,19 @@ svg.append("rect")
     .on("click", reset);
 
 svg.call(city_tip);
-svg.call(state_tip);
-svg.call(county_tip);
+svg.call(geo_tip);
 
 var g = svg.append("g");
+
+d3.csv(tags_file, function(error, tag)
+{
+  for(var i = 0; i < tag.length; i++)
+  {
+    var temp_id = tag[i].id;
+    var temp_geo = tag[i].location;
+    geo_labels[temp_id] = temp_geo;
+  }
+});
 
 d3.json(us_json_file, function(error, us)
 {
@@ -137,8 +149,8 @@ d3.json(us_json_file, function(error, us)
     .attr("class", "county-boundary")
     .attr("id", function(d){return d.id})
     .on("click", reset)
-    .on("mouseover", function(d) {county_tip.show(d);})
-    .on("mouseout", function(d) {county_tip.hide(d);})
+    .on("mouseover", function(d) {geo_tip.show(d);})
+    .on("mouseout", function(d) {geo_tip.hide(d);})
     .on("contextmenu", function (d, i) {
         d3.event.preventDefault();});
 
@@ -151,8 +163,8 @@ d3.json(us_json_file, function(error, us)
     .attr("class", "state")
     .attr("id", function(d){return d.id * 1000;})
     .on("click", clicked)
-    .on("mouseover", function(d) {state_tip.show(d);})
-    .on("mouseout", function(d) {state_tip.hide(d);})
+    .on("mouseover", function(d) {geo_tip.show(d);})
+    .on("mouseout", function(d) {geo_tip.hide(d);})
     .on("contextmenu", function (d, i) {
         d3.event.preventDefault();
         if(filled_array[d.id * 1000] == true && curr_year != 0)
