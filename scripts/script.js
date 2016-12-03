@@ -1027,7 +1027,7 @@ function SecondCharts()
   var xAxis = d3.axisBottom(x);
   var yAxis = d3.axisLeft(y);
 
-  x.domain(bar_values.map(function(d) { return d.id; }));
+  x.domain(array.map(function(d) { return d.id; }));
   y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]);
 
   // Create the axes
