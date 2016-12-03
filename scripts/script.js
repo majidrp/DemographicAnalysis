@@ -672,7 +672,7 @@ function colorMap(year){
         .style("fill", function(d){
             try {
                   var val2 = counties_data[year][d.id]["Value"];
-                  if (val2 > 0){
+                  if (val2 > -1){
                     return color(val2);
                   }
                   else{
