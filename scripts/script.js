@@ -1138,7 +1138,7 @@ function FirstCharts(curr_year)
   var x = d3.scaleBand().rangeRound([0, char1_width - margin.right - margin.left])
                         .paddingInner(0.10)
                         .domain(bar_values.map(function(d) {return d.id;}));
-  var y = d3.scaleLinear().range([char1_height, 0])
+  var y = d3.scaleLinear().range([char1_height - margin.top, 0])
                           .domain([0, max])
                           .nice()
 
@@ -1171,7 +1171,7 @@ function FirstCharts(curr_year)
 
   var yyy = d3.selectAll("#yAxis1")
               .classed("axis", true)
-              .attr("transform", "translate(" + margin.left + ",0)")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
               .transition().duration(1000)
               .call(yAxis);
 
