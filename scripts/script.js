@@ -1105,7 +1105,7 @@ function SecondCharts()
 
   //Create Labels
   var col = d3.scaleOrdinal()
-    .range(["#a58ec4", "#bfadd8", "#992288", "#441188", "blue"]);//#bbdddd"]);
+    .range(["#a58ec4", "#bfadd8", "#992288", "#441188", "#bbdddd"]);
     col.domain(leg);
 	console.log("Hello");
 
