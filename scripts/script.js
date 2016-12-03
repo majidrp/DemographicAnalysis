@@ -1071,8 +1071,8 @@ function FirstCharts(curr_year)
   //*****Bar Chart*****
   var svgBounds = d3.select("#barChart")
                     .attr("width", char1_width)
-                    .attr("height", char1_height + margin.bottom + margin.top);
-
+                    .attr("height", char1_height + margin.bottom + margin.top)
+                    //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   // selection values
   var state_array = d3.values(states_data[curr_year]);
   state_array.pop();
@@ -1085,6 +1085,33 @@ function FirstCharts(curr_year)
                                 "pop":population,
                                 "per":(+d["Value"])
                                }});
+
+   var bar_tip = d3.tip()
+                   .attr("class", "d3-tip")
+                   .offset([-8, 0])
+                   .html(function(d) {
+                       var rem = (+d.per) % 1;
+                       if(rem > 0.001 && (+d.per) != 0)
+                       {
+                         var value = Math.min(Math.ceil(Math.abs(Math.log10(+d.per))) + 1, 2);
+                         value = (+d.per).toFixed(value) + '%';
+                       }
+                       else
+                       {
+                         var value = (+d.per).toFixed(2) + '%';
+                       }
+                       var pop = NumberWithCommas(parseInt(d.pop));
+                       var str = '<div class="state-tooltip-title">' +
+                       d.state + '</div>'
+                       + '<span class=state-label-P>Percentage: </span>'
+                       + '<span class=state-value-P>' + value + '</span><br/>'
+                       + '<span class=state-label-P>Matching Population: </span>'
+                       + '<span class=state-value-P>' + pop + '</span>';
+                       return str;
+                     });
+
+    var svg = d3.select("#barChart");
+    svg.call(bar_tip);
 /*
   var selection = [];
   for(var i = 0; i < 51; i++)
@@ -1131,19 +1158,11 @@ function FirstCharts(curr_year)
                     return d + '%';
                   }});
 
-/*
-  // Create colorScale
-  var min = d3.min(bar_values, function(d) { return d.per; });
-  var max = d3.max(bar_values, function(d) { return d.per; });
-  var colorScale = d3.scaleLinear()
-              .domain([min, max])
-              .range(color_array);
-*/
-
   // Create the axes
   var xxx = d3.selectAll("#xAxis1")
               .classed("axis", true)
               .attr("transform", "translate(" + margin.left + "," + char1_height + ")")
+              .transition().duration(1000)
               .call(xAxis)
               .selectAll("text")
               .style("text-anchor", "end")
@@ -1154,6 +1173,7 @@ function FirstCharts(curr_year)
   var yyy = d3.selectAll("#yAxis1")
               .classed("axis", true)
               .attr("transform", "translate(" + margin.left + ",0)")
+              .transition().duration(1000)
               .call(yAxis);
 
   // Create the bars
@@ -1170,22 +1190,22 @@ function FirstCharts(curr_year)
                     return x(d.id);
                   })
       .attr("width", x.bandwidth())
-      .transition().duration(1500)
+      .classed("bars", true)
+      .on("mouseover", function(d) {bar_tip.show(d)})
+      .on("mouseout", function(d) {bar_tip.hide(d)})
+            .attr("opacity", 1)
+      .transition().duration(1000)
+      .attr("y", function(d) {return y(d.per)})
       .style("fill", function(d)
                       {
                         return color(d.per);
                       })
-      .attr("y", function(d)
-                      {
-                        return y(d.per);
-                      })
       .attr("height", function(d)
                       {
                         return char1_height - y(d.per);
-                      })
-      .attr("opacity", 1);
-  //    .on('mouseover', tip.show)
-  //    .on('mouseout', tip.hide);
+                      });
+
+
 
   //self.svg.call(tip);
 
