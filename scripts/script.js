@@ -9,6 +9,7 @@ var first_load = false;
 var curr_year = 0;
 var max_state = null;
 var max_county = null;
+var val_sorted = false;
 
 Array.prototype.insert = function(index, item)
 {
@@ -1026,7 +1027,7 @@ function SecondCharts()
   var xAxis = d3.axisBottom(x);
   var yAxis = d3.axisLeft(y);
 
-  x.domain(states.map(function(d) { return d; }));
+  x.domain(bar_values.map(function(d) { return d.id; }));
   y.domain([0, max]);//d3.max(Datas, function(d) { return d[chosen]; })]);
 
   // Create the axes
@@ -1124,6 +1125,7 @@ function FirstCharts(curr_year)
 
     var svg = d3.select("#barChart");
     svg.call(bar_tip);
+
 /*
   var selection = [];
   for(var i = 0; i < 51; i++)
@@ -1217,9 +1219,52 @@ function FirstCharts(curr_year)
                         return char1_height - y(d.per);
                       });
 
+   var names = d3.select("#xAxis1").selectAll("text").on("click", SortName);
+   var vals = d3.select("#yAxis1").selectAll("text").on("click", SortValue);
 
+   var temp_bars = bar_values;
 
-  //self.svg.call(tip);
+   function SortName()
+   {
+     console.log(bar_values);
+     var bar_values = temp_bars.sort(function(a, b) {return d3.descending(b.id, a.id)});
+     var x0 = x.domain(bar_values.map(function(d) {return d.id;})).copy();
+
+     svg.selectAll(".bars").sort(function(a, b) {return x0(b.id) - x0(a.id)});
+
+     var transition = svg.transition().duration(750),
+              delay = function(d, i) {return i * 50};
+
+     transition.selectAll(".bars")
+               .delay(delay)
+               .attr("x", function(d) {return x0(d.id);});
+
+     transition.select("#xAxis1").call(xAxis).selectAll("g").delay(delay);
+
+     temp_bars = bar_values;
+   }
+
+   function SortValue()
+   {
+     var bar_values_v = temp_bars.sort(function(a,b) {return b.per - a.per});
+
+     var x0 = x.domain(bar_values_v.map(function(d) {return d.id;})).copy();
+
+     svg.selectAll(".bars").sort(function(a, b) {return x0(b.id) - x0(a.id)});
+
+     var transition = svg.transition().duration(750),
+              delay = function(d, i) {return i * 50};
+
+     transition.selectAll(".bars")
+               .delay(delay)
+               .attr("x", function(d) {return x0(d.id);});
+
+     transition.select("#xAxis1").call(xAxis).selectAll("g").delay(delay);
+
+     temp_bars = bar_values_v;
+   }
+
+                      //self.svg.call(tip);
 
 
   //*****Line Chart*****
