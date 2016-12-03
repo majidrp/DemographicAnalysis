@@ -1035,9 +1035,13 @@ function SecondCharts()
 
   //**********************************************
   // Create the x and y scales
-  var margin = {top: 0, right: 0, bottom: 50, left: 70},
-    width = svgBounds.width - margin.left - margin.right,
-    height = svgBounds.height - margin.top - margin.bottom;
+
+  var width = window.innerWidth - margin.left - margin.right - 200;
+  var height = 400 - margin.bottom - margin.top;
+
+  var svgBounds = d3.select("#stackBarChart")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom + 200)
 
   var max = 0
   for(var i = 0; i < sum.length; i++)
@@ -1046,12 +1050,12 @@ function SecondCharts()
           max = sum[i];
   }
 
-  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.05);
+  var x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.10);
   var y = d3.scaleLinear()
       .range([height, 0])
       .domain([0, max]);
   var coloring = d3.scaleLinear()
-      .range(["#8cd98c", "#80b3ff", "#ff80df", "#ff6666", "#cc99ff"])
+      .range(["#a58ec4", "#bfadd8", "#992288", "#441188", "#bbdddd"])
       .domain([1, 2, 3, 4, 5]);
 
   var xAxis = d3.axisBottom(x);
@@ -1064,11 +1068,12 @@ function SecondCharts()
   var xxx = d3.selectAll("#xAxis3")
     .classed("axis", true)
     .attr("transform", "translate(" + margin.left + "," + (height+50) + ")")
+    .transition().duration(1500)
     .call(xAxis)
     .selectAll("text")
     .style("text-anchor", "end")
     .attr("dx", "-.8em")
-    .attr("dy", "-.55em")
+    .attr("dy", "-.3em")
     .attr("transform", "rotate(-90)" );
 
   var yyy = d3.selectAll("#yAxis3")
@@ -1078,7 +1083,7 @@ function SecondCharts()
 
   yyy.append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
+    .attr("y", 0 - 50)
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
@@ -1119,7 +1124,7 @@ function SecondCharts()
 
 
   var col = d3.scaleOrdinal()
-    .range(["#cc99ff", "#ff6666" , "#ff80df" , "#80b3ff", "#8cd98c"]);
+    .range(["#a58ec4", "#bfadd8", "#992288", "#441188", "#bbdddd"]);
     col.domain(leg);
 
   temp = [];
