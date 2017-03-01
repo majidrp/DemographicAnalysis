@@ -33,4 +33,6 @@ by taking the matching percentage and multiplying by the total population.
 pretty close, however if there are many states around that percentage, it can
 throw off some of the smaller circles.
 
-https://mrabaris.github.io/DemographicAnalysis/.
+## Hosting
+
+This project is hosted at [http://cmertin.github.io/DemographicAnalysis](http://cmertin.github.io/DemographicAnalysis)
